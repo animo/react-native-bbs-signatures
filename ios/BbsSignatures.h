@@ -1,11 +1,7 @@
 #import <React/RCTBridgeModule.h>
 
-#ifdef __cplusplus
+@interface BbsSignatures: NSObject <RCTBridgeModule>
 
-#import "react-native-bbs-signatures.h"
-
-#endif
-
-@interface BbsSignatures : NSObject <RCTBridgeModule>
+@property(nonatomic, assign) BOOL setBridgeOnMainQueue;
 
 @end

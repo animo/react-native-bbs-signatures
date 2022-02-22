@@ -1,22 +1,7 @@
-import { NativeModules, Platform } from 'react-native';
+import type { Spec } from './turboModule'
 
-const LINKING_ERROR =
-  `The package 'react-native-bbs-signatures' doesn't seem to be linked. Make sure: \n\n` +
-  Platform.select({ ios: "- You have run 'pod install'\n", default: '' }) +
-  '- You rebuilt the app after installing the package\n' +
-  '- You are not using Expo managed workflow\n';
+declare var _bbsSignatures: Spec
 
-const BbsSignatures = NativeModules.BbsSignatures
-  ? NativeModules.BbsSignatures
-  : new Proxy(
-      {},
-      {
-        get() {
-          throw new Error(LINKING_ERROR);
-        },
-      }
-    );
+export const turboModule = _bbsSignatures as Spec
 
-export function multiply(a: number, b: number): Promise<number> {
-  return BbsSignatures.multiply(a, b);
-}
+export type TurboModuleType = Spec
