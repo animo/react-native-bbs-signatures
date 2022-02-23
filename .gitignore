@@ -59,5 +59,3 @@ android/keystores/debug.keystore
 
 # Expo
 .expo/*
-
-ios/Frameworks
