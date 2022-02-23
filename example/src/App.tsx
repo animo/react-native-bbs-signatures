@@ -6,7 +6,7 @@ import { turboModule } from 'react-native-bbs-signatures'
 export default function App() {
   return (
     <View>
-      <Text>Result: {turboModule.multiply(1, 2)}</Text>
+      <Text>Result: {turboModule.multiply(20, 20)}</Text>
     </View>
   )
 }
