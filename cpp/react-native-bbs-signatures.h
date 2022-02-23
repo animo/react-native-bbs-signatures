@@ -1,8 +1,21 @@
-#ifndef EXAMPLE_H
-#define EXAMPLE_H
+// class "interface" of the generated code. This has to be copied over from
+// `../lib/cpp-generated/NativeModules.h`
 
-namespace example {
-  int multiply(float a, float b);
-}
+#include "../lib/cpp-generated/NativeModules.h"
+#include "NativeModules.h"
+#include "TurboModuleUtils.h"
+#include <ReactCommon/TurboModule.h>
+#include <jsi/jsi.h>
+#include <jsi/jsilib.h>
 
-#endif /* EXAMPLE_H */
+namespace facebook {
+namespace react {
+
+class NativeBbsSignatures : public BbsSignaturesCxxSpecJSI {
+public:
+  NativeBbsSignatures(std::shared_ptr<CallInvoker> jsInvoker);
+  double multiply(jsi::Runtime &rt, double a, double b);
+};
+
+} // namespace react
+} // namespace facebook
