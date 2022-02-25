@@ -1,3 +1,5 @@
+import { bls12381toBbs } from './bls12381toBbs'
+import { bbsNativeBindings } from './register'
 import type {
   BbsBlindSignContext,
   BbsBlindSignContextRequest,
@@ -14,48 +16,86 @@ import type {
 
 export const BBS_SIGNATURE_LENGTH = 112
 
-export const sign = async (request: BbsSignRequest): Promise<Uint8Array> => {
-  return new Promise<Uint8Array>(() => console.log(request))
+// This is probably a builder that handles the whole process
+// Which steps do we havr to do here
+// export const sign = (request: BbsSignRequest): Uint8Array => {
+export const sign = (request: BbsSignRequest): Uint8Array => {
+  const { keyPair, messages } = request
+
+  if (!keyPair.secretKey) throw new Error('Secret key must be set')
+
+  const messageBuffers = messages.map((m) => m.buffer)
+  const handle = bbsNativeBindings.bbs_sign_context_init()
+
+  messageBuffers.forEach((message) =>
+    bbsNativeBindings.bbs_sign_context_add_message_string({ handle, message: 'Hello' })
+  )
+
+  bbsNativeBindings.bbs_sign_context_set_public_key({ handle, publicKey: keyPair.publicKey.buffer })
+  // TODO: handle undefined?
+  bbsNativeBindings.bbs_sign_context_set_secret_key({ handle, secretKey: keyPair.secretKey.buffer })
+  const { signature } = bbsNativeBindings.bbs_sign_context_finish({ handle })
+  return signature
 }
 
-export const blsSign = async (request: BlsBbsSignRequest): Promise<Uint8Array> => {
-  return new Promise<Uint8Array>(() => console.log(request))
+// This should call sign now.
+export const blsSign = (request: BlsBbsSignRequest): Uint8Array => {
+  const { keyPair, messages } = request
+  const bbsKeyPair = bls12381toBbs({ keyPair, messageCount: messages.length })
+  throw new Error('NOT YET IMPLEMENTED')
 }
 
-export const verify = async (request: BbsVerifyRequest): Promise<BbsVerifyResult> => {
-  return new Promise<BbsVerifyResult>(() => console.log(request))
+export const verify = (request: BbsVerifyRequest): BbsVerifyResult => {
+  const { publicKey, signature, messages } = request
+  const messageBuffers = messages.map((m) => m.buffer)
+  throw new Error('NOT YET IMPLEMENTED')
 }
 
-export const blsVerify = async (request: BlsBbsVerifyRequest): Promise<BbsVerifyResult> => {
-  return new Promise<BbsVerifyResult>(() => console.log(request))
+// This should call verify now.
+export const blsVerify = (request: BlsBbsVerifyRequest): BbsVerifyResult => {
+  const { publicKey, signature, messages } = request
+  const bbsKeyPair = bls12381toBbs({ keyPair, messageCount: messages.length })
+  throw new Error('NOT YET IMPLEMENTED')
 }
 
-export const createProof = async (request: BbsCreateProofRequest): Promise<Uint8Array> => {
-  return new Promise<Uint8Array>(() => console.log(request))
+export const createProof = (request: BbsCreateProofRequest): Uint8Array => {
+  const { publicKey, signature, messages, nonce, revealed } = request
+  const messageBuffers = messages.map((m) => m.buffer)
+  throw new Error('NOT YET IMPLEMENTED')
 }
 
-export const blsCreateProof = async (request: BbsCreateProofRequest): Promise<Uint8Array> => {
-  return new Promise<Uint8Array>(() => console.log(request))
+// This should call createProof now.
+export const blsCreateProof = (request: BbsCreateProofRequest): Uint8Array => {
+  const { publicKey, signature, messages, nonce, revealed } = request
+  const bbsKeyPair = bls12381toBbs({ keyPair: { publicKey }, messageCount: messages.length })
+  throw new Error('NOT YET IMPLEMENTED')
 }
 
-export const verifyProof = async (request: BbsVerifyProofRequest): Promise<BbsVerifyResult> => {
-  return new Promise<BbsVerifyResult>(() => console.log(request))
+export const verifyProof = (request: BbsVerifyProofRequest): BbsVerifyResult => {
+  const { publicKey, proof, messages, nonce } = request
+  const messageBuffers = messages.map((m) => m.buffer)
+  throw new Error('NOT YET IMPLEMENTED')
 }
 
-export const blsVerifyProof = async (request: BbsVerifyProofRequest): Promise<BbsVerifyResult> => {
-  return new Promise<BbsVerifyResult>(() => console.log(request))
+// This should call verifyProof now.
+// does NOT need to call verifyProof
+export const blsVerifyProof = (request: BbsVerifyProofRequest): BbsVerifyResult => {
+  const { publicKey, proof, messages, nonce } = request
+  const messageBuffers = messages.map((m) => m.buffer)
+  throw new Error('NOT YET IMPLEMENTED')
 }
 
-export const commitmentForBlindSignRequest = async (
-  request: BbsBlindSignContextRequest
-): Promise<BbsBlindSignContext> => {
-  return new Promise<BbsBlindSignContext>(() => console.log(request))
+export const commitmentForBlindSignRequest = (request: BbsBlindSignContextRequest): BbsBlindSignContext => {
+  throw new Error('NOT YET IMPLEMENTED')
 }
 
-export const verifyBlindSignContext = async (request: BbsVerifyBlindSignContextRequest): Promise<boolean> => {
-  return new Promise<boolean>(() => console.log(request))
+export const verifyBlindSignContext = (request: BbsVerifyBlindSignContextRequest): boolean => {
+  const { commitment, proofOfHiddenMessages, challengeHash, publicKey, blinded, nonce } = request
+  throw new Error('NOT YET IMPLEMENTED')
 }
 
-export const blindSign = async (request: BbsBlindSignRequest): Promise<Uint8Array> => {
-  return new Promise<Uint8Array>(() => console.log(request))
+export const blindSign = (request: BbsBlindSignRequest): Uint8Array => {
+  const { commitment, secretKey, messages } = request
+  const messageBuffers = messages.map((m) => m.buffer)
+  throw new Error('NOT YET IMPLEMENTED')
 }

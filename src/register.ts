@@ -1,5 +1,5 @@
-import type { BbsNativeBindings } from './turboModule'
+import type { Bbs } from './bbs'
 
-declare var _bbsSignatures: BbsNativeBindings
+declare var _bbsSignatures: Bbs
 
-export const bbsNativeBindings = _bbsSignatures as BbsNativeBindings
+export const bbsNativeBindings = _bbsSignatures as Bbs

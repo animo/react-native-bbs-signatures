@@ -2,15 +2,7 @@ require "json"
 
 package = JSON.parse(File.read(File.join(__dir__, "package.json")))
 
-reactVersion = '0.0.0'
-
-begin
-  reactVersion = JSON.parse(File.read(File.join(__dir__, "..", "react-native", "package.json")))["version"]
-rescue
-  reactVersion = '0.63.0'
-end
-
-rnVersion = reactVersion.split('.')[1]
+rnVersion = JSON.parse(File.read(File.join(__dir__, "node_modules" ,"react-native", "package.json")))["version"].split('.')[1]
 
 folly_prefix = ""
 if rnVersion.to_i >= 64
@@ -32,18 +24,19 @@ Pod::Spec.new do |s|
   s.platforms    = { :ios => "12.0" }
   s.source       = { :git => "https://github.com/animo/react-native-bbs-signatures.git.git", :tag => "#{s.version}" }
 
-  s.source_files           = "ios/**/*.{h,m,mm}", "cpp/**/*.{h,cpp}", "lib/cpp-generated/*.{h,cpp}"
-
   s.xcconfig = {
     "CLANG_CXX_LANGUAGE_STANDARD" => "c++14",
     "HEADER_SEARCH_PATHS" => "\"$(PODS_ROOT)/#{folly_prefix}Folly\"",
     "OTHER_CFLAGS" => "$(inherited)" + " " + folly_flags,
   }
+
   s.pod_target_xcconfig = {
       "DEFINES_MODULE" => "YES",
       "USE_HEADERMAP" => "YES",
       "HEADER_SEARCH_PATHS" => "\"$(PODS_TARGET_SRCROOT)/ReactCommon\" \"$(PODS_TARGET_SRCROOT)\" \"$(PODS_ROOT)/#{folly_prefix}Folly\" \"$(PODS_ROOT)/Headers/Private/React-Core\" ",
   }
+
+  s.source_files = "ios/**/*.{h,m,mm}", "cpp/**/*.{h,cpp}", "lib/cpp-generated/*.{h,cpp}"
 
   s.requires_arc = true
 
@@ -55,6 +48,4 @@ Pod::Spec.new do |s|
   s.dependency "ReactCommon/turbomodule/core"
   s.dependency "React-callinvoker"
   s.dependency "#{folly_prefix}Folly"
-
 end
-

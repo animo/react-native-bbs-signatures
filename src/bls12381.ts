@@ -1,17 +1,18 @@
+import { bbsNativeBindings } from './register'
 import type { BlsKeyPair, BlindedBlsKeyPair } from './types'
 
-export const generateBls12381G1KeyPair = async (seed?: Uint8Array): Promise<Required<BlsKeyPair>> => {
-  return new Promise<Required<BlsKeyPair>>(() => console.log(seed))
+export const generateBls12381G1KeyPair = (seed?: Uint8Array): Required<BlsKeyPair> => {
+  return bbsNativeBindings.bls_generate_g1_key({ seed })
 }
 
-export const generateBlindedBls12381G1KeyPair = async (seed?: Uint8Array): Promise<Required<BlindedBlsKeyPair>> => {
-  return new Promise<Required<BlindedBlsKeyPair>>(() => console.log(seed))
+export const generateBlindedBls12381G1KeyPair = (seed?: Uint8Array): Required<BlindedBlsKeyPair> => {
+  return bbsNativeBindings.bls_generate_blinded_g1_key({ seed })
 }
 
-export const generateBls12381G2KeyPair = async (seed?: Uint8Array): Promise<Required<BlsKeyPair>> => {
-  return new Promise<Required<BlsKeyPair>>(() => console.log(seed))
+export const generateBls12381G2KeyPair = (seed?: Uint8Array): Required<BlsKeyPair> => {
+  return bbsNativeBindings.bls_generate_g2_key({ seed })
 }
 
-export const generateBlindedBls12381G2KeyPair = async (seed?: Uint8Array): Promise<Required<BlindedBlsKeyPair>> => {
-  return new Promise<Required<BlindedBlsKeyPair>>(() => console.log(seed))
+export const generateBlindedBls12381G2KeyPair = (seed?: Uint8Array): Required<BlindedBlsKeyPair> => {
+  return bbsNativeBindings.bls_generate_blinded_g2_key({ seed })
 }

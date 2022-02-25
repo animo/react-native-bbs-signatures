@@ -13,3 +13,5 @@ export {
   verifyProof,
   blsVerifyProof,
 } from './bbsSignature'
+
+export { bbsNativeBindings } from './register'

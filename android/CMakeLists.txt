@@ -39,7 +39,7 @@ add_library(
         ../node_modules/react-native/ReactCommon/jsi/jsi/jsi.cpp
         ../node_modules/react-native/ReactAndroid/src/main/java/com/facebook/react/turbomodule/core/jni/ReactCommon/CallInvokerHolder.cpp
         ../node_modules/react-native/ReactCommon/react/nativemodule/core/ReactCommon/TurboModule.cpp
-        ../cpp/TurboUtilsModule.cpp
+        ../cpp/TurboModuleUtils.cpp
         ../cpp/react-native-bbs-signatures.cpp
         ../lib/cpp-generated/NativeModules.cpp
         cpp-adapter.cpp
