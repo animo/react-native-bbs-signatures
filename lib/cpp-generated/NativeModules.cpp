@@ -12,353 +12,73 @@
 namespace facebook {
 namespace react {
 
-static jsi::Value __hostFunction_BbsSignaturesCxxSpecJSI_bbs_string_free(jsi::Runtime &rt, TurboModule &turboModule, const jsi::Value* args, size_t count) {
-  static_cast<BbsSignaturesCxxSpecJSI *>(&turboModule)->bbs_string_free(rt, args[0].getObject(rt));
-  return jsi::Value::undefined();
+static jsi::Value __hostFunction_BbsSignaturesCxxSpecJSI_sign(jsi::Runtime &rt, TurboModule &turboModule, const jsi::Value* args, size_t count) {
+  return static_cast<BbsSignaturesCxxSpecJSI *>(&turboModule)->sign(rt, args[0].getObject(rt));
 }
-static jsi::Value __hostFunction_BbsSignaturesCxxSpecJSI_bbs_byte_buffer_free(jsi::Runtime &rt, TurboModule &turboModule, const jsi::Value* args, size_t count) {
-  static_cast<BbsSignaturesCxxSpecJSI *>(&turboModule)->bbs_byte_buffer_free(rt, args[0].getObject(rt));
-  return jsi::Value::undefined();
+static jsi::Value __hostFunction_BbsSignaturesCxxSpecJSI_blsSign(jsi::Runtime &rt, TurboModule &turboModule, const jsi::Value* args, size_t count) {
+  return static_cast<BbsSignaturesCxxSpecJSI *>(&turboModule)->blsSign(rt, args[0].getObject(rt));
 }
-static jsi::Value __hostFunction_BbsSignaturesCxxSpecJSI_free_bbs_blind_commitment(jsi::Runtime &rt, TurboModule &turboModule, const jsi::Value* args, size_t count) {
-  static_cast<BbsSignaturesCxxSpecJSI *>(&turboModule)->free_bbs_blind_commitment(rt, args[0].getObject(rt));
-  return jsi::Value::undefined();
+static jsi::Value __hostFunction_BbsSignaturesCxxSpecJSI_verify(jsi::Runtime &rt, TurboModule &turboModule, const jsi::Value* args, size_t count) {
+  return static_cast<BbsSignaturesCxxSpecJSI *>(&turboModule)->verify(rt, args[0].getObject(rt));
 }
-static jsi::Value __hostFunction_BbsSignaturesCxxSpecJSI_bbs_blind_signature_size(jsi::Runtime &rt, TurboModule &turboModule, const jsi::Value* args, size_t count) {
-  return static_cast<BbsSignaturesCxxSpecJSI *>(&turboModule)->bbs_blind_signature_size(rt);
+static jsi::Value __hostFunction_BbsSignaturesCxxSpecJSI_blsVerify(jsi::Runtime &rt, TurboModule &turboModule, const jsi::Value* args, size_t count) {
+  return static_cast<BbsSignaturesCxxSpecJSI *>(&turboModule)->blsVerify(rt, args[0].getObject(rt));
 }
-static jsi::Value __hostFunction_BbsSignaturesCxxSpecJSI_bbs_blind_commitment_context_init(jsi::Runtime &rt, TurboModule &turboModule, const jsi::Value* args, size_t count) {
-  return static_cast<BbsSignaturesCxxSpecJSI *>(&turboModule)->bbs_blind_commitment_context_init(rt, args[0].getObject(rt));
+static jsi::Value __hostFunction_BbsSignaturesCxxSpecJSI_createProof(jsi::Runtime &rt, TurboModule &turboModule, const jsi::Value* args, size_t count) {
+  return static_cast<BbsSignaturesCxxSpecJSI *>(&turboModule)->createProof(rt, args[0].getObject(rt));
 }
-static jsi::Value __hostFunction_BbsSignaturesCxxSpecJSI_bbs_blind_commitment_context_add_message_string(jsi::Runtime &rt, TurboModule &turboModule, const jsi::Value* args, size_t count) {
-  return static_cast<BbsSignaturesCxxSpecJSI *>(&turboModule)->bbs_blind_commitment_context_add_message_string(rt, args[0].getObject(rt));
+static jsi::Value __hostFunction_BbsSignaturesCxxSpecJSI_blsCreateProof(jsi::Runtime &rt, TurboModule &turboModule, const jsi::Value* args, size_t count) {
+  return static_cast<BbsSignaturesCxxSpecJSI *>(&turboModule)->blsCreateProof(rt, args[0].getObject(rt));
 }
-static jsi::Value __hostFunction_BbsSignaturesCxxSpecJSI_bbs_blind_commitment_context_add_message_bytes(jsi::Runtime &rt, TurboModule &turboModule, const jsi::Value* args, size_t count) {
-  return static_cast<BbsSignaturesCxxSpecJSI *>(&turboModule)->bbs_blind_commitment_context_add_message_bytes(rt, args[0].getObject(rt));
+static jsi::Value __hostFunction_BbsSignaturesCxxSpecJSI_verifyProof(jsi::Runtime &rt, TurboModule &turboModule, const jsi::Value* args, size_t count) {
+  return static_cast<BbsSignaturesCxxSpecJSI *>(&turboModule)->verifyProof(rt, args[0].getObject(rt));
 }
-static jsi::Value __hostFunction_BbsSignaturesCxxSpecJSI_bbs_blind_commitment_context_add_message_prehashed(jsi::Runtime &rt, TurboModule &turboModule, const jsi::Value* args, size_t count) {
-  return static_cast<BbsSignaturesCxxSpecJSI *>(&turboModule)->bbs_blind_commitment_context_add_message_prehashed(rt, args[0].getObject(rt));
+static jsi::Value __hostFunction_BbsSignaturesCxxSpecJSI_blsVerifyProof(jsi::Runtime &rt, TurboModule &turboModule, const jsi::Value* args, size_t count) {
+  return static_cast<BbsSignaturesCxxSpecJSI *>(&turboModule)->blsVerifyProof(rt, args[0].getObject(rt));
 }
-static jsi::Value __hostFunction_BbsSignaturesCxxSpecJSI_bbs_blind_commitment_context_set_public_key(jsi::Runtime &rt, TurboModule &turboModule, const jsi::Value* args, size_t count) {
-  return static_cast<BbsSignaturesCxxSpecJSI *>(&turboModule)->bbs_blind_commitment_context_set_public_key(rt, args[0].getObject(rt));
+static jsi::Value __hostFunction_BbsSignaturesCxxSpecJSI_commitmentForBlindSignRequest(jsi::Runtime &rt, TurboModule &turboModule, const jsi::Value* args, size_t count) {
+  return static_cast<BbsSignaturesCxxSpecJSI *>(&turboModule)->commitmentForBlindSignRequest(rt, args[0].getObject(rt));
 }
-static jsi::Value __hostFunction_BbsSignaturesCxxSpecJSI_bbs_blind_commitment_context_set_nonce_string(jsi::Runtime &rt, TurboModule &turboModule, const jsi::Value* args, size_t count) {
-  return static_cast<BbsSignaturesCxxSpecJSI *>(&turboModule)->bbs_blind_commitment_context_set_nonce_string(rt, args[0].getObject(rt));
+static jsi::Value __hostFunction_BbsSignaturesCxxSpecJSI_verifyBlindSignRequest(jsi::Runtime &rt, TurboModule &turboModule, const jsi::Value* args, size_t count) {
+  return static_cast<BbsSignaturesCxxSpecJSI *>(&turboModule)->verifyBlindSignRequest(rt, args[0].getObject(rt));
 }
-static jsi::Value __hostFunction_BbsSignaturesCxxSpecJSI_bbs_blind_commitment_context_set_nonce_bytes(jsi::Runtime &rt, TurboModule &turboModule, const jsi::Value* args, size_t count) {
-  return static_cast<BbsSignaturesCxxSpecJSI *>(&turboModule)->bbs_blind_commitment_context_set_nonce_bytes(rt, args[0].getObject(rt));
+static jsi::Value __hostFunction_BbsSignaturesCxxSpecJSI_blindSign(jsi::Runtime &rt, TurboModule &turboModule, const jsi::Value* args, size_t count) {
+  return static_cast<BbsSignaturesCxxSpecJSI *>(&turboModule)->blindSign(rt, args[0].getObject(rt));
 }
-static jsi::Value __hostFunction_BbsSignaturesCxxSpecJSI_bbs_blind_commitment_context_set_nonce_prehashed(jsi::Runtime &rt, TurboModule &turboModule, const jsi::Value* args, size_t count) {
-  return static_cast<BbsSignaturesCxxSpecJSI *>(&turboModule)->bbs_blind_commitment_context_set_nonce_prehashed(rt, args[0].getObject(rt));
+static jsi::Value __hostFunction_BbsSignaturesCxxSpecJSI_generateBls12381G1KeyPair(jsi::Runtime &rt, TurboModule &turboModule, const jsi::Value* args, size_t count) {
+  return static_cast<BbsSignaturesCxxSpecJSI *>(&turboModule)->generateBls12381G1KeyPair(rt, args[0].getObject(rt));
 }
-static jsi::Value __hostFunction_BbsSignaturesCxxSpecJSI_bbs_blind_commitment_context_finish(jsi::Runtime &rt, TurboModule &turboModule, const jsi::Value* args, size_t count) {
-  return static_cast<BbsSignaturesCxxSpecJSI *>(&turboModule)->bbs_blind_commitment_context_finish(rt, args[0].getObject(rt));
+static jsi::Value __hostFunction_BbsSignaturesCxxSpecJSI_generateBlindedBls12381G1KeyPair(jsi::Runtime &rt, TurboModule &turboModule, const jsi::Value* args, size_t count) {
+  return static_cast<BbsSignaturesCxxSpecJSI *>(&turboModule)->generateBlindedBls12381G1KeyPair(rt, args[0].getObject(rt));
 }
-static jsi::Value __hostFunction_BbsSignaturesCxxSpecJSI_free_bbs_blind_sign(jsi::Runtime &rt, TurboModule &turboModule, const jsi::Value* args, size_t count) {
-  static_cast<BbsSignaturesCxxSpecJSI *>(&turboModule)->free_bbs_blind_sign(rt, args[0].getObject(rt));
-  return jsi::Value::undefined();
+static jsi::Value __hostFunction_BbsSignaturesCxxSpecJSI_generateBls12381G2KeyPair(jsi::Runtime &rt, TurboModule &turboModule, const jsi::Value* args, size_t count) {
+  return static_cast<BbsSignaturesCxxSpecJSI *>(&turboModule)->generateBls12381G2KeyPair(rt, args[0].getObject(rt));
 }
-static jsi::Value __hostFunction_BbsSignaturesCxxSpecJSI_bbs_blinding_factor_size(jsi::Runtime &rt, TurboModule &turboModule, const jsi::Value* args, size_t count) {
-  return static_cast<BbsSignaturesCxxSpecJSI *>(&turboModule)->bbs_blinding_factor_size(rt, args[0].getObject(rt));
+static jsi::Value __hostFunction_BbsSignaturesCxxSpecJSI_generateBlindedBls12381G2KeyPair(jsi::Runtime &rt, TurboModule &turboModule, const jsi::Value* args, size_t count) {
+  return static_cast<BbsSignaturesCxxSpecJSI *>(&turboModule)->generateBlindedBls12381G2KeyPair(rt, args[0].getObject(rt));
 }
-static jsi::Value __hostFunction_BbsSignaturesCxxSpecJSI_bbs_blind_sign_context_init(jsi::Runtime &rt, TurboModule &turboModule, const jsi::Value* args, size_t count) {
-  return static_cast<BbsSignaturesCxxSpecJSI *>(&turboModule)->bbs_blind_sign_context_init(rt, args[0].getObject(rt));
-}
-static jsi::Value __hostFunction_BbsSignaturesCxxSpecJSI_bbs_blind_sign_context_add_message_string(jsi::Runtime &rt, TurboModule &turboModule, const jsi::Value* args, size_t count) {
-  return static_cast<BbsSignaturesCxxSpecJSI *>(&turboModule)->bbs_blind_sign_context_add_message_string(rt, args[0].getObject(rt));
-}
-static jsi::Value __hostFunction_BbsSignaturesCxxSpecJSI_bbs_blind_sign_context_add_message_bytes(jsi::Runtime &rt, TurboModule &turboModule, const jsi::Value* args, size_t count) {
-  return static_cast<BbsSignaturesCxxSpecJSI *>(&turboModule)->bbs_blind_sign_context_add_message_bytes(rt, args[0].getObject(rt));
-}
-static jsi::Value __hostFunction_BbsSignaturesCxxSpecJSI_bbs_blind_sign_context_add_message_prehashed(jsi::Runtime &rt, TurboModule &turboModule, const jsi::Value* args, size_t count) {
-  return static_cast<BbsSignaturesCxxSpecJSI *>(&turboModule)->bbs_blind_sign_context_add_message_prehashed(rt, args[0].getObject(rt));
-}
-static jsi::Value __hostFunction_BbsSignaturesCxxSpecJSI_bbs_blind_sign_context_set_public_key(jsi::Runtime &rt, TurboModule &turboModule, const jsi::Value* args, size_t count) {
-  return static_cast<BbsSignaturesCxxSpecJSI *>(&turboModule)->bbs_blind_sign_context_set_public_key(rt, args[0].getObject(rt));
-}
-static jsi::Value __hostFunction_BbsSignaturesCxxSpecJSI_bbs_blind_sign_context_set_secret_key(jsi::Runtime &rt, TurboModule &turboModule, const jsi::Value* args, size_t count) {
-  return static_cast<BbsSignaturesCxxSpecJSI *>(&turboModule)->bbs_blind_sign_context_set_secret_key(rt, args[0].getObject(rt));
-}
-static jsi::Value __hostFunction_BbsSignaturesCxxSpecJSI_bbs_blind_sign_context_set_commitment(jsi::Runtime &rt, TurboModule &turboModule, const jsi::Value* args, size_t count) {
-  return static_cast<BbsSignaturesCxxSpecJSI *>(&turboModule)->bbs_blind_sign_context_set_commitment(rt, args[0].getObject(rt));
-}
-static jsi::Value __hostFunction_BbsSignaturesCxxSpecJSI_bbs_blind_sign_context_finish(jsi::Runtime &rt, TurboModule &turboModule, const jsi::Value* args, size_t count) {
-  return static_cast<BbsSignaturesCxxSpecJSI *>(&turboModule)->bbs_blind_sign_context_finish(rt, args[0].getObject(rt));
-}
-static jsi::Value __hostFunction_BbsSignaturesCxxSpecJSI_bbs_unblind_signature(jsi::Runtime &rt, TurboModule &turboModule, const jsi::Value* args, size_t count) {
-  return static_cast<BbsSignaturesCxxSpecJSI *>(&turboModule)->bbs_unblind_signature(rt, args[0].getObject(rt));
-}
-static jsi::Value __hostFunction_BbsSignaturesCxxSpecJSI_free_create_proof(jsi::Runtime &rt, TurboModule &turboModule, const jsi::Value* args, size_t count) {
-  static_cast<BbsSignaturesCxxSpecJSI *>(&turboModule)->free_create_proof(rt, args[0].getObject(rt));
-  return jsi::Value::undefined();
-}
-static jsi::Value __hostFunction_BbsSignaturesCxxSpecJSI_bbs_create_proof_context_size(jsi::Runtime &rt, TurboModule &turboModule, const jsi::Value* args, size_t count) {
-  return static_cast<BbsSignaturesCxxSpecJSI *>(&turboModule)->bbs_create_proof_context_size(rt, args[0].getObject(rt));
-}
-static jsi::Value __hostFunction_BbsSignaturesCxxSpecJSI_bbs_create_proof_context_init(jsi::Runtime &rt, TurboModule &turboModule, const jsi::Value* args, size_t count) {
-  return static_cast<BbsSignaturesCxxSpecJSI *>(&turboModule)->bbs_create_proof_context_init(rt, args[0].getObject(rt));
-}
-static jsi::Value __hostFunction_BbsSignaturesCxxSpecJSI_bbs_create_proof_context_add_proof_message_string(jsi::Runtime &rt, TurboModule &turboModule, const jsi::Value* args, size_t count) {
-  return static_cast<BbsSignaturesCxxSpecJSI *>(&turboModule)->bbs_create_proof_context_add_proof_message_string(rt, args[0].getObject(rt));
-}
-static jsi::Value __hostFunction_BbsSignaturesCxxSpecJSI_bbs_create_proof_context_add_proof_message_bytes(jsi::Runtime &rt, TurboModule &turboModule, const jsi::Value* args, size_t count) {
-  return static_cast<BbsSignaturesCxxSpecJSI *>(&turboModule)->bbs_create_proof_context_add_proof_message_bytes(rt, args[0].getObject(rt));
-}
-static jsi::Value __hostFunction_BbsSignaturesCxxSpecJSI_bbs_create_proof_context_add_proof_message_prehashed(jsi::Runtime &rt, TurboModule &turboModule, const jsi::Value* args, size_t count) {
-  return static_cast<BbsSignaturesCxxSpecJSI *>(&turboModule)->bbs_create_proof_context_add_proof_message_prehashed(rt, args[0].getObject(rt));
-}
-static jsi::Value __hostFunction_BbsSignaturesCxxSpecJSI_bbs_create_proof_context_set_signature(jsi::Runtime &rt, TurboModule &turboModule, const jsi::Value* args, size_t count) {
-  return static_cast<BbsSignaturesCxxSpecJSI *>(&turboModule)->bbs_create_proof_context_set_signature(rt, args[0].getObject(rt));
-}
-static jsi::Value __hostFunction_BbsSignaturesCxxSpecJSI_bbs_create_proof_context_set_public_key(jsi::Runtime &rt, TurboModule &turboModule, const jsi::Value* args, size_t count) {
-  return static_cast<BbsSignaturesCxxSpecJSI *>(&turboModule)->bbs_create_proof_context_set_public_key(rt, args[0].getObject(rt));
-}
-static jsi::Value __hostFunction_BbsSignaturesCxxSpecJSI_bbs_create_proof_context_set_nonce_string(jsi::Runtime &rt, TurboModule &turboModule, const jsi::Value* args, size_t count) {
-  return static_cast<BbsSignaturesCxxSpecJSI *>(&turboModule)->bbs_create_proof_context_set_nonce_string(rt, args[0].getObject(rt));
-}
-static jsi::Value __hostFunction_BbsSignaturesCxxSpecJSI_bbs_create_proof_context_set_nonce_bytes(jsi::Runtime &rt, TurboModule &turboModule, const jsi::Value* args, size_t count) {
-  return static_cast<BbsSignaturesCxxSpecJSI *>(&turboModule)->bbs_create_proof_context_set_nonce_bytes(rt, args[0].getObject(rt));
-}
-static jsi::Value __hostFunction_BbsSignaturesCxxSpecJSI_bbs_create_proof_context_set_nonce_prehashed(jsi::Runtime &rt, TurboModule &turboModule, const jsi::Value* args, size_t count) {
-  return static_cast<BbsSignaturesCxxSpecJSI *>(&turboModule)->bbs_create_proof_context_set_nonce_prehashed(rt, args[0].getObject(rt));
-}
-static jsi::Value __hostFunction_BbsSignaturesCxxSpecJSI_bbs_create_proof_context_finish(jsi::Runtime &rt, TurboModule &turboModule, const jsi::Value* args, size_t count) {
-  return static_cast<BbsSignaturesCxxSpecJSI *>(&turboModule)->bbs_create_proof_context_finish(rt, args[0].getObject(rt));
-}
-static jsi::Value __hostFunction_BbsSignaturesCxxSpecJSI_free_bbs_sign(jsi::Runtime &rt, TurboModule &turboModule, const jsi::Value* args, size_t count) {
-  static_cast<BbsSignaturesCxxSpecJSI *>(&turboModule)->free_bbs_sign(rt, args[0].getObject(rt));
-  return jsi::Value::undefined();
-}
-static jsi::Value __hostFunction_BbsSignaturesCxxSpecJSI_bbs_signature_size(jsi::Runtime &rt, TurboModule &turboModule, const jsi::Value* args, size_t count) {
-  return static_cast<BbsSignaturesCxxSpecJSI *>(&turboModule)->bbs_signature_size(rt, args[0].getObject(rt));
-}
-static jsi::Value __hostFunction_BbsSignaturesCxxSpecJSI_bbs_sign_context_init(jsi::Runtime &rt, TurboModule &turboModule, const jsi::Value* args, size_t count) {
-  return static_cast<BbsSignaturesCxxSpecJSI *>(&turboModule)->bbs_sign_context_init(rt);
-}
-static jsi::Value __hostFunction_BbsSignaturesCxxSpecJSI_bbs_sign_context_add_message_string(jsi::Runtime &rt, TurboModule &turboModule, const jsi::Value* args, size_t count) {
-  return static_cast<BbsSignaturesCxxSpecJSI *>(&turboModule)->bbs_sign_context_add_message_string(rt, args[0].getObject(rt));
-}
-static jsi::Value __hostFunction_BbsSignaturesCxxSpecJSI_bbs_sign_context_add_message_bytes(jsi::Runtime &rt, TurboModule &turboModule, const jsi::Value* args, size_t count) {
-  return static_cast<BbsSignaturesCxxSpecJSI *>(&turboModule)->bbs_sign_context_add_message_bytes(rt, args[0].getObject(rt));
-}
-static jsi::Value __hostFunction_BbsSignaturesCxxSpecJSI_bbs_sign_context_add_message_prehashed(jsi::Runtime &rt, TurboModule &turboModule, const jsi::Value* args, size_t count) {
-  return static_cast<BbsSignaturesCxxSpecJSI *>(&turboModule)->bbs_sign_context_add_message_prehashed(rt, args[0].getObject(rt));
-}
-static jsi::Value __hostFunction_BbsSignaturesCxxSpecJSI_bbs_sign_context_set_secret_key(jsi::Runtime &rt, TurboModule &turboModule, const jsi::Value* args, size_t count) {
-  return static_cast<BbsSignaturesCxxSpecJSI *>(&turboModule)->bbs_sign_context_set_secret_key(rt, args[0].getObject(rt));
-}
-static jsi::Value __hostFunction_BbsSignaturesCxxSpecJSI_bbs_sign_context_set_public_key(jsi::Runtime &rt, TurboModule &turboModule, const jsi::Value* args, size_t count) {
-  return static_cast<BbsSignaturesCxxSpecJSI *>(&turboModule)->bbs_sign_context_set_public_key(rt, args[0].getObject(rt));
-}
-static jsi::Value __hostFunction_BbsSignaturesCxxSpecJSI_bbs_sign_context_finish(jsi::Runtime &rt, TurboModule &turboModule, const jsi::Value* args, size_t count) {
-  return static_cast<BbsSignaturesCxxSpecJSI *>(&turboModule)->bbs_sign_context_finish(rt, args[0].getObject(rt));
-}
-static jsi::Value __hostFunction_BbsSignaturesCxxSpecJSI_bbs_verify_context_init(jsi::Runtime &rt, TurboModule &turboModule, const jsi::Value* args, size_t count) {
-  return static_cast<BbsSignaturesCxxSpecJSI *>(&turboModule)->bbs_verify_context_init(rt, args[0].getObject(rt));
-}
-static jsi::Value __hostFunction_BbsSignaturesCxxSpecJSI_bbs_verify_context_add_message_string(jsi::Runtime &rt, TurboModule &turboModule, const jsi::Value* args, size_t count) {
-  return static_cast<BbsSignaturesCxxSpecJSI *>(&turboModule)->bbs_verify_context_add_message_string(rt, args[0].getObject(rt));
-}
-static jsi::Value __hostFunction_BbsSignaturesCxxSpecJSI_bbs_verify_context_add_message_bytes(jsi::Runtime &rt, TurboModule &turboModule, const jsi::Value* args, size_t count) {
-  return static_cast<BbsSignaturesCxxSpecJSI *>(&turboModule)->bbs_verify_context_add_message_bytes(rt, args[0].getObject(rt));
-}
-static jsi::Value __hostFunction_BbsSignaturesCxxSpecJSI_bbs_verify_context_add_message_prehashed(jsi::Runtime &rt, TurboModule &turboModule, const jsi::Value* args, size_t count) {
-  return static_cast<BbsSignaturesCxxSpecJSI *>(&turboModule)->bbs_verify_context_add_message_prehashed(rt, args[0].getObject(rt));
-}
-static jsi::Value __hostFunction_BbsSignaturesCxxSpecJSI_bbs_verify_context_set_public_key(jsi::Runtime &rt, TurboModule &turboModule, const jsi::Value* args, size_t count) {
-  return static_cast<BbsSignaturesCxxSpecJSI *>(&turboModule)->bbs_verify_context_set_public_key(rt, args[0].getObject(rt));
-}
-static jsi::Value __hostFunction_BbsSignaturesCxxSpecJSI_bbs_verify_context_set_signature(jsi::Runtime &rt, TurboModule &turboModule, const jsi::Value* args, size_t count) {
-  return static_cast<BbsSignaturesCxxSpecJSI *>(&turboModule)->bbs_verify_context_set_signature(rt, args[0].getObject(rt));
-}
-static jsi::Value __hostFunction_BbsSignaturesCxxSpecJSI_bbs_verify_context_finish(jsi::Runtime &rt, TurboModule &turboModule, const jsi::Value* args, size_t count) {
-  return static_cast<BbsSignaturesCxxSpecJSI *>(&turboModule)->bbs_verify_context_finish(rt, args[0].getObject(rt));
-}
-static jsi::Value __hostFunction_BbsSignaturesCxxSpecJSI_free_verify_proof(jsi::Runtime &rt, TurboModule &turboModule, const jsi::Value* args, size_t count) {
-  static_cast<BbsSignaturesCxxSpecJSI *>(&turboModule)->free_verify_proof(rt, args[0].getObject(rt));
-  return jsi::Value::undefined();
-}
-static jsi::Value __hostFunction_BbsSignaturesCxxSpecJSI_bbs_get_total_messages_count_for_proof(jsi::Runtime &rt, TurboModule &turboModule, const jsi::Value* args, size_t count) {
-  return static_cast<BbsSignaturesCxxSpecJSI *>(&turboModule)->bbs_get_total_messages_count_for_proof(rt, args[0].getObject(rt));
-}
-static jsi::Value __hostFunction_BbsSignaturesCxxSpecJSI_bbs_verify_proof_context_init(jsi::Runtime &rt, TurboModule &turboModule, const jsi::Value* args, size_t count) {
-  return static_cast<BbsSignaturesCxxSpecJSI *>(&turboModule)->bbs_verify_proof_context_init(rt, args[0].getObject(rt));
-}
-static jsi::Value __hostFunction_BbsSignaturesCxxSpecJSI_bbs_verify_proof_context_add_message_string(jsi::Runtime &rt, TurboModule &turboModule, const jsi::Value* args, size_t count) {
-  return static_cast<BbsSignaturesCxxSpecJSI *>(&turboModule)->bbs_verify_proof_context_add_message_string(rt, args[0].getObject(rt));
-}
-static jsi::Value __hostFunction_BbsSignaturesCxxSpecJSI_bbs_verify_proof_context_add_message_bytes(jsi::Runtime &rt, TurboModule &turboModule, const jsi::Value* args, size_t count) {
-  return static_cast<BbsSignaturesCxxSpecJSI *>(&turboModule)->bbs_verify_proof_context_add_message_bytes(rt, args[0].getObject(rt));
-}
-static jsi::Value __hostFunction_BbsSignaturesCxxSpecJSI_bbs_verify_proof_context_add_message_prehashed(jsi::Runtime &rt, TurboModule &turboModule, const jsi::Value* args, size_t count) {
-  return static_cast<BbsSignaturesCxxSpecJSI *>(&turboModule)->bbs_verify_proof_context_add_message_prehashed(rt, args[0].getObject(rt));
-}
-static jsi::Value __hostFunction_BbsSignaturesCxxSpecJSI_bbs_verify_proof_context_set_proof(jsi::Runtime &rt, TurboModule &turboModule, const jsi::Value* args, size_t count) {
-  return static_cast<BbsSignaturesCxxSpecJSI *>(&turboModule)->bbs_verify_proof_context_set_proof(rt, args[0].getObject(rt));
-}
-static jsi::Value __hostFunction_BbsSignaturesCxxSpecJSI_bbs_verify_proof_context_set_public_key(jsi::Runtime &rt, TurboModule &turboModule, const jsi::Value* args, size_t count) {
-  return static_cast<BbsSignaturesCxxSpecJSI *>(&turboModule)->bbs_verify_proof_context_set_public_key(rt, args[0].getObject(rt));
-}
-static jsi::Value __hostFunction_BbsSignaturesCxxSpecJSI_bbs_verify_proof_context_set_nonce_string(jsi::Runtime &rt, TurboModule &turboModule, const jsi::Value* args, size_t count) {
-  return static_cast<BbsSignaturesCxxSpecJSI *>(&turboModule)->bbs_verify_proof_context_set_nonce_string(rt, args[0].getObject(rt));
-}
-static jsi::Value __hostFunction_BbsSignaturesCxxSpecJSI_bbs_verify_proof_context_set_nonce_bytes(jsi::Runtime &rt, TurboModule &turboModule, const jsi::Value* args, size_t count) {
-  return static_cast<BbsSignaturesCxxSpecJSI *>(&turboModule)->bbs_verify_proof_context_set_nonce_bytes(rt, args[0].getObject(rt));
-}
-static jsi::Value __hostFunction_BbsSignaturesCxxSpecJSI_bbs_verify_proof_context_set_nonce_prehashed(jsi::Runtime &rt, TurboModule &turboModule, const jsi::Value* args, size_t count) {
-  return static_cast<BbsSignaturesCxxSpecJSI *>(&turboModule)->bbs_verify_proof_context_set_nonce_prehashed(rt, args[0].getObject(rt));
-}
-static jsi::Value __hostFunction_BbsSignaturesCxxSpecJSI_bbs_verify_proof_context_finish(jsi::Runtime &rt, TurboModule &turboModule, const jsi::Value* args, size_t count) {
-  return static_cast<BbsSignaturesCxxSpecJSI *>(&turboModule)->bbs_verify_proof_context_finish(rt, args[0].getObject(rt));
-}
-static jsi::Value __hostFunction_BbsSignaturesCxxSpecJSI_free_verify_sign_proof(jsi::Runtime &rt, TurboModule &turboModule, const jsi::Value* args, size_t count) {
-  static_cast<BbsSignaturesCxxSpecJSI *>(&turboModule)->free_verify_sign_proof(rt, args[0].getObject(rt));
-  return jsi::Value::undefined();
-}
-static jsi::Value __hostFunction_BbsSignaturesCxxSpecJSI_bbs_verify_blind_commitment_context_init(jsi::Runtime &rt, TurboModule &turboModule, const jsi::Value* args, size_t count) {
-  return static_cast<BbsSignaturesCxxSpecJSI *>(&turboModule)->bbs_verify_blind_commitment_context_init(rt, args[0].getObject(rt));
-}
-static jsi::Value __hostFunction_BbsSignaturesCxxSpecJSI_bbs_verify_blind_commitment_context_add_blinded(jsi::Runtime &rt, TurboModule &turboModule, const jsi::Value* args, size_t count) {
-  return static_cast<BbsSignaturesCxxSpecJSI *>(&turboModule)->bbs_verify_blind_commitment_context_add_blinded(rt, args[0].getObject(rt));
-}
-static jsi::Value __hostFunction_BbsSignaturesCxxSpecJSI_bbs_verify_blind_commitment_context_set_public_key(jsi::Runtime &rt, TurboModule &turboModule, const jsi::Value* args, size_t count) {
-  return static_cast<BbsSignaturesCxxSpecJSI *>(&turboModule)->bbs_verify_blind_commitment_context_set_public_key(rt, args[0].getObject(rt));
-}
-static jsi::Value __hostFunction_BbsSignaturesCxxSpecJSI_bbs_verify_blind_commitment_context_set_nonce_string(jsi::Runtime &rt, TurboModule &turboModule, const jsi::Value* args, size_t count) {
-  return static_cast<BbsSignaturesCxxSpecJSI *>(&turboModule)->bbs_verify_blind_commitment_context_set_nonce_string(rt, args[0].getObject(rt));
-}
-static jsi::Value __hostFunction_BbsSignaturesCxxSpecJSI_bbs_verify_blind_commitment_context_set_nonce_bytes(jsi::Runtime &rt, TurboModule &turboModule, const jsi::Value* args, size_t count) {
-  return static_cast<BbsSignaturesCxxSpecJSI *>(&turboModule)->bbs_verify_blind_commitment_context_set_nonce_bytes(rt, args[0].getObject(rt));
-}
-static jsi::Value __hostFunction_BbsSignaturesCxxSpecJSI_bbs_verify_blind_commitment_context_set_nonce_prehashed(jsi::Runtime &rt, TurboModule &turboModule, const jsi::Value* args, size_t count) {
-  return static_cast<BbsSignaturesCxxSpecJSI *>(&turboModule)->bbs_verify_blind_commitment_context_set_nonce_prehashed(rt, args[0].getObject(rt));
-}
-static jsi::Value __hostFunction_BbsSignaturesCxxSpecJSI_bbs_verify_blind_commitment_context_set_proof(jsi::Runtime &rt, TurboModule &turboModule, const jsi::Value* args, size_t count) {
-  return static_cast<BbsSignaturesCxxSpecJSI *>(&turboModule)->bbs_verify_blind_commitment_context_set_proof(rt, args[0].getObject(rt));
-}
-static jsi::Value __hostFunction_BbsSignaturesCxxSpecJSI_bbs_verify_blind_commitment_context_finish(jsi::Runtime &rt, TurboModule &turboModule, const jsi::Value* args, size_t count) {
-  return static_cast<BbsSignaturesCxxSpecJSI *>(&turboModule)->bbs_verify_blind_commitment_context_finish(rt, args[0].getObject(rt));
-}
-static jsi::Value __hostFunction_BbsSignaturesCxxSpecJSI_bls_secret_key_size(jsi::Runtime &rt, TurboModule &turboModule, const jsi::Value* args, size_t count) {
-  return static_cast<BbsSignaturesCxxSpecJSI *>(&turboModule)->bls_secret_key_size(rt, args[0].getObject(rt));
-}
-static jsi::Value __hostFunction_BbsSignaturesCxxSpecJSI_bls_public_key_g2_size(jsi::Runtime &rt, TurboModule &turboModule, const jsi::Value* args, size_t count) {
-  return static_cast<BbsSignaturesCxxSpecJSI *>(&turboModule)->bls_public_key_g2_size(rt, args[0].getObject(rt));
-}
-static jsi::Value __hostFunction_BbsSignaturesCxxSpecJSI_blinding_factor_size(jsi::Runtime &rt, TurboModule &turboModule, const jsi::Value* args, size_t count) {
-  return static_cast<BbsSignaturesCxxSpecJSI *>(&turboModule)->blinding_factor_size(rt, args[0].getObject(rt));
-}
-static jsi::Value __hostFunction_BbsSignaturesCxxSpecJSI_bls_public_key_g1_size(jsi::Runtime &rt, TurboModule &turboModule, const jsi::Value* args, size_t count) {
-  return static_cast<BbsSignaturesCxxSpecJSI *>(&turboModule)->bls_public_key_g1_size(rt, args[0].getObject(rt));
-}
-static jsi::Value __hostFunction_BbsSignaturesCxxSpecJSI_bls_generate_g2_key(jsi::Runtime &rt, TurboModule &turboModule, const jsi::Value* args, size_t count) {
-  return static_cast<BbsSignaturesCxxSpecJSI *>(&turboModule)->bls_generate_g2_key(rt, args[0].getObject(rt));
-}
-static jsi::Value __hostFunction_BbsSignaturesCxxSpecJSI_bls_generate_g1_key(jsi::Runtime &rt, TurboModule &turboModule, const jsi::Value* args, size_t count) {
-  return static_cast<BbsSignaturesCxxSpecJSI *>(&turboModule)->bls_generate_g1_key(rt, args[0].getObject(rt));
-}
-static jsi::Value __hostFunction_BbsSignaturesCxxSpecJSI_bls_generate_blinded_g2_key(jsi::Runtime &rt, TurboModule &turboModule, const jsi::Value* args, size_t count) {
-  return static_cast<BbsSignaturesCxxSpecJSI *>(&turboModule)->bls_generate_blinded_g2_key(rt, args[0].getObject(rt));
-}
-static jsi::Value __hostFunction_BbsSignaturesCxxSpecJSI_bls_generate_blinded_g1_key(jsi::Runtime &rt, TurboModule &turboModule, const jsi::Value* args, size_t count) {
-  return static_cast<BbsSignaturesCxxSpecJSI *>(&turboModule)->bls_generate_blinded_g1_key(rt, args[0].getObject(rt));
-}
-static jsi::Value __hostFunction_BbsSignaturesCxxSpecJSI_bls_get_public_key(jsi::Runtime &rt, TurboModule &turboModule, const jsi::Value* args, size_t count) {
-  return static_cast<BbsSignaturesCxxSpecJSI *>(&turboModule)->bls_get_public_key(rt, args[0].getObject(rt));
-}
-static jsi::Value __hostFunction_BbsSignaturesCxxSpecJSI_bls_secret_key_to_bbs_key(jsi::Runtime &rt, TurboModule &turboModule, const jsi::Value* args, size_t count) {
-  return static_cast<BbsSignaturesCxxSpecJSI *>(&turboModule)->bls_secret_key_to_bbs_key(rt, args[0].getObject(rt));
-}
-static jsi::Value __hostFunction_BbsSignaturesCxxSpecJSI_bls_public_key_to_bbs_key(jsi::Runtime &rt, TurboModule &turboModule, const jsi::Value* args, size_t count) {
-  return static_cast<BbsSignaturesCxxSpecJSI *>(&turboModule)->bls_public_key_to_bbs_key(rt, args[0].getObject(rt));
+static jsi::Value __hostFunction_BbsSignaturesCxxSpecJSI_bl12381toBbs(jsi::Runtime &rt, TurboModule &turboModule, const jsi::Value* args, size_t count) {
+  return static_cast<BbsSignaturesCxxSpecJSI *>(&turboModule)->bl12381toBbs(rt, args[0].getObject(rt));
 }
 
 BbsSignaturesCxxSpecJSI::BbsSignaturesCxxSpecJSI(std::shared_ptr<CallInvoker> jsInvoker)
   : TurboModule("BbsSignatures", jsInvoker) {
-  methodMap_["bbs_string_free"] = MethodMetadata {1, __hostFunction_BbsSignaturesCxxSpecJSI_bbs_string_free};
-  methodMap_["bbs_byte_buffer_free"] = MethodMetadata {1, __hostFunction_BbsSignaturesCxxSpecJSI_bbs_byte_buffer_free};
-  methodMap_["free_bbs_blind_commitment"] = MethodMetadata {1, __hostFunction_BbsSignaturesCxxSpecJSI_free_bbs_blind_commitment};
-  methodMap_["bbs_blind_signature_size"] = MethodMetadata {0, __hostFunction_BbsSignaturesCxxSpecJSI_bbs_blind_signature_size};
-  methodMap_["bbs_blind_commitment_context_init"] = MethodMetadata {1, __hostFunction_BbsSignaturesCxxSpecJSI_bbs_blind_commitment_context_init};
-  methodMap_["bbs_blind_commitment_context_add_message_string"] = MethodMetadata {1, __hostFunction_BbsSignaturesCxxSpecJSI_bbs_blind_commitment_context_add_message_string};
-  methodMap_["bbs_blind_commitment_context_add_message_bytes"] = MethodMetadata {1, __hostFunction_BbsSignaturesCxxSpecJSI_bbs_blind_commitment_context_add_message_bytes};
-  methodMap_["bbs_blind_commitment_context_add_message_prehashed"] = MethodMetadata {1, __hostFunction_BbsSignaturesCxxSpecJSI_bbs_blind_commitment_context_add_message_prehashed};
-  methodMap_["bbs_blind_commitment_context_set_public_key"] = MethodMetadata {1, __hostFunction_BbsSignaturesCxxSpecJSI_bbs_blind_commitment_context_set_public_key};
-  methodMap_["bbs_blind_commitment_context_set_nonce_string"] = MethodMetadata {1, __hostFunction_BbsSignaturesCxxSpecJSI_bbs_blind_commitment_context_set_nonce_string};
-  methodMap_["bbs_blind_commitment_context_set_nonce_bytes"] = MethodMetadata {1, __hostFunction_BbsSignaturesCxxSpecJSI_bbs_blind_commitment_context_set_nonce_bytes};
-  methodMap_["bbs_blind_commitment_context_set_nonce_prehashed"] = MethodMetadata {1, __hostFunction_BbsSignaturesCxxSpecJSI_bbs_blind_commitment_context_set_nonce_prehashed};
-  methodMap_["bbs_blind_commitment_context_finish"] = MethodMetadata {1, __hostFunction_BbsSignaturesCxxSpecJSI_bbs_blind_commitment_context_finish};
-  methodMap_["free_bbs_blind_sign"] = MethodMetadata {1, __hostFunction_BbsSignaturesCxxSpecJSI_free_bbs_blind_sign};
-  methodMap_["bbs_blinding_factor_size"] = MethodMetadata {1, __hostFunction_BbsSignaturesCxxSpecJSI_bbs_blinding_factor_size};
-  methodMap_["bbs_blind_sign_context_init"] = MethodMetadata {1, __hostFunction_BbsSignaturesCxxSpecJSI_bbs_blind_sign_context_init};
-  methodMap_["bbs_blind_sign_context_add_message_string"] = MethodMetadata {1, __hostFunction_BbsSignaturesCxxSpecJSI_bbs_blind_sign_context_add_message_string};
-  methodMap_["bbs_blind_sign_context_add_message_bytes"] = MethodMetadata {1, __hostFunction_BbsSignaturesCxxSpecJSI_bbs_blind_sign_context_add_message_bytes};
-  methodMap_["bbs_blind_sign_context_add_message_prehashed"] = MethodMetadata {1, __hostFunction_BbsSignaturesCxxSpecJSI_bbs_blind_sign_context_add_message_prehashed};
-  methodMap_["bbs_blind_sign_context_set_public_key"] = MethodMetadata {1, __hostFunction_BbsSignaturesCxxSpecJSI_bbs_blind_sign_context_set_public_key};
-  methodMap_["bbs_blind_sign_context_set_secret_key"] = MethodMetadata {1, __hostFunction_BbsSignaturesCxxSpecJSI_bbs_blind_sign_context_set_secret_key};
-  methodMap_["bbs_blind_sign_context_set_commitment"] = MethodMetadata {1, __hostFunction_BbsSignaturesCxxSpecJSI_bbs_blind_sign_context_set_commitment};
-  methodMap_["bbs_blind_sign_context_finish"] = MethodMetadata {1, __hostFunction_BbsSignaturesCxxSpecJSI_bbs_blind_sign_context_finish};
-  methodMap_["bbs_unblind_signature"] = MethodMetadata {1, __hostFunction_BbsSignaturesCxxSpecJSI_bbs_unblind_signature};
-  methodMap_["free_create_proof"] = MethodMetadata {1, __hostFunction_BbsSignaturesCxxSpecJSI_free_create_proof};
-  methodMap_["bbs_create_proof_context_size"] = MethodMetadata {1, __hostFunction_BbsSignaturesCxxSpecJSI_bbs_create_proof_context_size};
-  methodMap_["bbs_create_proof_context_init"] = MethodMetadata {1, __hostFunction_BbsSignaturesCxxSpecJSI_bbs_create_proof_context_init};
-  methodMap_["bbs_create_proof_context_add_proof_message_string"] = MethodMetadata {1, __hostFunction_BbsSignaturesCxxSpecJSI_bbs_create_proof_context_add_proof_message_string};
-  methodMap_["bbs_create_proof_context_add_proof_message_bytes"] = MethodMetadata {1, __hostFunction_BbsSignaturesCxxSpecJSI_bbs_create_proof_context_add_proof_message_bytes};
-  methodMap_["bbs_create_proof_context_add_proof_message_prehashed"] = MethodMetadata {1, __hostFunction_BbsSignaturesCxxSpecJSI_bbs_create_proof_context_add_proof_message_prehashed};
-  methodMap_["bbs_create_proof_context_set_signature"] = MethodMetadata {1, __hostFunction_BbsSignaturesCxxSpecJSI_bbs_create_proof_context_set_signature};
-  methodMap_["bbs_create_proof_context_set_public_key"] = MethodMetadata {1, __hostFunction_BbsSignaturesCxxSpecJSI_bbs_create_proof_context_set_public_key};
-  methodMap_["bbs_create_proof_context_set_nonce_string"] = MethodMetadata {1, __hostFunction_BbsSignaturesCxxSpecJSI_bbs_create_proof_context_set_nonce_string};
-  methodMap_["bbs_create_proof_context_set_nonce_bytes"] = MethodMetadata {1, __hostFunction_BbsSignaturesCxxSpecJSI_bbs_create_proof_context_set_nonce_bytes};
-  methodMap_["bbs_create_proof_context_set_nonce_prehashed"] = MethodMetadata {1, __hostFunction_BbsSignaturesCxxSpecJSI_bbs_create_proof_context_set_nonce_prehashed};
-  methodMap_["bbs_create_proof_context_finish"] = MethodMetadata {1, __hostFunction_BbsSignaturesCxxSpecJSI_bbs_create_proof_context_finish};
-  methodMap_["free_bbs_sign"] = MethodMetadata {1, __hostFunction_BbsSignaturesCxxSpecJSI_free_bbs_sign};
-  methodMap_["bbs_signature_size"] = MethodMetadata {1, __hostFunction_BbsSignaturesCxxSpecJSI_bbs_signature_size};
-  methodMap_["bbs_sign_context_init"] = MethodMetadata {0, __hostFunction_BbsSignaturesCxxSpecJSI_bbs_sign_context_init};
-  methodMap_["bbs_sign_context_add_message_string"] = MethodMetadata {1, __hostFunction_BbsSignaturesCxxSpecJSI_bbs_sign_context_add_message_string};
-  methodMap_["bbs_sign_context_add_message_bytes"] = MethodMetadata {1, __hostFunction_BbsSignaturesCxxSpecJSI_bbs_sign_context_add_message_bytes};
-  methodMap_["bbs_sign_context_add_message_prehashed"] = MethodMetadata {1, __hostFunction_BbsSignaturesCxxSpecJSI_bbs_sign_context_add_message_prehashed};
-  methodMap_["bbs_sign_context_set_secret_key"] = MethodMetadata {1, __hostFunction_BbsSignaturesCxxSpecJSI_bbs_sign_context_set_secret_key};
-  methodMap_["bbs_sign_context_set_public_key"] = MethodMetadata {1, __hostFunction_BbsSignaturesCxxSpecJSI_bbs_sign_context_set_public_key};
-  methodMap_["bbs_sign_context_finish"] = MethodMetadata {1, __hostFunction_BbsSignaturesCxxSpecJSI_bbs_sign_context_finish};
-  methodMap_["bbs_verify_context_init"] = MethodMetadata {1, __hostFunction_BbsSignaturesCxxSpecJSI_bbs_verify_context_init};
-  methodMap_["bbs_verify_context_add_message_string"] = MethodMetadata {1, __hostFunction_BbsSignaturesCxxSpecJSI_bbs_verify_context_add_message_string};
-  methodMap_["bbs_verify_context_add_message_bytes"] = MethodMetadata {1, __hostFunction_BbsSignaturesCxxSpecJSI_bbs_verify_context_add_message_bytes};
-  methodMap_["bbs_verify_context_add_message_prehashed"] = MethodMetadata {1, __hostFunction_BbsSignaturesCxxSpecJSI_bbs_verify_context_add_message_prehashed};
-  methodMap_["bbs_verify_context_set_public_key"] = MethodMetadata {1, __hostFunction_BbsSignaturesCxxSpecJSI_bbs_verify_context_set_public_key};
-  methodMap_["bbs_verify_context_set_signature"] = MethodMetadata {1, __hostFunction_BbsSignaturesCxxSpecJSI_bbs_verify_context_set_signature};
-  methodMap_["bbs_verify_context_finish"] = MethodMetadata {1, __hostFunction_BbsSignaturesCxxSpecJSI_bbs_verify_context_finish};
-  methodMap_["free_verify_proof"] = MethodMetadata {1, __hostFunction_BbsSignaturesCxxSpecJSI_free_verify_proof};
-  methodMap_["bbs_get_total_messages_count_for_proof"] = MethodMetadata {1, __hostFunction_BbsSignaturesCxxSpecJSI_bbs_get_total_messages_count_for_proof};
-  methodMap_["bbs_verify_proof_context_init"] = MethodMetadata {1, __hostFunction_BbsSignaturesCxxSpecJSI_bbs_verify_proof_context_init};
-  methodMap_["bbs_verify_proof_context_add_message_string"] = MethodMetadata {1, __hostFunction_BbsSignaturesCxxSpecJSI_bbs_verify_proof_context_add_message_string};
-  methodMap_["bbs_verify_proof_context_add_message_bytes"] = MethodMetadata {1, __hostFunction_BbsSignaturesCxxSpecJSI_bbs_verify_proof_context_add_message_bytes};
-  methodMap_["bbs_verify_proof_context_add_message_prehashed"] = MethodMetadata {1, __hostFunction_BbsSignaturesCxxSpecJSI_bbs_verify_proof_context_add_message_prehashed};
-  methodMap_["bbs_verify_proof_context_set_proof"] = MethodMetadata {1, __hostFunction_BbsSignaturesCxxSpecJSI_bbs_verify_proof_context_set_proof};
-  methodMap_["bbs_verify_proof_context_set_public_key"] = MethodMetadata {1, __hostFunction_BbsSignaturesCxxSpecJSI_bbs_verify_proof_context_set_public_key};
-  methodMap_["bbs_verify_proof_context_set_nonce_string"] = MethodMetadata {1, __hostFunction_BbsSignaturesCxxSpecJSI_bbs_verify_proof_context_set_nonce_string};
-  methodMap_["bbs_verify_proof_context_set_nonce_bytes"] = MethodMetadata {1, __hostFunction_BbsSignaturesCxxSpecJSI_bbs_verify_proof_context_set_nonce_bytes};
-  methodMap_["bbs_verify_proof_context_set_nonce_prehashed"] = MethodMetadata {1, __hostFunction_BbsSignaturesCxxSpecJSI_bbs_verify_proof_context_set_nonce_prehashed};
-  methodMap_["bbs_verify_proof_context_finish"] = MethodMetadata {1, __hostFunction_BbsSignaturesCxxSpecJSI_bbs_verify_proof_context_finish};
-  methodMap_["free_verify_sign_proof"] = MethodMetadata {1, __hostFunction_BbsSignaturesCxxSpecJSI_free_verify_sign_proof};
-  methodMap_["bbs_verify_blind_commitment_context_init"] = MethodMetadata {1, __hostFunction_BbsSignaturesCxxSpecJSI_bbs_verify_blind_commitment_context_init};
-  methodMap_["bbs_verify_blind_commitment_context_add_blinded"] = MethodMetadata {1, __hostFunction_BbsSignaturesCxxSpecJSI_bbs_verify_blind_commitment_context_add_blinded};
-  methodMap_["bbs_verify_blind_commitment_context_set_public_key"] = MethodMetadata {1, __hostFunction_BbsSignaturesCxxSpecJSI_bbs_verify_blind_commitment_context_set_public_key};
-  methodMap_["bbs_verify_blind_commitment_context_set_nonce_string"] = MethodMetadata {1, __hostFunction_BbsSignaturesCxxSpecJSI_bbs_verify_blind_commitment_context_set_nonce_string};
-  methodMap_["bbs_verify_blind_commitment_context_set_nonce_bytes"] = MethodMetadata {1, __hostFunction_BbsSignaturesCxxSpecJSI_bbs_verify_blind_commitment_context_set_nonce_bytes};
-  methodMap_["bbs_verify_blind_commitment_context_set_nonce_prehashed"] = MethodMetadata {1, __hostFunction_BbsSignaturesCxxSpecJSI_bbs_verify_blind_commitment_context_set_nonce_prehashed};
-  methodMap_["bbs_verify_blind_commitment_context_set_proof"] = MethodMetadata {1, __hostFunction_BbsSignaturesCxxSpecJSI_bbs_verify_blind_commitment_context_set_proof};
-  methodMap_["bbs_verify_blind_commitment_context_finish"] = MethodMetadata {1, __hostFunction_BbsSignaturesCxxSpecJSI_bbs_verify_blind_commitment_context_finish};
-  methodMap_["bls_secret_key_size"] = MethodMetadata {1, __hostFunction_BbsSignaturesCxxSpecJSI_bls_secret_key_size};
-  methodMap_["bls_public_key_g2_size"] = MethodMetadata {1, __hostFunction_BbsSignaturesCxxSpecJSI_bls_public_key_g2_size};
-  methodMap_["blinding_factor_size"] = MethodMetadata {1, __hostFunction_BbsSignaturesCxxSpecJSI_blinding_factor_size};
-  methodMap_["bls_public_key_g1_size"] = MethodMetadata {1, __hostFunction_BbsSignaturesCxxSpecJSI_bls_public_key_g1_size};
-  methodMap_["bls_generate_g2_key"] = MethodMetadata {1, __hostFunction_BbsSignaturesCxxSpecJSI_bls_generate_g2_key};
-  methodMap_["bls_generate_g1_key"] = MethodMetadata {1, __hostFunction_BbsSignaturesCxxSpecJSI_bls_generate_g1_key};
-  methodMap_["bls_generate_blinded_g2_key"] = MethodMetadata {1, __hostFunction_BbsSignaturesCxxSpecJSI_bls_generate_blinded_g2_key};
-  methodMap_["bls_generate_blinded_g1_key"] = MethodMetadata {1, __hostFunction_BbsSignaturesCxxSpecJSI_bls_generate_blinded_g1_key};
-  methodMap_["bls_get_public_key"] = MethodMetadata {1, __hostFunction_BbsSignaturesCxxSpecJSI_bls_get_public_key};
-  methodMap_["bls_secret_key_to_bbs_key"] = MethodMetadata {1, __hostFunction_BbsSignaturesCxxSpecJSI_bls_secret_key_to_bbs_key};
-  methodMap_["bls_public_key_to_bbs_key"] = MethodMetadata {1, __hostFunction_BbsSignaturesCxxSpecJSI_bls_public_key_to_bbs_key};
+  methodMap_["sign"] = MethodMetadata {1, __hostFunction_BbsSignaturesCxxSpecJSI_sign};
+  methodMap_["blsSign"] = MethodMetadata {1, __hostFunction_BbsSignaturesCxxSpecJSI_blsSign};
+  methodMap_["verify"] = MethodMetadata {1, __hostFunction_BbsSignaturesCxxSpecJSI_verify};
+  methodMap_["blsVerify"] = MethodMetadata {1, __hostFunction_BbsSignaturesCxxSpecJSI_blsVerify};
+  methodMap_["createProof"] = MethodMetadata {1, __hostFunction_BbsSignaturesCxxSpecJSI_createProof};
+  methodMap_["blsCreateProof"] = MethodMetadata {1, __hostFunction_BbsSignaturesCxxSpecJSI_blsCreateProof};
+  methodMap_["verifyProof"] = MethodMetadata {1, __hostFunction_BbsSignaturesCxxSpecJSI_verifyProof};
+  methodMap_["blsVerifyProof"] = MethodMetadata {1, __hostFunction_BbsSignaturesCxxSpecJSI_blsVerifyProof};
+  methodMap_["commitmentForBlindSignRequest"] = MethodMetadata {1, __hostFunction_BbsSignaturesCxxSpecJSI_commitmentForBlindSignRequest};
+  methodMap_["verifyBlindSignRequest"] = MethodMetadata {1, __hostFunction_BbsSignaturesCxxSpecJSI_verifyBlindSignRequest};
+  methodMap_["blindSign"] = MethodMetadata {1, __hostFunction_BbsSignaturesCxxSpecJSI_blindSign};
+  methodMap_["generateBls12381G1KeyPair"] = MethodMetadata {1, __hostFunction_BbsSignaturesCxxSpecJSI_generateBls12381G1KeyPair};
+  methodMap_["generateBlindedBls12381G1KeyPair"] = MethodMetadata {1, __hostFunction_BbsSignaturesCxxSpecJSI_generateBlindedBls12381G1KeyPair};
+  methodMap_["generateBls12381G2KeyPair"] = MethodMetadata {1, __hostFunction_BbsSignaturesCxxSpecJSI_generateBls12381G2KeyPair};
+  methodMap_["generateBlindedBls12381G2KeyPair"] = MethodMetadata {1, __hostFunction_BbsSignaturesCxxSpecJSI_generateBlindedBls12381G2KeyPair};
+  methodMap_["bl12381toBbs"] = MethodMetadata {1, __hostFunction_BbsSignaturesCxxSpecJSI_bl12381toBbs};
 }
 
 

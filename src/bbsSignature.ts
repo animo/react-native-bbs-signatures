@@ -31,11 +31,12 @@ export const sign = (request: BbsSignRequest): Uint8Array => {
     bbsNativeBindings.bbs_sign_context_add_message_string({ handle, message: 'Hello' })
   )
 
-  bbsNativeBindings.bbs_sign_context_set_public_key({ handle, publicKey: keyPair.publicKey.buffer })
-  // TODO: handle undefined?
-  bbsNativeBindings.bbs_sign_context_set_secret_key({ handle, secretKey: keyPair.secretKey.buffer })
-  const { signature } = bbsNativeBindings.bbs_sign_context_finish({ handle })
-  return signature
+  //bbsNativeBindings.bbs_sign_context_set_public_key({ handle, publicKey: keyPair.publicKey.buffer })
+  //// TODO: handle undefined?
+  //bbsNativeBindings.bbs_sign_context_set_secret_key({ handle, secretKey: keyPair.secretKey.buffer })
+  //const { signature } = bbsNativeBindings.bbs_sign_context_finish({ handle })
+  //return signature
+  return new Uint8Array([0])
 }
 
 // This should call sign now.

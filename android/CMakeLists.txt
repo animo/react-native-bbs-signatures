@@ -41,6 +41,7 @@ add_library(
         ../node_modules/react-native/ReactCommon/react/nativemodule/core/ReactCommon/TurboModule.cpp
         ../cpp/TurboModuleUtils.cpp
         ../cpp/react-native-bbs-signatures.cpp
+        ../cpp/TypedArray.cpp
         ../lib/cpp-generated/NativeModules.cpp
         cpp-adapter.cpp
 )
