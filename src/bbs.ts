@@ -1,79 +1,79 @@
-import type { BlsKeyPair } from "./types"
+import type { BlsKeyPair } from './types'
 
 type SignOptions = {
-  publicKey: ArrayBuffer,
-  secretKey: ArrayBuffer,
+  publicKey: ArrayBuffer
+  secretKey: ArrayBuffer
   messages: ArrayBuffer[]
 }
 
 type BlsSignOptions = {
-  publickey: ArrayBuffer,
-  secretkey: ArrayBuffer,
+  publickey: ArrayBuffer
+  secretkey: ArrayBuffer
   messages: ArrayBuffer[]
 }
 
 type VerifyOptions = {
-  publickey: ArrayBuffer,
-  signature: ArrayBuffer,
+  publickey: ArrayBuffer
+  signature: ArrayBuffer
   messages: ArrayBuffer[]
 }
 
 type BlsVerifyOptions = {
-  publickey: ArrayBuffer,
-  signature: ArrayBuffer,
+  publickey: ArrayBuffer
+  signature: ArrayBuffer
   messages: ArrayBuffer[]
 }
 
 type CreateProofOptions = {
-  nonce: Uint8Array,
-  revealed: number[] ,
-  publicKey: ArrayBuffer,
-  signature: ArrayBuffer,
-  messages: ArrayBuffer,
+  nonce: Uint8Array
+  revealed: number[]
+  publicKey: ArrayBuffer
+  signature: ArrayBuffer
+  messages: ArrayBuffer
 }
 
 type BlsCreateProofOptions = {
-  nonce: Uint8Array,
-  revealed: number[] ,
-  publicKey: ArrayBuffer,
-  signature: ArrayBuffer,
-  messages: ArrayBuffer,
+  nonce: Uint8Array
+  revealed: number[]
+  publicKey: ArrayBuffer
+  signature: ArrayBuffer
+  messages: ArrayBuffer
 }
 
 type VerifyProofOptions = {
-  nonce: Uint8Array,
-  publicKey: ArrayBuffer,
-  proof: ArrayBuffer,
+  nonce: Uint8Array
+  publicKey: ArrayBuffer
+  proof: ArrayBuffer
   messages: ArrayBuffer[]
 }
 
 type BlsVerifyProofOptions = {
-  nonce: Uint8Array ,
-  publicKey: ArrayBuffer,
-  proof: ArrayBuffer,
+  nonce: Uint8Array
+  publicKey: ArrayBuffer
+  proof: ArrayBuffer
   messages: ArrayBuffer[]
 }
 
 type CommitmentForBlindSignRequestOptions = {
-  nonce: Uint8Array ,
-  publicKey: ArrayBuffer,
-  messages: ArrayBuffer[],
-  hidden: number[],
+  nonce: Uint8Array
+  publicKey: ArrayBuffer
+  messages: ArrayBuffer[]
+  hidden: number[]
 }
 
 type VerifyBlindSignRequestOptions = {
-  commitment: ArrayBuffer,
-  proofOfHiddenMessages: ArrayBuffer,
-  challengeHash: ArrayBuffer,
-  publicKey: ArrayBuffer,
-  blinded: number[],
-  nonce: Uint8Array,
+  commitment: ArrayBuffer
+  proofOfHiddenMessages: ArrayBuffer
+  challengeHash: ArrayBuffer
+  publicKey: ArrayBuffer
+  blinded: number[]
+  nonce: Uint8Array
 }
 
 type BlindSignOptions = {
-  commitment: ArrayBuffer,
-  secretKey: ArrayBuffer,
-  messages: ArrayBuffer[],
+  commitment: ArrayBuffer
+  secretKey: ArrayBuffer
+  messages: ArrayBuffer[]
 }
 
 // ---
@@ -83,14 +83,16 @@ type GenerateBls12381G1KeyPairOptions = {
 
 type GenerateBlindedBls12381G1KeyPairOptions = {}
 
-type GenerateBls12381G2KeyPairOptions = {}
+type GenerateBls12381G2KeyPairOptions = {
+  seed?: Uint8Array
+}
 
 type GenerateBlindedBls12381G2KeyPairOptions = {}
 // ---
 type Bl12381toBbsOptions = {}
 
 export interface Bbs {
-  sign(options: SignOptions): {}
+  sign(options: SignOptions): { signature: Uint8Array }
   blsSign(options: BlsSignOptions): {}
   verify(options: VerifyOptions): {}
   blsVerify(options: BlsVerifyOptions): {}

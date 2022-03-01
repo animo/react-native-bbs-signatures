@@ -5,12 +5,17 @@ BlsKeyPair::BlsKeyPair(ByteArray pk, ByteArray sk) {
   secretKey = sk;
 }
 
+BlsKeyPair::BlsKeyPair(ByteArray pk) {
+  publicKey = pk;
+  // Indicates optional
+  secretKey = ByteArray{0, 0};
+}
+
 BlsKeyPair BlsKeyPair::generateG1(ByteArray seed, ExternError *err) {
   ByteBuffer *pk = new ByteBuffer();
   ByteBuffer *sk = new ByteBuffer();
 
   ::bls_generate_g1_key(seed, pk, sk, err);
-
   handleExternError(err);
 
   ByteArray bapk = byteBufferToByteArray(*pk);
@@ -23,6 +28,7 @@ BlsKeyPair BlsKeyPair::generateG2(ByteArray seed, ExternError *err) {
   ByteBuffer *sk = new ByteBuffer();
 
   ::bls_generate_g2_key(seed, pk, sk, err);
+  handleExternError(err);
 
   ByteArray bapk = byteBufferToByteArray(*pk);
   ByteArray bask = byteBufferToByteArray(*sk);
@@ -33,7 +39,6 @@ BlsKeyPair BlsKeyPair::fromSecretKey(ByteArray sk, ExternError *err) {
   ByteBuffer *pk = new ByteBuffer();
 
   ::bls_get_public_key(sk, pk, err);
-
   handleExternError(err);
 
   ByteArray bapk = byteBufferToByteArray(*pk);
@@ -54,9 +59,12 @@ BbsKey BlsKeyPair::getBbsKey(uint32_t messageCount, ExternError *err) {
   ByteBuffer *pk = new ByteBuffer();
   if (secretKey.length) {
     ::bls_secret_key_to_bbs_key(secretKey, messageCount, pk, err);
+    handleExternError(err);
   } else if (this->isG2()) {
     ::bls_public_key_to_bbs_key(publicKey, messageCount, pk, err);
+    handleExternError(err);
+  } else {
+    throw "Cannot generate BbsKey from G1 public key";
   }
-
   return BbsKey{byteBufferToByteArray(*pk), messageCount};
 }

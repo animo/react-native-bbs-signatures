@@ -19,9 +19,14 @@ export const BBS_SIGNATURE_LENGTH = 112
 // TODO: promisfy
 export const sign = (request: BbsSignRequest): Uint8Array => {
   const messageBuffers = request.messages.map((m) => m.buffer)
-  const x = bbsNativeBindings.sign({publicKey: request.keyPair.publicKey.buffer, secretKey: request.keyPair.secretKey!.buffer, messages: messageBuffers});
-  console.log(x)
-  return new Uint8Array([0])
+  const { signature } = bbsNativeBindings.sign({
+    publicKey: request.keyPair.publicKey.buffer,
+    secretKey: request.keyPair.secretKey!.buffer,
+    messages: messageBuffers,
+  })
+
+  console.log(signature)
+  return signature as Uint8Array
 }
 
 // This should call sign now.
@@ -30,7 +35,17 @@ export const blsSign = (request: BlsBbsSignRequest): Uint8Array => {
 }
 
 export const verify = (request: BbsVerifyRequest): BbsVerifyResult => {
-  throw new Error('NOT YET IMPLEMENTED')
+  const messageBuffers = request.messages.map((m) => m.buffer)
+  const { verified } = bbsNativeBindings.verify({
+    publicKey: request.publicKey.buffer,
+    signature: request.signature.buffer,
+    messages: messageBuffers,
+  })
+
+  // TODO: What does the node error string contain
+  return {
+    verified,
+  }
 }
 
 // This should call verify now.

@@ -23,118 +23,201 @@ jsi::Object NativeBbsSignatures::sign(jsi::Runtime &rt,
     jsi::Object object = jsi::Object(rt);
     object.setProperty(
         rt, "signature",
-        TurboModuleUtils::bytebufferToArrayBuffer(rt, signature));
+        TurboModuleUtils::byteBufferToArrayBuffer(rt, signature));
     return object;
-  } catch (const char* e) {
+  } catch (const char *e) {
     throw jsi::JSError(rt, e);
   }
 }
 
 jsi::Object NativeBbsSignatures::blsSign(jsi::Runtime &rt,
                                          const jsi::Object &options) {
-  jsi::Object object = jsi::Object(rt);
-  return object;
+  try {
+    jsi::Object object = jsi::Object(rt);
+    return object;
+  } catch (const char *e) {
+    throw jsi::JSError(rt, e);
+  }
 }
 
 jsi::Object NativeBbsSignatures::verify(jsi::Runtime &rt,
                                         const jsi::Object &options) {
-  jsi::Object object = jsi::Object(rt);
-  return object;
+  try {
+    ByteArray publicKey = TurboModuleUtils::jsiToValue<ByteArray>(
+        rt, options.getProperty(rt, "publicKey"));
+    ByteArray signature = TurboModuleUtils::jsiToValue<ByteArray>(
+        rt, options.getProperty(rt, "signature"));
+    std::vector<ByteArray> messages =
+        TurboModuleUtils::jsiToValue<std::vector<ByteArray>>(
+            rt, options.getProperty(rt, "messages"));
+
+    ExternError *err = new ExternError();
+    bool verified = Bbs::verify(publicKey, signature, messages, err);
+
+    jsi::Object object = jsi::Object(rt);
+    object.setProperty(rt, "verified", verified);
+    return object;
+  } catch (const char *e) {
+    throw jsi::JSError(rt, e);
+  }
 }
 
 jsi::Object NativeBbsSignatures::blsVerify(jsi::Runtime &rt,
                                            const jsi::Object &options) {
-  jsi::Object object = jsi::Object(rt);
-  return object;
+  try {
+    jsi::Object object = jsi::Object(rt);
+    return object;
+  } catch (const char *e) {
+    throw jsi::JSError(rt, e);
+  }
 }
 
 jsi::Object NativeBbsSignatures::createProof(jsi::Runtime &rt,
                                              const jsi::Object &options) {
-  jsi::Object object = jsi::Object(rt);
-  return object;
+  try {
+    jsi::Object object = jsi::Object(rt);
+    return object;
+  } catch (const char *e) {
+    throw jsi::JSError(rt, e);
+  }
 }
 
 jsi::Object NativeBbsSignatures::blsCreateProof(jsi::Runtime &rt,
                                                 const jsi::Object &options) {
-  jsi::Object object = jsi::Object(rt);
-  return object;
+  try {
+    jsi::Object object = jsi::Object(rt);
+    return object;
+  } catch (const char *e) {
+    throw jsi::JSError(rt, e);
+  }
 }
 
 jsi::Object NativeBbsSignatures::verifyProof(jsi::Runtime &rt,
                                              const jsi::Object &options) {
-  jsi::Object object = jsi::Object(rt);
-  return object;
+  try {
+    jsi::Object object = jsi::Object(rt);
+    return object;
+  } catch (const char *e) {
+    throw jsi::JSError(rt, e);
+  }
 }
 
 jsi::Object NativeBbsSignatures::blsVerifyProof(jsi::Runtime &rt,
                                                 const jsi::Object &options) {
-  jsi::Object object = jsi::Object(rt);
-  return object;
+  try {
+    jsi::Object object = jsi::Object(rt);
+    return object;
+  } catch (const char *e) {
+    throw jsi::JSError(rt, e);
+  }
 }
 
 jsi::Object
 NativeBbsSignatures::commitmentForBlindSignRequest(jsi::Runtime &rt,
                                                    const jsi::Object &options) {
-  jsi::Object object = jsi::Object(rt);
-  return object;
+  try {
+    jsi::Object object = jsi::Object(rt);
+    return object;
+  } catch (const char *e) {
+    throw jsi::JSError(rt, e);
+  }
 }
 
 jsi::Object
 NativeBbsSignatures::verifyBlindSignRequest(jsi::Runtime &rt,
                                             const jsi::Object &options) {
-  jsi::Object object = jsi::Object(rt);
-  return object;
+  try {
+    jsi::Object object = jsi::Object(rt);
+    return object;
+  } catch (const char *e) {
+    throw jsi::JSError(rt, e);
+  }
 }
 
 jsi::Object NativeBbsSignatures::blindSign(jsi::Runtime &rt,
                                            const jsi::Object &options) {
-  jsi::Object object = jsi::Object(rt);
-  return object;
+  try {
+    jsi::Object object = jsi::Object(rt);
+    return object;
+  } catch (const char *e) {
+    throw jsi::JSError(rt, e);
+  }
 }
 
 jsi::Object
 NativeBbsSignatures::generateBls12381G1KeyPair(jsi::Runtime &rt,
                                                const jsi::Object &options) {
-  ByteArray seed = TurboModuleUtils::jsiToValue<ByteArray>(
-      rt, options.getProperty(rt, "seed"), true);
+  try {
+    ByteArray seed = TurboModuleUtils::jsiToValue<ByteArray>(
+        rt, options.getProperty(rt, "seed"), true);
 
-  ExternError *err = new ExternError();
+    ExternError *err = new ExternError();
 
-  KeyPair keyPair = Bbs::generateBls12381G1KeyPair(seed, err);
+    BlsKeyPair bpk = Bbs::generateBls12381G1KeyPair(seed, err);
 
-  TurboModuleUtils::handleError(rt, err);
-
-  jsi::Object object = jsi::Object(rt);
-  object.setProperty(
-      rt, "publicKey",
-      TurboModuleUtils::bytebufferToArrayBuffer(rt, keyPair.first));
-  object.setProperty(
-      rt, "secretKey",
-      TurboModuleUtils::bytebufferToArrayBuffer(rt, keyPair.second));
-  return object;
+    jsi::Object object = jsi::Object(rt);
+    object.setProperty(
+        rt, "publicKey",
+        TurboModuleUtils::byteArrayToArrayBuffer(rt, bpk.publicKey));
+    object.setProperty(
+        rt, "secretKey",
+        TurboModuleUtils::byteArrayToArrayBuffer(rt, bpk.secretKey));
+    return object;
+  } catch (const char *e) {
+    throw jsi::JSError(rt, e);
+  }
 }
 
 jsi::Object NativeBbsSignatures::generateBlindedBls12381G1KeyPair(
     jsi::Runtime &rt, const jsi::Object &options) {
-  jsi::Object object = jsi::Object(rt);
-  return object;
+  try {
+    jsi::Object object = jsi::Object(rt);
+    return object;
+  } catch (const char *e) {
+    throw jsi::JSError(rt, e);
+  }
 }
 
 jsi::Object
 NativeBbsSignatures::generateBls12381G2KeyPair(jsi::Runtime &rt,
                                                const jsi::Object &options) {
-  jsi::Object object = jsi::Object(rt);
-  return object;
+  try {
+    ByteArray seed = TurboModuleUtils::jsiToValue<ByteArray>(
+        rt, options.getProperty(rt, "seed"), true);
+
+    ExternError *err = new ExternError();
+
+    BlsKeyPair bpk = Bbs::generateBls12381G2KeyPair(seed, err);
+
+    jsi::Object object = jsi::Object(rt);
+    object.setProperty(
+        rt, "publicKey",
+        TurboModuleUtils::byteArrayToArrayBuffer(rt, bpk.publicKey));
+    object.setProperty(
+        rt, "secretKey",
+        TurboModuleUtils::byteArrayToArrayBuffer(rt, bpk.secretKey));
+    return object;
+  } catch (const char *e) {
+    throw jsi::JSError(rt, e);
+  }
 }
 
 jsi::Object NativeBbsSignatures::generateBlindedBls12381G2KeyPair(
     jsi::Runtime &rt, const jsi::Object &options) {
-  jsi::Object object = jsi::Object(rt);
-  return object;
+  try {
+    jsi::Object object = jsi::Object(rt);
+    return object;
+  } catch (const char *e) {
+    throw jsi::JSError(rt, e);
+  }
 }
 
 jsi::Object NativeBbsSignatures::bl12381toBbs(jsi::Runtime &rt,
                                               const jsi::Object &options) {
-  jsi::Object object = jsi::Object(rt);
-  return object;
+  try {
+    jsi::Object object = jsi::Object(rt);
+    return object;
+  } catch (const char *e) {
+    throw jsi::JSError(rt, e);
+  }
 }

@@ -5,12 +5,11 @@
 
 #include "../lib/cpp-generated/NativeModules.h"
 #include "TurboModuleUtils.h"
-#include "bbs.h"
 #include "bbs-signatures.h"
+#include "bbs.h"
 #include <ReactCommon/TurboModule.h>
 #include <jsi/jsi.h>
 #include <jsi/jsilib.h>
-
 
 namespace facebook {
 namespace react {
@@ -26,13 +25,19 @@ public:
   jsi::Object blsCreateProof(jsi::Runtime &rt, const jsi::Object &options);
   jsi::Object verifyProof(jsi::Runtime &rt, const jsi::Object &options);
   jsi::Object blsVerifyProof(jsi::Runtime &rt, const jsi::Object &options);
-  jsi::Object commitmentForBlindSignRequest(jsi::Runtime &rt, const jsi::Object &options);
-  jsi::Object verifyBlindSignRequest(jsi::Runtime &rt, const jsi::Object &options);
+  jsi::Object commitmentForBlindSignRequest(jsi::Runtime &rt,
+                                            const jsi::Object &options);
+  jsi::Object verifyBlindSignRequest(jsi::Runtime &rt,
+                                     const jsi::Object &options);
   jsi::Object blindSign(jsi::Runtime &rt, const jsi::Object &options);
-  jsi::Object generateBls12381G1KeyPair(jsi::Runtime &rt, const jsi::Object &options);
-  jsi::Object generateBlindedBls12381G1KeyPair(jsi::Runtime &rt, const jsi::Object &options);
-  jsi::Object generateBls12381G2KeyPair(jsi::Runtime &rt, const jsi::Object &options);
-  jsi::Object generateBlindedBls12381G2KeyPair(jsi::Runtime &rt, const jsi::Object &options);
+  jsi::Object generateBls12381G1KeyPair(jsi::Runtime &rt,
+                                        const jsi::Object &options);
+  jsi::Object generateBlindedBls12381G1KeyPair(jsi::Runtime &rt,
+                                               const jsi::Object &options);
+  jsi::Object generateBls12381G2KeyPair(jsi::Runtime &rt,
+                                        const jsi::Object &options);
+  jsi::Object generateBlindedBls12381G2KeyPair(jsi::Runtime &rt,
+                                               const jsi::Object &options);
   jsi::Object bl12381toBbs(jsi::Runtime &rt, const jsi::Object &options);
 };
 } // namespace react
