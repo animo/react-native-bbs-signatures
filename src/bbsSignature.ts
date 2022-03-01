@@ -17,11 +17,11 @@ import type {
 export const BBS_SIGNATURE_LENGTH = 112
 
 // TODO: promisfy
-export const sign = (request: BbsSignRequest): Uint8Array => {
-  const messageBuffers = request.messages.map((m) => m.buffer)
+export const sign = ({ messages, keyPair }: BbsSignRequest): Uint8Array => {
+  const messageBuffers = messages.map((m) => m.buffer)
   const { signature } = bbsNativeBindings.sign({
-    publicKey: request.keyPair.publicKey.buffer,
-    secretKey: request.keyPair.secretKey!.buffer,
+    publicKey: keyPair.publicKey.buffer,
+    secretKey: keyPair.secretKey!.buffer,
     messages: messageBuffers,
   })
 
@@ -34,11 +34,11 @@ export const blsSign = (request: BlsBbsSignRequest): Uint8Array => {
   throw new Error('NOT YET IMPLEMENTED')
 }
 
-export const verify = (request: BbsVerifyRequest): BbsVerifyResult => {
-  const messageBuffers = request.messages.map((m) => m.buffer)
+export const verify = ({ publicKey, signature, messages }: BbsVerifyRequest): BbsVerifyResult => {
+  const messageBuffers = messages.map((m) => m.buffer)
   const { verified } = bbsNativeBindings.verify({
-    publicKey: request.publicKey.buffer,
-    signature: request.signature.buffer,
+    publicKey: publicKey.buffer,
+    signature: signature.buffer,
     messages: messageBuffers,
   })
 
@@ -53,8 +53,18 @@ export const blsVerify = (request: BlsBbsVerifyRequest): BbsVerifyResult => {
   throw new Error('NOT YET IMPLEMENTED')
 }
 
-export const createProof = (request: BbsCreateProofRequest): Uint8Array => {
-  throw new Error('NOT YET IMPLEMENTED')
+export const createProof = ({ publicKey, messages, signature, nonce, revealed }: BbsCreateProofRequest): Uint8Array => {
+  const messageBuffers = messages.map((m) => m.buffer)
+  const { proof } = bbsNativeBindings.createProof({
+    publicKey: publicKey.buffer,
+    messages: messageBuffers,
+    signature: signature.buffer,
+    nonce: nonce.buffer,
+    revealed,
+  })
+  console.log(proof)
+
+  return proof
 }
 
 // This should call createProof now.

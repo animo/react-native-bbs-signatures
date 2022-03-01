@@ -25,11 +25,11 @@ type BlsVerifyOptions = {
 }
 
 type CreateProofOptions = {
-  nonce: Uint8Array
-  revealed: number[]
+  nonce: ArrayBuffer
+  revealed: readonly number[]
   publicKey: ArrayBuffer
   signature: ArrayBuffer
-  messages: ArrayBuffer
+  messages: ArrayBuffer[]
 }
 
 type BlsCreateProofOptions = {
@@ -37,7 +37,7 @@ type BlsCreateProofOptions = {
   revealed: number[]
   publicKey: ArrayBuffer
   signature: ArrayBuffer
-  messages: ArrayBuffer
+  messages: ArrayBuffer[]
 }
 
 type VerifyProofOptions = {
@@ -94,9 +94,9 @@ type Bl12381toBbsOptions = {}
 export interface Bbs {
   sign(options: SignOptions): { signature: Uint8Array }
   blsSign(options: BlsSignOptions): {}
-  verify(options: VerifyOptions): {}
+  verify(options: VerifyOptions): { verified: boolean; error?: string }
   blsVerify(options: BlsVerifyOptions): {}
-  createProof(options: CreateProofOptions): {}
+  createProof(options: CreateProofOptions): { proof: Uint8Array }
   blsCreateProof(options: BlsCreateProofOptions): {}
   verifyProof(options: VerifyProofOptions): {}
   blsVerifyProof(options: BlsVerifyProofOptions): {}

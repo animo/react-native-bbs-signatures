@@ -139,6 +139,29 @@ std::vector<ByteArray> TurboModuleUtils::jsiToValue<std::vector<ByteArray>>(
 }
 
 template <>
+std::vector<int64_t> TurboModuleUtils::jsiToValue<std::vector<int64_t>>(
+    jsi::Runtime &rt, jsi::Value value, bool optional) {
+  if (optional)
+    return {};
+
+  if (value.isObject() && value.asObject(rt).isArray(rt)) {
+    std::vector<int64_t> vec = {};
+    jsi::Array arr = value.asObject(rt).asArray(rt);
+    auto length = arr.length(rt);
+    for (int i = 0; i < length; i++) {
+      jsi::Value element = arr.getValueAtIndex(rt, i);
+      if (element.isNumber()) {
+        vec.push_back(element.asNumber());
+      } else {
+        throw jsi::JSError(rt, "Value in array not of type int64_t");
+      }
+    }
+    return vec;
+  }
+  throw jsi::JSError(rt, "Value is not of type int64_t[]");
+}
+
+template <>
 uint8_t TurboModuleUtils::jsiToValue<uint8_t>(jsi::Runtime &rt,
                                               jsi::Value value, bool optional) {
   // We return -1 here as rust interprets this as the optional value was not

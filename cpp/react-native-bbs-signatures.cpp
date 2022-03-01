@@ -75,7 +75,30 @@ jsi::Object NativeBbsSignatures::blsVerify(jsi::Runtime &rt,
 jsi::Object NativeBbsSignatures::createProof(jsi::Runtime &rt,
                                              const jsi::Object &options) {
   try {
+    ByteArray nonce = TurboModuleUtils::jsiToValue<ByteArray>(
+        rt, options.getProperty(rt, "nonce"));
+    ByteArray publicKey = TurboModuleUtils::jsiToValue<ByteArray>(
+        rt, options.getProperty(rt, "publicKey"));
+    ByteArray signature = TurboModuleUtils::jsiToValue<ByteArray>(
+        rt, options.getProperty(rt, "signature"));
+    std::vector<ByteArray> messages =
+        TurboModuleUtils::jsiToValue<std::vector<ByteArray>>(
+            rt, options.getProperty(rt, "messages"));
+    std::vector<int64_t> revealed =
+        TurboModuleUtils::jsiToValue<std::vector<int64_t>>(
+            rt, options.getProperty(rt, "revealed"));
+
+    if (messages.size() != revealed.size()) {
+      throw "Messages does not have the same size as revealed";
+    }
+
+    ExternError *err = new ExternError();
+    ByteArray proof =
+        Bbs::createProof(nonce, publicKey, signature, messages, revealed, err);
+
     jsi::Object object = jsi::Object(rt);
+    object.setProperty(rt, "proof",
+                       TurboModuleUtils::byteArrayToArrayBuffer(rt, proof));
     return object;
   } catch (const char *e) {
     throw jsi::JSError(rt, e);

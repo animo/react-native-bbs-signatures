@@ -12,7 +12,10 @@ public:
   static bool verify(ByteArray publicKey, ByteArray signature,
                      std::vector<ByteArray> messages, ExternError *err);
   static void blsVerify();
-  static void createProof();
+  static ByteArray createProof(ByteArray nonce, ByteArray publicKey,
+                               ByteArray signature,
+                               std::vector<ByteArray> messages,
+                               std::vector<int64_t> revealed, ExternError *err);
   static void blsCreateProof();
   static void verifyProof();
   static void blsVerifyProof();

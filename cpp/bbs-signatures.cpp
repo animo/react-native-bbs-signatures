@@ -62,7 +62,43 @@ bool Bbs::verify(ByteArray publicKey, ByteArray signature,
 
 void Bbs::blsVerify() {}
 
-void Bbs::createProof() {}
+ByteArray Bbs::createProof(ByteArray nonce, ByteArray publicKey,
+                           ByteArray signature, std::vector<ByteArray> messages,
+                           std::vector<int64_t> revealed, ExternError *err) {
+  uint32_t length = (uint32_t)messages.size();
+    BlsKeyPair *bpk = new BlsKeyPair(publicKey);
+    BbsKey key = bpk->getBbsKey(length, err);
+  handleExternError(err);
+    
+  uint64_t handle = ::bbs_create_proof_context_init(err);
+  handleExternError(err);
+
+  for (int i = 0; i < length; i++) {
+    // TODO: message length MUST equal revealed length?
+    ByteArray message = messages[i];
+    ProofMessageType xtype = static_cast<ProofMessageType>(revealed[i]);
+    // TODO: how do we get the blinding factor?
+    ByteArray blindingFactor = ByteArray{0, 0};
+    ::bbs_create_proof_context_add_proof_message_bytes(handle, message, xtype,
+                                                       blindingFactor, err);
+    handleExternError(err);
+  }
+
+  ::bbs_create_proof_context_set_nonce_bytes(handle, nonce, err);
+  handleExternError(err);
+
+  ::bbs_create_proof_context_set_public_key(handle, key.publicKey, err);
+  handleExternError(err);
+
+  ::bbs_create_proof_context_set_signature(handle, signature, err);
+  handleExternError(err);
+
+  ByteBuffer *proof = new ByteBuffer();
+  ::bbs_create_proof_context_finish(handle, proof, err);
+  handleExternError(err);
+
+  return byteBufferToByteArray(*proof);
+}
 
 void Bbs::blsCreateProof() {}
 
