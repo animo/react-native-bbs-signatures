@@ -1,10 +1,17 @@
 import * as React from 'react'
 import { StyleSheet, Text, View, Button } from 'react-native'
-import { createProof, generateBls12381G2KeyPair, sign, verify, verifyProof } from 'react-native-bbs-signatures'
+import {
+  ProofMessageType,
+  createProof,
+  generateBls12381G2KeyPair,
+  sign,
+  verify,
+  verifyProof,
+} from 'react-native-bbs-signatures'
 
 const mockMessages = [new Uint8Array([1, 2, 3, 4])]
 const mockNonce = new Uint8Array([1, 2, 3])
-const revealed = [1]
+const revealed = [ProofMessageType.Revealed]
 
 export default function App() {
   const signFunc = () => {

@@ -18,21 +18,27 @@ export interface BbsCreateProofRequest {
   /**
    * BBS signature to generate the BBS proof from
    */
-  readonly signature: Uint8Array;
+  readonly signature: Uint8Array
   /**
    * Public key of the original signer of the signature
    */
-  readonly publicKey: Uint8Array;
+  readonly publicKey: Uint8Array
   /**
    * The messages that were originally signed
    */
-  readonly messages: readonly Uint8Array[];
+  readonly messages: readonly Uint8Array[]
   /**
    * The zero based indicies of which messages to reveal
    */
-  readonly revealed: readonly number[];
+  readonly revealed: readonly number[]
   /**
    * A nonce for the resulting proof
    */
-  readonly nonce: Uint8Array;
+  readonly nonce: Uint8Array
+}
+
+export enum ProofMessageType {
+  Revealed = 1,
+  HiddenProofSpecifcBlinding = 2,
+  HiddenExternalBlinding = 3,
 }

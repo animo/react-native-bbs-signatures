@@ -11,15 +11,15 @@
  * limitations under the License.
  */
 
-export { BbsBlindSignContext } from "./BbsBlindSignContext";
-export { BbsBlindSignContextRequest } from "./BbsBlindSignContextRequest";
-export { BbsBlindSignRequest } from "./BbsBlindSignRequest";
-export { BbsCreateProofRequest } from "./BbsCreateProofRequest";
-export { BbsKeyPair } from "./BbsKeyPair";
-export { BbsSignRequest } from "./BbsSignRequest";
-export { BbsVerifyBlindSignContextRequest } from "./BbsVerifyBlindSignContextRequest";
-export { BbsVerifyProofRequest } from "./BbsVerifyProofRequest";
-export { BbsVerifyRequest } from "./BbsVerifyRequest";
+export { BbsBlindSignContext } from './BbsBlindSignContext'
+export { BbsBlindSignContextRequest } from './BbsBlindSignContextRequest'
+export { BbsBlindSignRequest } from './BbsBlindSignRequest'
+export { BbsCreateProofRequest, ProofMessageType } from './BbsCreateProofRequest'
+export { BbsKeyPair } from './BbsKeyPair'
+export { BbsSignRequest } from './BbsSignRequest'
+export { BbsVerifyBlindSignContextRequest } from './BbsVerifyBlindSignContextRequest'
+export { BbsVerifyProofRequest } from './BbsVerifyProofRequest'
+export { BbsVerifyRequest } from './BbsVerifyRequest'
 export {
   BlsKeyPair,
   BlindedBlsKeyPair,
@@ -27,8 +27,8 @@ export {
   DEFAULT_BLS12381_G2_PUBLIC_KEY_LENGTH,
   DEFAULT_BLS12381_G1_PUBLIC_KEY_LENGTH,
   BLS12381_BLINDING_FACTOR_LENGTH,
-} from "./BlsKeyPair";
-export { Bls12381ToBbsRequest } from "./Bls12381ToBbsRequest";
-export { BlsBbsSignRequest } from "./BlsBbsSignRequest";
-export { BlsBbsVerifyRequest } from "./BlsBbsVerifyRequest";
-export { BbsVerifyResult } from "./BbsVerifyResult";
+} from './BlsKeyPair'
+export { Bls12381ToBbsRequest } from './Bls12381ToBbsRequest'
+export { BlsBbsSignRequest } from './BlsBbsSignRequest'
+export { BlsBbsVerifyRequest } from './BlsBbsVerifyRequest'
+export { BbsVerifyResult } from './BbsVerifyResult'
