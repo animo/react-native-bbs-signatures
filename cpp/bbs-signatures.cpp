@@ -1,24 +1,29 @@
 #include "bbs-signatures.h"
 
-// TODO: after every lib call we must handle the error
 ByteBuffer Bbs::sign(ByteArray publicKey, ByteArray secretKey, std::vector<ByteArray> messages, ExternError *err) {
   uint64_t handle = ::bbs_sign_context_init(err);
+  handleExternError(err);
   
   uint32_t length = (uint32_t)messages.size();
   for (int i = 0; i < length; i++) {
     ByteArray message = messages[i];
     ::bbs_sign_context_add_message_bytes(handle, message, err);
+    handleExternError(err);
   }
 
   BlsKeyPair *bpk = new BlsKeyPair(publicKey, secretKey);
-  BbsKey key = bpk->getBbsKey(length);
+  BbsKey key = bpk->getBbsKey(length, err);
+  handleExternError(err);
 
   ::bbs_sign_context_set_public_key(handle, key.publicKey, err);
+  handleExternError(err);
 
   ::bbs_sign_context_set_secret_key(handle, secretKey, err);
+  handleExternError(err);
   
   ByteBuffer *signature = new ByteBuffer();
   ::bbs_sign_context_finish(handle, signature, err);
+  handleExternError(err);
 
   return *signature;
 }
