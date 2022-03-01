@@ -1,13 +1,16 @@
+#pragma once
+
 // class "interface" of the generated code. This has to be copied over from
 // `../lib/cpp-generated/NativeModules.h`
 
 #include "../lib/cpp-generated/NativeModules.h"
-#include "NativeModules.h"
 #include "TurboModuleUtils.h"
 #include "bbs.h"
+#include "bbs-signatures.h"
 #include <ReactCommon/TurboModule.h>
 #include <jsi/jsi.h>
 #include <jsi/jsilib.h>
+
 
 namespace facebook {
 namespace react {

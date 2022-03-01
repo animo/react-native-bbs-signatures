@@ -1,6 +1,5 @@
 #include <jsi/jsilib.h>
 #include "TurboModuleUtils.h"
-#include "react-native-bbs-signatures.h"
 
 using namespace facebook;
 using namespace react;
@@ -22,22 +21,6 @@ void TurboModuleUtils::handleError(jsi::Runtime &rt, ExternError *error) {
     // TODO: how can we reformat the error message
     throw jsi::JSError(rt, error->message);
 };
-
-void TurboModuleUtils::callback(uintptr_t result, uint32_t code) {
-    State *s = reinterpret_cast<State*>(result);
-    jsi::Function *cb = &s->cb;
-    jsi::Runtime *rt = reinterpret_cast<jsi::Runtime*>(s->rt);
-
-    cb->call(*rt, int(code));
-}
-
-void TurboModuleUtils::callbackWithResponse(uintptr_t result, uint32_t code, const char* response) {
-    State *s = reinterpret_cast<State*>(result);
-    jsi::Function *cb = &s->cb;
-    jsi::Runtime *rt = reinterpret_cast<jsi::Runtime*>(s->rt);
-    
-    cb->call(*rt, int(code), response);
-}
 
 template <>
 std::string TurboModuleUtils::jsiToValue<std::string>(jsi::Runtime &rt, jsi::Value value, bool optional) {
@@ -106,6 +89,28 @@ ByteArray TurboModuleUtils::jsiToValue<ByteArray>(jsi::Runtime &rt, jsi::Value v
 }
 
 template <>
+std::vector<ByteArray> TurboModuleUtils::jsiToValue<std::vector<ByteArray>>(jsi::Runtime &rt, jsi::Value value, bool optional) {
+    if (optional) return {};
+
+    if(value.isObject() && value.asObject(rt).isArray(rt)) {
+        std::vector<ByteArray> vec = {};
+        jsi::Array arr = value.asObject(rt).asArray(rt);
+        auto length = arr.length(rt);
+        for (int i = 0; i < length; i++) {
+            jsi::Value element = arr.getValueAtIndex(rt, i);
+            if(element.isObject() && element.asObject(rt).isArrayBuffer(rt)) {
+                jsi::ArrayBuffer arrayBuffer = element.asObject(rt).getArrayBuffer(rt);
+                vec.push_back(ByteArray {arrayBuffer.size(rt), arrayBuffer.data(rt)});
+            } else {
+                throw jsi::JSError(rt, "Value in array not of type ByteArray");
+            }
+        }
+        return vec;
+    }
+    throw jsi::JSError(rt, "Value is not of type ByteArray[]");
+}
+
+template <>
 uint8_t TurboModuleUtils::jsiToValue<uint8_t>(jsi::Runtime &rt, jsi::Value value, bool optional) {
     // We return -1 here as rust interprets this as the optional value was not given.
     if ((value.isNull() || value.isUndefined()) && optional) return -1;
@@ -115,9 +120,9 @@ uint8_t TurboModuleUtils::jsiToValue<uint8_t>(jsi::Runtime &rt, jsi::Value value
     throw jsi::JSError(rt, "Value is not of type number");
 }
 
-jsi::ArrayBuffer TurboModuleUtils::bytebufferToArrayBuffer(jsi::Runtime &rt, ByteBuffer *bb) {
-    const uint8_t* buffer = bb->data;
-    auto size = bb->len;
+jsi::ArrayBuffer TurboModuleUtils::bytebufferToArrayBuffer(jsi::Runtime &rt, ByteBuffer bb) {
+    const uint8_t* buffer = bb.data;
+    auto size = bb.len;
     auto end = buffer + (size * sizeof(uint8_t));
     std::vector<uint8_t> vector(buffer, end);
     auto array = TypedArray<TypedArrayKind::Uint8Array>(rt, vector);

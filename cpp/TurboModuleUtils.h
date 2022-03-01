@@ -1,5 +1,6 @@
 #pragma once
 
+#include "react-native-bbs-signatures.h"
 #include <ReactCommon/TurboModule.h>
 #include <jsi/jsi.h>
 #include "bbs.h"
@@ -7,15 +8,6 @@
 
 using namespace facebook;
 using namespace react;
-
-// state of a callback function
-struct State {
-    jsi::Function cb;
-    // TODO: can we not make this a void pointer
-    void* rt;
-    
-    State(jsi::Function *cb_): cb(std::move(*cb_)) {}
-};
 
 const char *name = "_bbsSignatures";
 
@@ -37,7 +29,7 @@ public:
     // Callback function that makes the host function async with response from rust side
     static void callbackWithResponse(uintptr_t result, uint32_t code, const char* response);
     
-    static jsi::ArrayBuffer bytebufferToArrayBuffer(jsi::Runtime &rt, ByteBuffer *bb);
+    static jsi::ArrayBuffer bytebufferToArrayBuffer(jsi::Runtime &rt, ByteBuffer bb);
     
     static jsi::Object structureBlsKeyPair(jsi::Runtime &rt, jsi::ArrayBuffer public_key, jsi::ArrayBuffer secret_key);
 };
