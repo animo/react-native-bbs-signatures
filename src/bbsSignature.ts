@@ -62,7 +62,6 @@ export const createProof = ({ publicKey, messages, signature, nonce, revealed }:
     nonce: nonce.buffer,
     revealed,
   })
-  console.log(proof)
 
   return proof
 }
@@ -72,8 +71,18 @@ export const blsCreateProof = (request: BbsCreateProofRequest): Uint8Array => {
   throw new Error('NOT YET IMPLEMENTED')
 }
 
-export const verifyProof = (request: BbsVerifyProofRequest): BbsVerifyResult => {
-  throw new Error('NOT YET IMPLEMENTED')
+export const verifyProof = ({ nonce, proof, messages, publicKey }: BbsVerifyProofRequest): BbsVerifyResult => {
+  const messageBuffers = messages.map((m) => m.buffer)
+  const { verified } = bbsNativeBindings.verifyProof({
+    publicKey: publicKey.buffer,
+    messages: messageBuffers,
+    proof: proof.buffer,
+    nonce: nonce.buffer,
+  })
+
+  return {
+    verified,
+  }
 }
 
 // This should call verifyProof now.

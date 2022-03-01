@@ -41,7 +41,7 @@ type BlsCreateProofOptions = {
 }
 
 type VerifyProofOptions = {
-  nonce: Uint8Array
+  nonce: ArrayBuffer
   publicKey: ArrayBuffer
   proof: ArrayBuffer
   messages: ArrayBuffer[]
@@ -98,7 +98,7 @@ export interface Bbs {
   blsVerify(options: BlsVerifyOptions): {}
   createProof(options: CreateProofOptions): { proof: Uint8Array }
   blsCreateProof(options: BlsCreateProofOptions): {}
-  verifyProof(options: VerifyProofOptions): {}
+  verifyProof(options: VerifyProofOptions): { verified: boolean; error?: string }
   blsVerifyProof(options: BlsVerifyProofOptions): {}
   commitmentForBlindSignRequest(options: CommitmentForBlindSignRequestOptions): {}
   verifyBlindSignRequest(options: VerifyBlindSignRequestOptions): {}

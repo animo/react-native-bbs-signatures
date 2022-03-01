@@ -1,10 +1,10 @@
 import * as React from 'react'
 import { StyleSheet, Text, View, Button } from 'react-native'
-import { createProof, generateBls12381G2KeyPair, sign, verify } from 'react-native-bbs-signatures'
+import { createProof, generateBls12381G2KeyPair, sign, verify, verifyProof } from 'react-native-bbs-signatures'
 
 const mockMessages = [new Uint8Array([1, 2, 3, 4])]
 const mockNonce = new Uint8Array([1, 2, 3])
-const revealed = [0]
+const revealed = [1]
 
 export default function App() {
   const signFunc = () => {
@@ -13,10 +13,12 @@ export default function App() {
       keyPair: { publicKey, secretKey, messageCount: mockMessages.length },
       messages: mockMessages,
     })
-    const { verified } = verify({ publicKey: publicKey, signature, messages: mockMessages })
+    const verifiedSignature = verify({ publicKey: publicKey, signature, messages: mockMessages })
     const proof = createProof({ signature, messages: mockMessages, publicKey, revealed, nonce: mockNonce })
-    console.log('verified: ', JSON.stringify(verified))
+    const verifiedProof = verifyProof({ nonce: mockNonce, proof, messages: mockMessages, publicKey })
+    console.log('verified Sig: ', JSON.stringify(verifiedSignature))
     console.log('proof: ', JSON.stringify(proof))
+    console.log('verified proof: ', JSON.stringify(verifiedProof))
   }
 
   return (

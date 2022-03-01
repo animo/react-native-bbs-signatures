@@ -118,7 +118,21 @@ jsi::Object NativeBbsSignatures::blsCreateProof(jsi::Runtime &rt,
 jsi::Object NativeBbsSignatures::verifyProof(jsi::Runtime &rt,
                                              const jsi::Object &options) {
   try {
+    ByteArray nonce = TurboModuleUtils::jsiToValue<ByteArray>(
+        rt, options.getProperty(rt, "nonce"));
+    ByteArray proof = TurboModuleUtils::jsiToValue<ByteArray>(
+        rt, options.getProperty(rt, "proof"));
+    ByteArray publicKey = TurboModuleUtils::jsiToValue<ByteArray>(
+        rt, options.getProperty(rt, "publicKey"));
+    std::vector<ByteArray> messages =
+        TurboModuleUtils::jsiToValue<std::vector<ByteArray>>(
+            rt, options.getProperty(rt, "messages"));
+
+    ExternError *err = new ExternError();
+    bool verified = Bbs::verifyProof(nonce, publicKey, proof, messages, err);
+
     jsi::Object object = jsi::Object(rt);
+    object.setProperty(rt, "verified", verified);
     return object;
   } catch (const char *e) {
     throw jsi::JSError(rt, e);
