@@ -1,4 +1,4 @@
-import type { BlsKeyPair } from './types'
+import type { BlindedBlsKeyPair, BlsKeyPair } from './types'
 
 type SignOptions = {
   publicKey: ArrayBuffer
@@ -105,9 +105,9 @@ export interface Bbs {
   blindSign(options: BlindSignOptions): {}
   // ---
   generateBls12381G1KeyPair(options: GenerateBls12381G1KeyPairOptions): Required<BlsKeyPair>
-  generateBlindedBls12381G1KeyPair(options: GenerateBlindedBls12381G1KeyPairOptions): {}
-  generateBls12381G2KeyPair(options: GenerateBls12381G2KeyPairOptions): {}
-  generateBlindedBls12381G2KeyPair(options: GenerateBlindedBls12381G2KeyPairOptions): {}
+  generateBlindedBls12381G1KeyPair(options: GenerateBlindedBls12381G1KeyPairOptions): Required<BlindedBlsKeyPair>
+  generateBls12381G2KeyPair(options: GenerateBls12381G2KeyPairOptions): Required<BlsKeyPair>
+  generateBlindedBls12381G2KeyPair(options: GenerateBlindedBls12381G2KeyPairOptions): Required<BlindedBlsKeyPair>
   // ---
-  bl12381toBbs(options: Bl12381toBbsOptions): {}
+  bls12381toBbs(options: Bl12381toBbsOptions): { publicKey: Uint8Array }
 }

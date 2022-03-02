@@ -1,3 +1,5 @@
+#pragma once
+
 #include "bbs.h"
 
 struct BbsKey {

@@ -12,75 +12,146 @@
 namespace facebook {
 namespace react {
 
-static jsi::Value __hostFunction_BbsSignaturesCxxSpecJSI_sign(jsi::Runtime &rt, TurboModule &turboModule, const jsi::Value* args, size_t count) {
-  return static_cast<BbsSignaturesCxxSpecJSI *>(&turboModule)->sign(rt, args[0].getObject(rt));
+static jsi::Value __hostFunction_BbsSignaturesCxxSpecJSI_sign(
+    jsi::Runtime &rt, TurboModule &turboModule, const jsi::Value *args,
+    size_t count) {
+  return static_cast<BbsSignaturesCxxSpecJSI *>(&turboModule)
+      ->sign(rt, args[0].getObject(rt));
 }
-static jsi::Value __hostFunction_BbsSignaturesCxxSpecJSI_blsSign(jsi::Runtime &rt, TurboModule &turboModule, const jsi::Value* args, size_t count) {
-  return static_cast<BbsSignaturesCxxSpecJSI *>(&turboModule)->blsSign(rt, args[0].getObject(rt));
+static jsi::Value __hostFunction_BbsSignaturesCxxSpecJSI_blsSign(
+    jsi::Runtime &rt, TurboModule &turboModule, const jsi::Value *args,
+    size_t count) {
+  return static_cast<BbsSignaturesCxxSpecJSI *>(&turboModule)
+      ->blsSign(rt, args[0].getObject(rt));
 }
-static jsi::Value __hostFunction_BbsSignaturesCxxSpecJSI_verify(jsi::Runtime &rt, TurboModule &turboModule, const jsi::Value* args, size_t count) {
-  return static_cast<BbsSignaturesCxxSpecJSI *>(&turboModule)->verify(rt, args[0].getObject(rt));
+static jsi::Value __hostFunction_BbsSignaturesCxxSpecJSI_verify(
+    jsi::Runtime &rt, TurboModule &turboModule, const jsi::Value *args,
+    size_t count) {
+  return static_cast<BbsSignaturesCxxSpecJSI *>(&turboModule)
+      ->verify(rt, args[0].getObject(rt));
 }
-static jsi::Value __hostFunction_BbsSignaturesCxxSpecJSI_blsVerify(jsi::Runtime &rt, TurboModule &turboModule, const jsi::Value* args, size_t count) {
-  return static_cast<BbsSignaturesCxxSpecJSI *>(&turboModule)->blsVerify(rt, args[0].getObject(rt));
+static jsi::Value __hostFunction_BbsSignaturesCxxSpecJSI_blsVerify(
+    jsi::Runtime &rt, TurboModule &turboModule, const jsi::Value *args,
+    size_t count) {
+  return static_cast<BbsSignaturesCxxSpecJSI *>(&turboModule)
+      ->blsVerify(rt, args[0].getObject(rt));
 }
-static jsi::Value __hostFunction_BbsSignaturesCxxSpecJSI_createProof(jsi::Runtime &rt, TurboModule &turboModule, const jsi::Value* args, size_t count) {
-  return static_cast<BbsSignaturesCxxSpecJSI *>(&turboModule)->createProof(rt, args[0].getObject(rt));
+static jsi::Value __hostFunction_BbsSignaturesCxxSpecJSI_createProof(
+    jsi::Runtime &rt, TurboModule &turboModule, const jsi::Value *args,
+    size_t count) {
+  return static_cast<BbsSignaturesCxxSpecJSI *>(&turboModule)
+      ->createProof(rt, args[0].getObject(rt));
 }
-static jsi::Value __hostFunction_BbsSignaturesCxxSpecJSI_blsCreateProof(jsi::Runtime &rt, TurboModule &turboModule, const jsi::Value* args, size_t count) {
-  return static_cast<BbsSignaturesCxxSpecJSI *>(&turboModule)->blsCreateProof(rt, args[0].getObject(rt));
+static jsi::Value __hostFunction_BbsSignaturesCxxSpecJSI_blsCreateProof(
+    jsi::Runtime &rt, TurboModule &turboModule, const jsi::Value *args,
+    size_t count) {
+  return static_cast<BbsSignaturesCxxSpecJSI *>(&turboModule)
+      ->blsCreateProof(rt, args[0].getObject(rt));
 }
-static jsi::Value __hostFunction_BbsSignaturesCxxSpecJSI_verifyProof(jsi::Runtime &rt, TurboModule &turboModule, const jsi::Value* args, size_t count) {
-  return static_cast<BbsSignaturesCxxSpecJSI *>(&turboModule)->verifyProof(rt, args[0].getObject(rt));
+static jsi::Value __hostFunction_BbsSignaturesCxxSpecJSI_verifyProof(
+    jsi::Runtime &rt, TurboModule &turboModule, const jsi::Value *args,
+    size_t count) {
+  return static_cast<BbsSignaturesCxxSpecJSI *>(&turboModule)
+      ->verifyProof(rt, args[0].getObject(rt));
 }
-static jsi::Value __hostFunction_BbsSignaturesCxxSpecJSI_blsVerifyProof(jsi::Runtime &rt, TurboModule &turboModule, const jsi::Value* args, size_t count) {
-  return static_cast<BbsSignaturesCxxSpecJSI *>(&turboModule)->blsVerifyProof(rt, args[0].getObject(rt));
+static jsi::Value __hostFunction_BbsSignaturesCxxSpecJSI_blsVerifyProof(
+    jsi::Runtime &rt, TurboModule &turboModule, const jsi::Value *args,
+    size_t count) {
+  return static_cast<BbsSignaturesCxxSpecJSI *>(&turboModule)
+      ->blsVerifyProof(rt, args[0].getObject(rt));
 }
-static jsi::Value __hostFunction_BbsSignaturesCxxSpecJSI_commitmentForBlindSignRequest(jsi::Runtime &rt, TurboModule &turboModule, const jsi::Value* args, size_t count) {
-  return static_cast<BbsSignaturesCxxSpecJSI *>(&turboModule)->commitmentForBlindSignRequest(rt, args[0].getObject(rt));
+static jsi::Value
+__hostFunction_BbsSignaturesCxxSpecJSI_commitmentForBlindSignRequest(
+    jsi::Runtime &rt, TurboModule &turboModule, const jsi::Value *args,
+    size_t count) {
+  return static_cast<BbsSignaturesCxxSpecJSI *>(&turboModule)
+      ->commitmentForBlindSignRequest(rt, args[0].getObject(rt));
 }
-static jsi::Value __hostFunction_BbsSignaturesCxxSpecJSI_verifyBlindSignRequest(jsi::Runtime &rt, TurboModule &turboModule, const jsi::Value* args, size_t count) {
-  return static_cast<BbsSignaturesCxxSpecJSI *>(&turboModule)->verifyBlindSignRequest(rt, args[0].getObject(rt));
+static jsi::Value __hostFunction_BbsSignaturesCxxSpecJSI_verifyBlindSignRequest(
+    jsi::Runtime &rt, TurboModule &turboModule, const jsi::Value *args,
+    size_t count) {
+  return static_cast<BbsSignaturesCxxSpecJSI *>(&turboModule)
+      ->verifyBlindSignRequest(rt, args[0].getObject(rt));
 }
-static jsi::Value __hostFunction_BbsSignaturesCxxSpecJSI_blindSign(jsi::Runtime &rt, TurboModule &turboModule, const jsi::Value* args, size_t count) {
-  return static_cast<BbsSignaturesCxxSpecJSI *>(&turboModule)->blindSign(rt, args[0].getObject(rt));
+static jsi::Value __hostFunction_BbsSignaturesCxxSpecJSI_blindSign(
+    jsi::Runtime &rt, TurboModule &turboModule, const jsi::Value *args,
+    size_t count) {
+  return static_cast<BbsSignaturesCxxSpecJSI *>(&turboModule)
+      ->blindSign(rt, args[0].getObject(rt));
 }
-static jsi::Value __hostFunction_BbsSignaturesCxxSpecJSI_generateBls12381G1KeyPair(jsi::Runtime &rt, TurboModule &turboModule, const jsi::Value* args, size_t count) {
-  return static_cast<BbsSignaturesCxxSpecJSI *>(&turboModule)->generateBls12381G1KeyPair(rt, args[0].getObject(rt));
+static jsi::Value
+__hostFunction_BbsSignaturesCxxSpecJSI_generateBls12381G1KeyPair(
+    jsi::Runtime &rt, TurboModule &turboModule, const jsi::Value *args,
+    size_t count) {
+  return static_cast<BbsSignaturesCxxSpecJSI *>(&turboModule)
+      ->generateBls12381G1KeyPair(rt, args[0].getObject(rt));
 }
-static jsi::Value __hostFunction_BbsSignaturesCxxSpecJSI_generateBlindedBls12381G1KeyPair(jsi::Runtime &rt, TurboModule &turboModule, const jsi::Value* args, size_t count) {
-  return static_cast<BbsSignaturesCxxSpecJSI *>(&turboModule)->generateBlindedBls12381G1KeyPair(rt, args[0].getObject(rt));
+static jsi::Value
+__hostFunction_BbsSignaturesCxxSpecJSI_generateBlindedBls12381G1KeyPair(
+    jsi::Runtime &rt, TurboModule &turboModule, const jsi::Value *args,
+    size_t count) {
+  return static_cast<BbsSignaturesCxxSpecJSI *>(&turboModule)
+      ->generateBlindedBls12381G1KeyPair(rt, args[0].getObject(rt));
 }
-static jsi::Value __hostFunction_BbsSignaturesCxxSpecJSI_generateBls12381G2KeyPair(jsi::Runtime &rt, TurboModule &turboModule, const jsi::Value* args, size_t count) {
-  return static_cast<BbsSignaturesCxxSpecJSI *>(&turboModule)->generateBls12381G2KeyPair(rt, args[0].getObject(rt));
+static jsi::Value
+__hostFunction_BbsSignaturesCxxSpecJSI_generateBls12381G2KeyPair(
+    jsi::Runtime &rt, TurboModule &turboModule, const jsi::Value *args,
+    size_t count) {
+  return static_cast<BbsSignaturesCxxSpecJSI *>(&turboModule)
+      ->generateBls12381G2KeyPair(rt, args[0].getObject(rt));
 }
-static jsi::Value __hostFunction_BbsSignaturesCxxSpecJSI_generateBlindedBls12381G2KeyPair(jsi::Runtime &rt, TurboModule &turboModule, const jsi::Value* args, size_t count) {
-  return static_cast<BbsSignaturesCxxSpecJSI *>(&turboModule)->generateBlindedBls12381G2KeyPair(rt, args[0].getObject(rt));
+static jsi::Value
+__hostFunction_BbsSignaturesCxxSpecJSI_generateBlindedBls12381G2KeyPair(
+    jsi::Runtime &rt, TurboModule &turboModule, const jsi::Value *args,
+    size_t count) {
+  return static_cast<BbsSignaturesCxxSpecJSI *>(&turboModule)
+      ->generateBlindedBls12381G2KeyPair(rt, args[0].getObject(rt));
 }
-static jsi::Value __hostFunction_BbsSignaturesCxxSpecJSI_bl12381toBbs(jsi::Runtime &rt, TurboModule &turboModule, const jsi::Value* args, size_t count) {
-  return static_cast<BbsSignaturesCxxSpecJSI *>(&turboModule)->bl12381toBbs(rt, args[0].getObject(rt));
+static jsi::Value __hostFunction_BbsSignaturesCxxSpecJSI_bls12381toBbs(
+    jsi::Runtime &rt, TurboModule &turboModule, const jsi::Value *args,
+    size_t count) {
+  return static_cast<BbsSignaturesCxxSpecJSI *>(&turboModule)
+      ->bls12381toBbs(rt, args[0].getObject(rt));
 }
 
-BbsSignaturesCxxSpecJSI::BbsSignaturesCxxSpecJSI(std::shared_ptr<CallInvoker> jsInvoker)
-  : TurboModule("BbsSignatures", jsInvoker) {
-  methodMap_["sign"] = MethodMetadata {1, __hostFunction_BbsSignaturesCxxSpecJSI_sign};
-  methodMap_["blsSign"] = MethodMetadata {1, __hostFunction_BbsSignaturesCxxSpecJSI_blsSign};
-  methodMap_["verify"] = MethodMetadata {1, __hostFunction_BbsSignaturesCxxSpecJSI_verify};
-  methodMap_["blsVerify"] = MethodMetadata {1, __hostFunction_BbsSignaturesCxxSpecJSI_blsVerify};
-  methodMap_["createProof"] = MethodMetadata {1, __hostFunction_BbsSignaturesCxxSpecJSI_createProof};
-  methodMap_["blsCreateProof"] = MethodMetadata {1, __hostFunction_BbsSignaturesCxxSpecJSI_blsCreateProof};
-  methodMap_["verifyProof"] = MethodMetadata {1, __hostFunction_BbsSignaturesCxxSpecJSI_verifyProof};
-  methodMap_["blsVerifyProof"] = MethodMetadata {1, __hostFunction_BbsSignaturesCxxSpecJSI_blsVerifyProof};
-  methodMap_["commitmentForBlindSignRequest"] = MethodMetadata {1, __hostFunction_BbsSignaturesCxxSpecJSI_commitmentForBlindSignRequest};
-  methodMap_["verifyBlindSignRequest"] = MethodMetadata {1, __hostFunction_BbsSignaturesCxxSpecJSI_verifyBlindSignRequest};
-  methodMap_["blindSign"] = MethodMetadata {1, __hostFunction_BbsSignaturesCxxSpecJSI_blindSign};
-  methodMap_["generateBls12381G1KeyPair"] = MethodMetadata {1, __hostFunction_BbsSignaturesCxxSpecJSI_generateBls12381G1KeyPair};
-  methodMap_["generateBlindedBls12381G1KeyPair"] = MethodMetadata {1, __hostFunction_BbsSignaturesCxxSpecJSI_generateBlindedBls12381G1KeyPair};
-  methodMap_["generateBls12381G2KeyPair"] = MethodMetadata {1, __hostFunction_BbsSignaturesCxxSpecJSI_generateBls12381G2KeyPair};
-  methodMap_["generateBlindedBls12381G2KeyPair"] = MethodMetadata {1, __hostFunction_BbsSignaturesCxxSpecJSI_generateBlindedBls12381G2KeyPair};
-  methodMap_["bl12381toBbs"] = MethodMetadata {1, __hostFunction_BbsSignaturesCxxSpecJSI_bl12381toBbs};
+BbsSignaturesCxxSpecJSI::BbsSignaturesCxxSpecJSI(
+    std::shared_ptr<CallInvoker> jsInvoker)
+    : TurboModule("BbsSignatures", jsInvoker) {
+  methodMap_["sign"] =
+      MethodMetadata{1, __hostFunction_BbsSignaturesCxxSpecJSI_sign};
+  methodMap_["blsSign"] =
+      MethodMetadata{1, __hostFunction_BbsSignaturesCxxSpecJSI_blsSign};
+  methodMap_["verify"] =
+      MethodMetadata{1, __hostFunction_BbsSignaturesCxxSpecJSI_verify};
+  methodMap_["blsVerify"] =
+      MethodMetadata{1, __hostFunction_BbsSignaturesCxxSpecJSI_blsVerify};
+  methodMap_["createProof"] =
+      MethodMetadata{1, __hostFunction_BbsSignaturesCxxSpecJSI_createProof};
+  methodMap_["blsCreateProof"] =
+      MethodMetadata{1, __hostFunction_BbsSignaturesCxxSpecJSI_blsCreateProof};
+  methodMap_["verifyProof"] =
+      MethodMetadata{1, __hostFunction_BbsSignaturesCxxSpecJSI_verifyProof};
+  methodMap_["blsVerifyProof"] =
+      MethodMetadata{1, __hostFunction_BbsSignaturesCxxSpecJSI_blsVerifyProof};
+  methodMap_["commitmentForBlindSignRequest"] = MethodMetadata{
+      1, __hostFunction_BbsSignaturesCxxSpecJSI_commitmentForBlindSignRequest};
+  methodMap_["verifyBlindSignRequest"] = MethodMetadata{
+      1, __hostFunction_BbsSignaturesCxxSpecJSI_verifyBlindSignRequest};
+  methodMap_["blindSign"] =
+      MethodMetadata{1, __hostFunction_BbsSignaturesCxxSpecJSI_blindSign};
+  methodMap_["generateBls12381G1KeyPair"] = MethodMetadata{
+      1, __hostFunction_BbsSignaturesCxxSpecJSI_generateBls12381G1KeyPair};
+  methodMap_["generateBlindedBls12381G1KeyPair"] = MethodMetadata{
+      1,
+      __hostFunction_BbsSignaturesCxxSpecJSI_generateBlindedBls12381G1KeyPair};
+  methodMap_["generateBls12381G2KeyPair"] = MethodMetadata{
+      1, __hostFunction_BbsSignaturesCxxSpecJSI_generateBls12381G2KeyPair};
+  methodMap_["generateBlindedBls12381G2KeyPair"] = MethodMetadata{
+      1,
+      __hostFunction_BbsSignaturesCxxSpecJSI_generateBlindedBls12381G2KeyPair};
+  methodMap_["bls12381toBbs"] =
+      MethodMetadata{1, __hostFunction_BbsSignaturesCxxSpecJSI_bls12381toBbs};
 }
-
 
 } // namespace react
 } // namespace facebook

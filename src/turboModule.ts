@@ -20,7 +20,7 @@ export interface BbsNativeBindings extends TurboModule {
   generateBls12381G2KeyPair(options: {}): {}
   generateBlindedBls12381G2KeyPair(options: {}): {}
   // ---
-  bl12381toBbs(options: {}): {}
+  bls12381toBbs(options: {}): {}
 }
 
 // We MUST export this according to tscodegen. We are ignoring it however.

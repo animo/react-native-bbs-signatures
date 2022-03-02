@@ -13,7 +13,7 @@ import type {
   BlsBbsVerifyRequest,
 } from './types'
 
-export const BBS_SIGNATURE_LENGTH = 112
+// export const BBS_SIGNATURE_LENGTH = 112
 
 // TODO: promisfy
 export const sign = ({ messages, keyPair }: BbsSignRequest): Uint8Array => {
@@ -24,13 +24,7 @@ export const sign = ({ messages, keyPair }: BbsSignRequest): Uint8Array => {
     messages: messageBuffers,
   })
 
-  console.log(signature)
   return signature as Uint8Array
-}
-
-// This should call sign now.
-export const blsSign = (request: BlsBbsSignRequest): Uint8Array => {
-  throw new Error('NOT YET IMPLEMENTED')
 }
 
 export const verify = ({ publicKey, signature, messages }: BbsVerifyRequest): BbsVerifyResult => {
@@ -47,11 +41,6 @@ export const verify = ({ publicKey, signature, messages }: BbsVerifyRequest): Bb
   }
 }
 
-// This should call verify now.
-export const blsVerify = (request: BlsBbsVerifyRequest): BbsVerifyResult => {
-  throw new Error('NOT YET IMPLEMENTED')
-}
-
 export const createProof = ({ publicKey, messages, signature, nonce, revealed }: BbsCreateProofRequest): Uint8Array => {
   const messageBuffers = messages.map((m) => m.buffer)
   const { proof } = bbsNativeBindings.createProof({
@@ -63,11 +52,6 @@ export const createProof = ({ publicKey, messages, signature, nonce, revealed }:
   })
 
   return proof
-}
-
-// This should call createProof now.
-export const blsCreateProof = (request: BbsCreateProofRequest): Uint8Array => {
-  throw new Error('NOT YET IMPLEMENTED')
 }
 
 export const verifyProof = ({ nonce, proof, messages, publicKey }: BbsVerifyProofRequest): BbsVerifyResult => {
@@ -84,48 +68,42 @@ export const verifyProof = ({ nonce, proof, messages, publicKey }: BbsVerifyProo
   }
 }
 
-// This should call verifyProof now.
-// does NOT need to call verifyProof
-export const blsVerifyProof = (request: BbsVerifyProofRequest): BbsVerifyResult => {
+export const blsSign = ({ messages, keyPair }: BlsBbsSignRequest): Uint8Array => {
   throw new Error('NOT YET IMPLEMENTED')
 }
 
-export const commitmentForBlindSignRequest = ({
-  nonce,
-  hidden,
-  messages,
-  publicKey,
-}: BbsBlindSignContextRequest): BbsBlindSignContext => {
-  const messageBuffers = messages.map((m) => m.buffer)
-  const x = bbsNativeBindings.commitmentForBlindSignRequest({
-    nonce: nonce.buffer,
-    hidden,
-    messages: messageBuffers,
-    publicKey: publicKey.buffer,
-  })
-
-  console.log(JSON.stringify(x))
-
-  throw new Error('DONT KNOW HOW TO DEAL WITH THIS RETURN TYPE')
+export const blsVerify = ({ messages, publicKey, signature }: BlsBbsVerifyRequest): BbsVerifyResult => {
+  throw new Error('NOT YET IMPLEMENTED')
 }
 
-export const verifyBlindSignContext = ({
+// This should call createProof now.
+export const blsCreateProof = ({
+  signature,
   publicKey,
+  messages,
   nonce,
-  blinded,
-  commitment,
-  challengeHash,
-  proofOfHiddenMessages,
-}: BbsVerifyBlindSignContextRequest): boolean => {
-  const c = bbsNativeBindings.verifyBlindSignRequest({
-    nonce: nonce.buffer,
-    blinded,
-    publicKey: publicKey.buffer,
-    commitment: commitment.buffer,
-    challengeHash: challengeHash.buffer,
-    proofOfHiddenMessages: proofOfHiddenMessages.buffer,
-  })
-  console.log(JSON.stringify(c))
+  revealed,
+}: BbsCreateProofRequest): Uint8Array => {
+  throw new Error('NOT YET IMPLEMENTED')
+}
+
+// does NOT need to call verifyProof
+export const blsVerifyProof = ({ nonce, proof, messages, publicKey }: BbsVerifyProofRequest): BbsVerifyResult => {
+  throw new Error('NOT YET IMPLEMENTED')
+}
+
+export const commitmentForBlindSignRequest = ({}: BbsBlindSignContextRequest): BbsBlindSignContext => {
+  throw new Error('NOT YET IMPLEMENTED')
+  // const messageBuffers = messages.map((m) => m.buffer)
+  // const = bbsNativeBindings.commitmentForBlindSignRequest({
+  //   nonce: nonce.buffer,
+  //   hidden,
+  //   messages: messageBuffers,
+  //   publicKey: publicKey.buffer,
+  // })
+}
+
+export const verifyBlindSignContext = ({}: BbsVerifyBlindSignContextRequest): boolean => {
   throw new Error('NOT YET IMPLEMENTED')
 }
 

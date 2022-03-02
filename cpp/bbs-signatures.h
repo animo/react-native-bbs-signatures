@@ -1,6 +1,8 @@
 #pragma once
 
+#include "bbs-key.h"
 #include "bbs.h"
+#include "blinded-bls-key-pair.h"
 #include "bls-key-pair.h"
 #include <vector>
 
@@ -32,8 +34,9 @@ public:
                                      ExternError *err);
   static void blindSign();
   static BlsKeyPair generateBls12381G1KeyPair(ByteArray seed, ExternError *err);
-  static void generateBlindedBls12381G1KeyPair();
+  static BlindedBlsKeyPair generateBlindedBls12381G1KeyPair(ByteArray seed, ExternError *err);
   static BlsKeyPair generateBls12381G2KeyPair(ByteArray seed, ExternError *err);
-  static void generateBlindedBls12381G2KeyPair();
-  static void bl12381toBbs();
+  static BlindedBlsKeyPair generateBlindedBls12381G2KeyPair(ByteArray seed, ExternError *err);
+  static BbsKey bls12381toBbs(BlsKeyPair kp, uint32_t messageCount,
+                             ExternError *err);
 };

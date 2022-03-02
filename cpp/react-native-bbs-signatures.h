@@ -38,7 +38,7 @@ public:
                                         const jsi::Object &options);
   jsi::Object generateBlindedBls12381G2KeyPair(jsi::Runtime &rt,
                                                const jsi::Object &options);
-  jsi::Object bl12381toBbs(jsi::Runtime &rt, const jsi::Object &options);
+  jsi::Object bls12381toBbs(jsi::Runtime &rt, const jsi::Object &options);
 };
 } // namespace react
 } // namespace facebook

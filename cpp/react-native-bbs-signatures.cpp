@@ -153,15 +153,16 @@ jsi::Object
 NativeBbsSignatures::commitmentForBlindSignRequest(jsi::Runtime &rt,
                                                    const jsi::Object &options) {
   try {
-      ByteArray nonce = TurboModuleUtils::jsiToValue<ByteArray>(
-          rt, options.getProperty(rt, "nonce"));
-      ByteArray publicKey = TurboModuleUtils::jsiToValue<ByteArray>(
-          rt, options.getProperty(rt, "publicKey"));
-      std::vector<int32_t> hidden = TurboModuleUtils::jsiToValue<std::vector<int32_t>>(
-          rt, options.getProperty(rt, "hidden"));
-      std::vector<ByteArray> messages =
-          TurboModuleUtils::jsiToValue<std::vector<ByteArray>>(
-              rt, options.getProperty(rt, "messages"));
+    ByteArray nonce = TurboModuleUtils::jsiToValue<ByteArray>(
+        rt, options.getProperty(rt, "nonce"));
+    ByteArray publicKey = TurboModuleUtils::jsiToValue<ByteArray>(
+        rt, options.getProperty(rt, "publicKey"));
+    std::vector<int32_t> hidden =
+        TurboModuleUtils::jsiToValue<std::vector<int32_t>>(
+            rt, options.getProperty(rt, "hidden"));
+    std::vector<ByteArray> messages =
+        TurboModuleUtils::jsiToValue<std::vector<ByteArray>>(
+            rt, options.getProperty(rt, "messages"));
 
     ExternError *err = new ExternError();
     std::tuple<ByteArray, ByteArray, ByteArray> res =
@@ -192,13 +193,13 @@ NativeBbsSignatures::verifyBlindSignRequest(jsi::Runtime &rt,
   try {
     ByteArray nonce = TurboModuleUtils::jsiToValue<ByteArray>(
         rt, options.getProperty(rt, "nonce"));
-      ByteArray publicKey = TurboModuleUtils::jsiToValue<ByteArray>(
+    ByteArray publicKey = TurboModuleUtils::jsiToValue<ByteArray>(
         rt, options.getProperty(rt, "publickey"));
-      ByteArray proofOfHiddenMessages = TurboModuleUtils::jsiToValue<ByteArray>(
+    ByteArray proofOfHiddenMessages = TurboModuleUtils::jsiToValue<ByteArray>(
         rt, options.getProperty(rt, "poofOfHiddenMessages"));
-      ByteArray challangeHash = TurboModuleUtils::jsiToValue<ByteArray>(
+    ByteArray challangeHash = TurboModuleUtils::jsiToValue<ByteArray>(
         rt, options.getProperty(rt, "challangeHash"));
-      ByteArray commitment = TurboModuleUtils::jsiToValue<ByteArray>(
+    ByteArray commitment = TurboModuleUtils::jsiToValue<ByteArray>(
         rt, options.getProperty(rt, "commitment"));
     std::vector<int32_t> blinded =
         TurboModuleUtils::jsiToValue<std::vector<int32_t>>(
@@ -209,10 +210,9 @@ NativeBbsSignatures::verifyBlindSignRequest(jsi::Runtime &rt,
         Bbs::verifyBlindSignRequest(nonce, publicKey, proofOfHiddenMessages,
                                     challangeHash, commitment, blinded, err);
 
-      jsi::Object object = jsi::Object(rt);
-      object.setProperty(
-          rt, "verified",verified);
-      return object;
+    jsi::Object object = jsi::Object(rt);
+    object.setProperty(rt, "verified", verified);
+    return object;
     return object;
   } catch (const char *e) {
     throw jsi::JSError(rt, e);
@@ -253,16 +253,6 @@ NativeBbsSignatures::generateBls12381G1KeyPair(jsi::Runtime &rt,
   }
 }
 
-jsi::Object NativeBbsSignatures::generateBlindedBls12381G1KeyPair(
-    jsi::Runtime &rt, const jsi::Object &options) {
-  try {
-    jsi::Object object = jsi::Object(rt);
-    return object;
-  } catch (const char *e) {
-    throw jsi::JSError(rt, e);
-  }
-}
-
 jsi::Object
 NativeBbsSignatures::generateBls12381G2KeyPair(jsi::Runtime &rt,
                                                const jsi::Object &options) {
@@ -287,20 +277,74 @@ NativeBbsSignatures::generateBls12381G2KeyPair(jsi::Runtime &rt,
   }
 }
 
-jsi::Object NativeBbsSignatures::generateBlindedBls12381G2KeyPair(
+jsi::Object NativeBbsSignatures::generateBlindedBls12381G1KeyPair(
     jsi::Runtime &rt, const jsi::Object &options) {
   try {
+    ByteArray seed = TurboModuleUtils::jsiToValue<ByteArray>(
+        rt, options.getProperty(rt, "seed"), true);
+
+    ExternError *err = new ExternError();
+
+    BlindedBlsKeyPair bbpk = Bbs::generateBlindedBls12381G1KeyPair(seed, err);
+
     jsi::Object object = jsi::Object(rt);
+    object.setProperty(
+        rt, "publicKey",
+        TurboModuleUtils::byteArrayToArrayBuffer(rt, bbpk.publicKey));
+    object.setProperty(
+        rt, "secretKey",
+        TurboModuleUtils::byteArrayToArrayBuffer(rt, bbpk.secretKey));
+    object.setProperty(
+        rt, "blindingFactor",
+        TurboModuleUtils::byteArrayToArrayBuffer(rt, bbpk.blindingFactor));
     return object;
   } catch (const char *e) {
     throw jsi::JSError(rt, e);
   }
 }
 
-jsi::Object NativeBbsSignatures::bl12381toBbs(jsi::Runtime &rt,
-                                              const jsi::Object &options) {
+jsi::Object NativeBbsSignatures::generateBlindedBls12381G2KeyPair(
+    jsi::Runtime &rt, const jsi::Object &options) {
   try {
+    ByteArray seed = TurboModuleUtils::jsiToValue<ByteArray>(
+        rt, options.getProperty(rt, "seed"), true);
+
+    ExternError *err = new ExternError();
+
+    BlindedBlsKeyPair bbkp = Bbs::generateBlindedBls12381G2KeyPair(seed, err);
+
     jsi::Object object = jsi::Object(rt);
+    object.setProperty(
+        rt, "publicKey",
+        TurboModuleUtils::byteArrayToArrayBuffer(rt, bbkp.publicKey));
+    object.setProperty(
+        rt, "secretKey",
+        TurboModuleUtils::byteArrayToArrayBuffer(rt, bbkp.secretKey));
+    object.setProperty(
+        rt, "blindingFactor",
+        TurboModuleUtils::byteArrayToArrayBuffer(rt, bbkp.blindingFactor));
+    return object;
+  } catch (const char *e) {
+    throw jsi::JSError(rt, e);
+  }
+}
+
+jsi::Object NativeBbsSignatures::bls12381toBbs(jsi::Runtime &rt,
+                                               const jsi::Object &options) {
+  try {
+    ByteArray publicKey = TurboModuleUtils::jsiToValue<ByteArray>(
+        rt, options.getProperty(rt, "publicKey"));
+    uint32_t messageCount = TurboModuleUtils::jsiToValue<int32_t>(
+        rt, options.getProperty(rt, "messageCount"));
+
+    ExternError *err = new ExternError();
+    BlsKeyPair blsKeyPair = BlsKeyPair{publicKey};
+    BbsKey bbsKey = Bbs::bls12381toBbs(blsKeyPair, messageCount, err);
+
+    jsi::Object object = jsi::Object(rt);
+    object.setProperty(
+        rt, "publicKey",
+        TurboModuleUtils::byteArrayToArrayBuffer(rt, bbsKey.publicKey));
     return object;
   } catch (const char *e) {
     throw jsi::JSError(rt, e);

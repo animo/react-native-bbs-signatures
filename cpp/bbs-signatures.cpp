@@ -175,14 +175,16 @@ std::tuple<ByteArray, ByteArray, ByteArray> Bbs::commitmentForBlindSignRequest(
 bool Bbs::verifyBlindSignRequest(ByteArray nonce, ByteArray publicKey,
                                  ByteArray proofOfHiddenMessages,
                                  ByteArray challangeHash, ByteArray commitment,
-                                 std::vector<int32_t> blinded, ExternError *err) {
+                                 std::vector<int32_t> blinded,
+                                 ExternError *err) {
   uint64_t handle = ::bbs_verify_blind_commitment_context_init(err);
   handleExternError(err);
 
   ::bbs_verify_blind_commitment_context_set_nonce_bytes(handle, nonce, err);
   handleExternError(err);
 
-  ::bbs_verify_blind_commitment_context_set_proof(handle, proofOfHiddenMessages, err);
+  ::bbs_verify_blind_commitment_context_set_proof(handle, proofOfHiddenMessages,
+                                                  err);
   handleExternError(err);
 
   ::bbs_verify_blind_commitment_context_set_public_key(handle, publicKey, err);
@@ -212,8 +214,17 @@ BlsKeyPair Bbs::generateBls12381G2KeyPair(ByteArray seed, ExternError *err) {
   return BlsKeyPair::generateG2(seed, err);
 }
 
-void Bbs::generateBlindedBls12381G1KeyPair() {}
+BlindedBlsKeyPair Bbs::generateBlindedBls12381G1KeyPair(ByteArray seed,
+                                                        ExternError *err) {
+  return BlindedBlsKeyPair::generateBlindedG1(seed, err);
+}
 
-void Bbs::generateBlindedBls12381G2KeyPair() {}
+BlindedBlsKeyPair Bbs::generateBlindedBls12381G2KeyPair(ByteArray seed,
+                                                        ExternError *err) {
+  return BlindedBlsKeyPair::generateBlindedG2(seed, err);
+}
 
-void Bbs::bl12381toBbs() {}
+BbsKey Bbs::bls12381toBbs(BlsKeyPair kp, uint32_t messageCount,
+                          ExternError *err) {
+  return kp.getBbsKey(messageCount, err);
+}

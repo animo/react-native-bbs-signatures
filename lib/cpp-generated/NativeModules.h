@@ -15,24 +15,39 @@ namespace facebook {
 namespace react {
 class JSI_EXPORT BbsSignaturesCxxSpecJSI : public TurboModule {
 public:
-BbsSignaturesCxxSpecJSI(std::shared_ptr<CallInvoker> jsInvoker);
-virtual jsi::Object sign(jsi::Runtime &rt, const jsi::Object &options) = 0;
-virtual jsi::Object blsSign(jsi::Runtime &rt, const jsi::Object &options) = 0;
-virtual jsi::Object verify(jsi::Runtime &rt, const jsi::Object &options) = 0;
-virtual jsi::Object blsVerify(jsi::Runtime &rt, const jsi::Object &options) = 0;
-virtual jsi::Object createProof(jsi::Runtime &rt, const jsi::Object &options) = 0;
-virtual jsi::Object blsCreateProof(jsi::Runtime &rt, const jsi::Object &options) = 0;
-virtual jsi::Object verifyProof(jsi::Runtime &rt, const jsi::Object &options) = 0;
-virtual jsi::Object blsVerifyProof(jsi::Runtime &rt, const jsi::Object &options) = 0;
-virtual jsi::Object commitmentForBlindSignRequest(jsi::Runtime &rt, const jsi::Object &options) = 0;
-virtual jsi::Object verifyBlindSignRequest(jsi::Runtime &rt, const jsi::Object &options) = 0;
-virtual jsi::Object blindSign(jsi::Runtime &rt, const jsi::Object &options) = 0;
-virtual jsi::Object generateBls12381G1KeyPair(jsi::Runtime &rt, const jsi::Object &options) = 0;
-virtual jsi::Object generateBlindedBls12381G1KeyPair(jsi::Runtime &rt, const jsi::Object &options) = 0;
-virtual jsi::Object generateBls12381G2KeyPair(jsi::Runtime &rt, const jsi::Object &options) = 0;
-virtual jsi::Object generateBlindedBls12381G2KeyPair(jsi::Runtime &rt, const jsi::Object &options) = 0;
-virtual jsi::Object bl12381toBbs(jsi::Runtime &rt, const jsi::Object &options) = 0;
-
+  BbsSignaturesCxxSpecJSI(std::shared_ptr<CallInvoker> jsInvoker);
+  virtual jsi::Object sign(jsi::Runtime &rt, const jsi::Object &options) = 0;
+  virtual jsi::Object blsSign(jsi::Runtime &rt, const jsi::Object &options) = 0;
+  virtual jsi::Object verify(jsi::Runtime &rt, const jsi::Object &options) = 0;
+  virtual jsi::Object blsVerify(jsi::Runtime &rt,
+                                const jsi::Object &options) = 0;
+  virtual jsi::Object createProof(jsi::Runtime &rt,
+                                  const jsi::Object &options) = 0;
+  virtual jsi::Object blsCreateProof(jsi::Runtime &rt,
+                                     const jsi::Object &options) = 0;
+  virtual jsi::Object verifyProof(jsi::Runtime &rt,
+                                  const jsi::Object &options) = 0;
+  virtual jsi::Object blsVerifyProof(jsi::Runtime &rt,
+                                     const jsi::Object &options) = 0;
+  virtual jsi::Object
+  commitmentForBlindSignRequest(jsi::Runtime &rt,
+                                const jsi::Object &options) = 0;
+  virtual jsi::Object verifyBlindSignRequest(jsi::Runtime &rt,
+                                             const jsi::Object &options) = 0;
+  virtual jsi::Object blindSign(jsi::Runtime &rt,
+                                const jsi::Object &options) = 0;
+  virtual jsi::Object generateBls12381G1KeyPair(jsi::Runtime &rt,
+                                                const jsi::Object &options) = 0;
+  virtual jsi::Object
+  generateBlindedBls12381G1KeyPair(jsi::Runtime &rt,
+                                   const jsi::Object &options) = 0;
+  virtual jsi::Object generateBls12381G2KeyPair(jsi::Runtime &rt,
+                                                const jsi::Object &options) = 0;
+  virtual jsi::Object
+  generateBlindedBls12381G2KeyPair(jsi::Runtime &rt,
+                                   const jsi::Object &options) = 0;
+  virtual jsi::Object bls12381toBbs(jsi::Runtime &rt,
+                                    const jsi::Object &options) = 0;
 };
 
 } // namespace react
