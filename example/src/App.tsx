@@ -7,11 +7,13 @@ import {
   sign,
   verify,
   verifyProof,
+  commitmentForBlindSignRequest,
 } from 'react-native-bbs-signatures'
 
 const mockMessages = [new Uint8Array([1, 2, 3, 4])]
 const mockNonce = new Uint8Array([1, 2, 3])
 const revealed = [ProofMessageType.Revealed]
+const hidden = [0]
 
 export default function App() {
   const signFunc = () => {
@@ -23,6 +25,7 @@ export default function App() {
     const verifiedSignature = verify({ publicKey: publicKey, signature, messages: mockMessages })
     const proof = createProof({ signature, messages: mockMessages, publicKey, revealed, nonce: mockNonce })
     const verifiedProof = verifyProof({ nonce: mockNonce, proof, messages: mockMessages, publicKey })
+    commitmentForBlindSignRequest({ nonce: mockNonce, hidden, messages: mockMessages, publicKey })
     console.log('verified Sig: ', JSON.stringify(verifiedSignature))
     console.log('proof: ', JSON.stringify(proof))
     console.log('verified proof: ', JSON.stringify(verifiedProof))

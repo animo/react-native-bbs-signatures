@@ -20,7 +20,10 @@ public:
   static bool verifyProof(ByteArray nonce, ByteArray publicKey, ByteArray proof,
                           std::vector<ByteArray> messages, ExternError *err);
   static void blsVerifyProof();
-  static void commitmentForBlindSignRequest();
+  static std::tuple<ByteArray, ByteArray, ByteArray>
+  commitmentForBlindSignRequest(ByteArray nonce, ByteArray publicKey,
+                                std::vector<ByteArray> messages,
+                                std::vector<int64_t> hidden, ExternError *err);
   static void verifyBlindSignRequest();
   static void blindSign();
   static BlsKeyPair generateBls12381G1KeyPair(ByteArray seed, ExternError *err);

@@ -55,10 +55,10 @@ type BlsVerifyProofOptions = {
 }
 
 type CommitmentForBlindSignRequestOptions = {
-  nonce: Uint8Array
+  nonce: ArrayBuffer
   publicKey: ArrayBuffer
   messages: ArrayBuffer[]
-  hidden: number[]
+  hidden: readonly number[]
 }
 
 type VerifyBlindSignRequestOptions = {

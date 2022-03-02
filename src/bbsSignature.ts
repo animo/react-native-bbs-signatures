@@ -91,12 +91,33 @@ export const blsVerifyProof = (request: BbsVerifyProofRequest): BbsVerifyResult 
   throw new Error('NOT YET IMPLEMENTED')
 }
 
-export const commitmentForBlindSignRequest = (request: BbsBlindSignContextRequest): BbsBlindSignContext => {
-  throw new Error('NOT YET IMPLEMENTED')
+export const commitmentForBlindSignRequest = ({
+  nonce,
+  hidden,
+  messages,
+  publicKey,
+}: BbsBlindSignContextRequest): BbsBlindSignContext => {
+  const messageBuffers = messages.map((m) => m.buffer)
+  const x = bbsNativeBindings.commitmentForBlindSignRequest({
+    nonce: nonce.buffer,
+    hidden,
+    messages: messageBuffers,
+    publicKey: publicKey.buffer,
+  })
+
+  console.log(JSON.stringify(x))
+
+  throw new Error('DONT KNOW HOW TO DEAL WITH THIS RETURN TYPE')
 }
 
-export const verifyBlindSignContext = (request: BbsVerifyBlindSignContextRequest): boolean => {
-  const { commitment, proofOfHiddenMessages, challengeHash, publicKey, blinded, nonce } = request
+export const verifyBlindSignContext = ({
+  publicKey,
+  nonce,
+  blinded,
+  commitment,
+  challengeHash,
+  proofOfHiddenMessages,
+}: BbsVerifyBlindSignContextRequest): boolean => {
   throw new Error('NOT YET IMPLEMENTED')
 }
 

@@ -17,6 +17,9 @@ export {
   blsCreateProof,
   verifyProof,
   blsVerifyProof,
+  commitmentForBlindSignRequest,
+  blindSign,
+  verifyBlindSignContext,
 } from './bbsSignature'
 
 export { bbsNativeBindings } from './register'

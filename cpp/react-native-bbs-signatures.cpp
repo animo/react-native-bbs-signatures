@@ -153,7 +153,28 @@ jsi::Object
 NativeBbsSignatures::commitmentForBlindSignRequest(jsi::Runtime &rt,
                                                    const jsi::Object &options) {
   try {
+    ByteArray nonce = TurboModuleUtils::jsiToValue<ByteArray>(
+        rt, options.getProperty(rt, "nonce"));
+    ByteArray publicKey = TurboModuleUtils::jsiToValue<ByteArray>(
+        rt, options.getProperty(rt, "publicKey"));
+    std::vector<ByteArray> messages =
+        TurboModuleUtils::jsiToValue<std::vector<ByteArray>>(
+            rt, options.getProperty(rt, "messages"));
+    std::vector<int64_t> hidden =
+        TurboModuleUtils::jsiToValue<std::vector<int64_t>>(
+            rt, options.getProperty(rt, "hidden"));
+
+    ExternError *err = new ExternError();
+    std::tuple<ByteArray, ByteArray, ByteArray> res =
+        Bbs::commitmentForBlindSignRequest(nonce, publicKey, messages, hidden,
+                                           err);
+
     jsi::Object object = jsi::Object(rt);
+    // TODO: it seems that outContext is not supplied by the Node wrapper and it
+    // provides challangeHash, proofOfHiddenMessages
+    object.setProperty(rt, "commitment", TurboModuleUtils::byteArrayToArrayBuffer(rt, std::get<0>(res)));
+    object.setProperty(rt, "outContext", TurboModuleUtils::byteArrayToArrayBuffer(rt, std::get<1>(res)));
+    object.setProperty(rt, "blindingFactor", TurboModuleUtils::byteArrayToArrayBuffer(rt, std::get<2>(res)));
     return object;
   } catch (const char *e) {
     throw jsi::JSError(rt, e);
