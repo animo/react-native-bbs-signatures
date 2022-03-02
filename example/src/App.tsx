@@ -8,6 +8,7 @@ import {
   verify,
   verifyProof,
   commitmentForBlindSignRequest,
+  verifyBlindSignContext,
 } from 'react-native-bbs-signatures'
 
 const mockMessages = [new Uint8Array([1, 2, 3, 4])]

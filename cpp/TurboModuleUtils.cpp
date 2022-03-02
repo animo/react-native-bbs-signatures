@@ -139,13 +139,13 @@ std::vector<ByteArray> TurboModuleUtils::jsiToValue<std::vector<ByteArray>>(
 }
 
 template <>
-std::vector<int64_t> TurboModuleUtils::jsiToValue<std::vector<int64_t>>(
+std::vector<int32_t> TurboModuleUtils::jsiToValue<std::vector<int32_t>>(
     jsi::Runtime &rt, jsi::Value value, bool optional) {
   if (optional)
     return {};
 
   if (value.isObject() && value.asObject(rt).isArray(rt)) {
-    std::vector<int64_t> vec = {};
+    std::vector<int32_t> vec = {};
     jsi::Array arr = value.asObject(rt).asArray(rt);
     auto length = arr.length(rt);
     for (int i = 0; i < length; i++) {

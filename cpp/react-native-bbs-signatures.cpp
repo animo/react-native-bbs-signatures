@@ -84,8 +84,8 @@ jsi::Object NativeBbsSignatures::createProof(jsi::Runtime &rt,
     std::vector<ByteArray> messages =
         TurboModuleUtils::jsiToValue<std::vector<ByteArray>>(
             rt, options.getProperty(rt, "messages"));
-    std::vector<int64_t> revealed =
-        TurboModuleUtils::jsiToValue<std::vector<int64_t>>(
+    std::vector<int32_t> revealed =
+        TurboModuleUtils::jsiToValue<std::vector<int32_t>>(
             rt, options.getProperty(rt, "revealed"));
 
     if (messages.size() != revealed.size()) {
@@ -153,16 +153,15 @@ jsi::Object
 NativeBbsSignatures::commitmentForBlindSignRequest(jsi::Runtime &rt,
                                                    const jsi::Object &options) {
   try {
-    ByteArray nonce = TurboModuleUtils::jsiToValue<ByteArray>(
-        rt, options.getProperty(rt, "nonce"));
-    ByteArray publicKey = TurboModuleUtils::jsiToValue<ByteArray>(
-        rt, options.getProperty(rt, "publicKey"));
-    std::vector<ByteArray> messages =
-        TurboModuleUtils::jsiToValue<std::vector<ByteArray>>(
-            rt, options.getProperty(rt, "messages"));
-    std::vector<int64_t> hidden =
-        TurboModuleUtils::jsiToValue<std::vector<int64_t>>(
-            rt, options.getProperty(rt, "hidden"));
+      ByteArray nonce = TurboModuleUtils::jsiToValue<ByteArray>(
+          rt, options.getProperty(rt, "nonce"));
+      ByteArray publicKey = TurboModuleUtils::jsiToValue<ByteArray>(
+          rt, options.getProperty(rt, "publicKey"));
+      std::vector<int32_t> hidden = TurboModuleUtils::jsiToValue<std::vector<int32_t>>(
+          rt, options.getProperty(rt, "hidden"));
+      std::vector<ByteArray> messages =
+          TurboModuleUtils::jsiToValue<std::vector<ByteArray>>(
+              rt, options.getProperty(rt, "messages"));
 
     ExternError *err = new ExternError();
     std::tuple<ByteArray, ByteArray, ByteArray> res =
@@ -170,11 +169,17 @@ NativeBbsSignatures::commitmentForBlindSignRequest(jsi::Runtime &rt,
                                            err);
 
     jsi::Object object = jsi::Object(rt);
-    // TODO: it seems that outContext is not supplied by the Node wrapper and it
-    // provides challangeHash, proofOfHiddenMessages
-    object.setProperty(rt, "commitment", TurboModuleUtils::byteArrayToArrayBuffer(rt, std::get<0>(res)));
-    object.setProperty(rt, "outContext", TurboModuleUtils::byteArrayToArrayBuffer(rt, std::get<1>(res)));
-    object.setProperty(rt, "blindingFactor", TurboModuleUtils::byteArrayToArrayBuffer(rt, std::get<2>(res)));
+    // todo: it seems that outcontext is not supplied by the node wrapper and it
+    // provides challangehash, proofofhiddenmessages
+    object.setProperty(
+        rt, "commitment",
+        TurboModuleUtils::byteArrayToArrayBuffer(rt, std::get<0>(res)));
+    object.setProperty(
+        rt, "outcontext",
+        TurboModuleUtils::byteArrayToArrayBuffer(rt, std::get<1>(res)));
+    object.setProperty(
+        rt, "blindingfactor",
+        TurboModuleUtils::byteArrayToArrayBuffer(rt, std::get<2>(res)));
     return object;
   } catch (const char *e) {
     throw jsi::JSError(rt, e);
@@ -185,7 +190,29 @@ jsi::Object
 NativeBbsSignatures::verifyBlindSignRequest(jsi::Runtime &rt,
                                             const jsi::Object &options) {
   try {
-    jsi::Object object = jsi::Object(rt);
+    ByteArray nonce = TurboModuleUtils::jsiToValue<ByteArray>(
+        rt, options.getProperty(rt, "nonce"));
+      ByteArray publicKey = TurboModuleUtils::jsiToValue<ByteArray>(
+        rt, options.getProperty(rt, "publickey"));
+      ByteArray proofOfHiddenMessages = TurboModuleUtils::jsiToValue<ByteArray>(
+        rt, options.getProperty(rt, "poofOfHiddenMessages"));
+      ByteArray challangeHash = TurboModuleUtils::jsiToValue<ByteArray>(
+        rt, options.getProperty(rt, "challangeHash"));
+      ByteArray commitment = TurboModuleUtils::jsiToValue<ByteArray>(
+        rt, options.getProperty(rt, "commitment"));
+    std::vector<int32_t> blinded =
+        TurboModuleUtils::jsiToValue<std::vector<int32_t>>(
+            rt, options.getProperty(rt, "blinded"));
+
+    ExternError *err = new ExternError();
+    bool verified =
+        Bbs::verifyBlindSignRequest(nonce, publicKey, proofOfHiddenMessages,
+                                    challangeHash, commitment, blinded, err);
+
+      jsi::Object object = jsi::Object(rt);
+      object.setProperty(
+          rt, "verified",verified);
+      return object;
     return object;
   } catch (const char *e) {
     throw jsi::JSError(rt, e);

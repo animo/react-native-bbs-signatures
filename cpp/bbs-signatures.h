@@ -15,7 +15,7 @@ public:
   static ByteArray createProof(ByteArray nonce, ByteArray publicKey,
                                ByteArray signature,
                                std::vector<ByteArray> messages,
-                               std::vector<int64_t> revealed, ExternError *err);
+                               std::vector<int32_t> revealed, ExternError *err);
   static void blsCreateProof();
   static bool verifyProof(ByteArray nonce, ByteArray publicKey, ByteArray proof,
                           std::vector<ByteArray> messages, ExternError *err);
@@ -23,8 +23,13 @@ public:
   static std::tuple<ByteArray, ByteArray, ByteArray>
   commitmentForBlindSignRequest(ByteArray nonce, ByteArray publicKey,
                                 std::vector<ByteArray> messages,
-                                std::vector<int64_t> hidden, ExternError *err);
-  static void verifyBlindSignRequest();
+                                std::vector<int32_t> hidden, ExternError *err);
+  static bool verifyBlindSignRequest(ByteArray nonce, ByteArray publicKey,
+                                     ByteArray proofOfHiddenMessages,
+                                     ByteArray challangeHash,
+                                     ByteArray commitment,
+                                     std::vector<int32_t> blinded,
+                                     ExternError *err);
   static void blindSign();
   static BlsKeyPair generateBls12381G1KeyPair(ByteArray seed, ExternError *err);
   static void generateBlindedBls12381G1KeyPair();

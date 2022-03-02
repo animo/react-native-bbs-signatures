@@ -1,4 +1,3 @@
-import { bls12381toBbs } from './bls12381toBbs'
 import { bbsNativeBindings } from './register'
 import type {
   BbsBlindSignContext,
@@ -118,6 +117,15 @@ export const verifyBlindSignContext = ({
   challengeHash,
   proofOfHiddenMessages,
 }: BbsVerifyBlindSignContextRequest): boolean => {
+  const c = bbsNativeBindings.verifyBlindSignRequest({
+    nonce: nonce.buffer,
+    blinded,
+    publicKey: publicKey.buffer,
+    commitment: commitment.buffer,
+    challengeHash: challengeHash.buffer,
+    proofOfHiddenMessages: proofOfHiddenMessages.buffer,
+  })
+  console.log(JSON.stringify(c))
   throw new Error('NOT YET IMPLEMENTED')
 }
 

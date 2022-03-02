@@ -13,7 +13,7 @@ type BlsSignOptions = {
 }
 
 type VerifyOptions = {
-  publickey: ArrayBuffer
+  publicKey: ArrayBuffer
   signature: ArrayBuffer
   messages: ArrayBuffer[]
 }
@@ -62,12 +62,12 @@ type CommitmentForBlindSignRequestOptions = {
 }
 
 type VerifyBlindSignRequestOptions = {
+  nonce: ArrayBuffer
   commitment: ArrayBuffer
   proofOfHiddenMessages: ArrayBuffer
   challengeHash: ArrayBuffer
   publicKey: ArrayBuffer
-  blinded: number[]
-  nonce: Uint8Array
+  blinded: readonly number[]
 }
 
 type BlindSignOptions = {

@@ -64,7 +64,7 @@ void Bbs::blsVerify() {}
 
 ByteArray Bbs::createProof(ByteArray nonce, ByteArray publicKey,
                            ByteArray signature, std::vector<ByteArray> messages,
-                           std::vector<int64_t> revealed, ExternError *err) {
+                           std::vector<int32_t> revealed, ExternError *err) {
   uint32_t length = (uint32_t)messages.size();
   BlsKeyPair *bpk = new BlsKeyPair(publicKey);
   BbsKey key = bpk->getBbsKey(length, err);
@@ -135,10 +135,9 @@ bool Bbs::verifyProof(ByteArray nonce, ByteArray publicKey, ByteArray proof,
 
 void Bbs::blsVerifyProof() {}
 
-std::tuple<ByteArray, ByteArray, ByteArray>
-Bbs::commitmentForBlindSignRequest(ByteArray nonce, ByteArray publicKey,
-                              std::vector<ByteArray> messages,
-                              std::vector<int64_t> hidden, ExternError *err) {
+std::tuple<ByteArray, ByteArray, ByteArray> Bbs::commitmentForBlindSignRequest(
+    ByteArray nonce, ByteArray publicKey, std::vector<ByteArray> messages,
+    std::vector<int32_t> hidden, ExternError *err) {
   uint32_t length = (uint32_t)messages.size();
   BlsKeyPair *bpk = new BlsKeyPair(publicKey);
   BbsKey key = bpk->getBbsKey(length, err);
@@ -149,8 +148,9 @@ Bbs::commitmentForBlindSignRequest(ByteArray nonce, ByteArray publicKey,
 
   for (int i = 0; i < length; i++) {
     ByteArray message = messages[i];
-    uint32_t index = (uint32_t)hidden[i];
-    ::bbs_blind_commitment_context_add_message_bytes(handle, index, message, err);
+    uint32_t index = hidden[i];
+    ::bbs_blind_commitment_context_add_message_bytes(handle, index, message,
+                                                     err);
     handleExternError(err);
   }
 
@@ -163,7 +163,8 @@ Bbs::commitmentForBlindSignRequest(ByteArray nonce, ByteArray publicKey,
   ByteBuffer *commitment = new ByteBuffer();
   ByteBuffer *out_context = new ByteBuffer();
   ByteBuffer *blinding_factor = new ByteBuffer();
-  ::bbs_blind_commitment_context_finish(handle, commitment, out_context,blinding_factor, err);
+  ::bbs_blind_commitment_context_finish(handle, commitment, out_context,
+                                        blinding_factor, err);
   handleExternError(err);
 
   return std::make_tuple(byteBufferToByteArray(*commitment),
@@ -171,7 +172,35 @@ Bbs::commitmentForBlindSignRequest(ByteArray nonce, ByteArray publicKey,
                          byteBufferToByteArray(*blinding_factor));
 }
 
-void Bbs::verifyBlindSignRequest() {}
+bool Bbs::verifyBlindSignRequest(ByteArray nonce, ByteArray publicKey,
+                                 ByteArray proofOfHiddenMessages,
+                                 ByteArray challangeHash, ByteArray commitment,
+                                 std::vector<int32_t> blinded, ExternError *err) {
+  uint64_t handle = ::bbs_verify_blind_commitment_context_init(err);
+  handleExternError(err);
+
+  ::bbs_verify_blind_commitment_context_set_nonce_bytes(handle, nonce, err);
+  handleExternError(err);
+
+  ::bbs_verify_blind_commitment_context_set_proof(handle, proofOfHiddenMessages, err);
+  handleExternError(err);
+
+  ::bbs_verify_blind_commitment_context_set_public_key(handle, publicKey, err);
+  handleExternError(err);
+
+  uint32_t length = (uint32_t)blinded.size();
+  for (int i = 0; i < length; i++) {
+    // TODO: do we just need to give the `i` or `blinded[i]`?
+    int32_t index = blinded[i];
+    ::bbs_verify_blind_commitment_context_add_blinded(handle, index, err);
+    handleExternError(err);
+  }
+
+  int32_t res = ::bbs_verify_blind_commitment_context_finish(handle, err);
+  handleExternError(err);
+
+  return res == 0;
+}
 
 void Bbs::blindSign() {}
 
