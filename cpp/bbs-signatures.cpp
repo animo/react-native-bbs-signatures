@@ -3,14 +3,11 @@
 ByteBuffer Bbs::sign(ByteArray publicKey, ByteArray secretKey,
                      std::vector<ByteArray> messages, ExternError *err) {
   uint32_t length = (uint32_t)messages.size();
-  BlsKeyPair *bpk = new BlsKeyPair(publicKey, secretKey);
-  BbsKey key = bpk->getBbsKey(length, err);
-  handleExternError(err);
 
   uint64_t handle = ::bbs_sign_context_init(err);
   handleExternError(err);
 
-  ::bbs_sign_context_set_public_key(handle, key.publicKey, err);
+  ::bbs_sign_context_set_public_key(handle, publicKey, err);
   handleExternError(err);
 
   ::bbs_sign_context_set_secret_key(handle, secretKey, err);
@@ -35,14 +32,11 @@ bool Bbs::verify(ByteArray publicKey, ByteArray signature,
                  std::vector<ByteArray> messages, ExternError *err) {
 
   uint32_t length = (uint32_t)messages.size();
-  BlsKeyPair *bpk = new BlsKeyPair(publicKey);
-  BbsKey key = bpk->getBbsKey(length, err);
-  handleExternError(err);
 
   uint64_t handle = ::bbs_verify_context_init(err);
   handleExternError(err);
 
-  ::bbs_verify_context_set_public_key(handle, key.publicKey, err);
+  ::bbs_verify_context_set_public_key(handle, publicKey, err);
   handleExternError(err);
 
   ::bbs_verify_context_set_signature(handle, signature, err);
@@ -66,9 +60,6 @@ ByteArray Bbs::createProof(ByteArray nonce, ByteArray publicKey,
                            ByteArray signature, std::vector<ByteArray> messages,
                            std::vector<int32_t> revealed, ExternError *err) {
   uint32_t length = (uint32_t)messages.size();
-  BlsKeyPair *bpk = new BlsKeyPair(publicKey);
-  BbsKey key = bpk->getBbsKey(length, err);
-  handleExternError(err);
 
   uint64_t handle = ::bbs_create_proof_context_init(err);
   handleExternError(err);
@@ -87,7 +78,7 @@ ByteArray Bbs::createProof(ByteArray nonce, ByteArray publicKey,
   ::bbs_create_proof_context_set_nonce_bytes(handle, nonce, err);
   handleExternError(err);
 
-  ::bbs_create_proof_context_set_public_key(handle, key.publicKey, err);
+  ::bbs_create_proof_context_set_public_key(handle, publicKey, err);
   handleExternError(err);
 
   ::bbs_create_proof_context_set_signature(handle, signature, err);
@@ -105,14 +96,11 @@ void Bbs::blsCreateProof() {}
 bool Bbs::verifyProof(ByteArray nonce, ByteArray publicKey, ByteArray proof,
                       std::vector<ByteArray> messages, ExternError *err) {
   uint32_t length = (uint32_t)messages.size();
-  BlsKeyPair *bpk = new BlsKeyPair(publicKey);
-  BbsKey key = bpk->getBbsKey(length, err);
-  handleExternError(err);
 
   uint64_t handle = ::bbs_verify_proof_context_init(err);
   handleExternError(err);
 
-  ::bbs_verify_proof_context_set_public_key(handle, key.publicKey, err);
+  ::bbs_verify_proof_context_set_public_key(handle, publicKey, err);
   handleExternError(err);
 
   ::bbs_verify_proof_context_set_nonce_bytes(handle, nonce, err);
@@ -139,9 +127,6 @@ std::tuple<ByteArray, ByteArray, ByteArray> Bbs::commitmentForBlindSignRequest(
     ByteArray nonce, ByteArray publicKey, std::vector<ByteArray> messages,
     std::vector<int32_t> hidden, ExternError *err) {
   uint32_t length = (uint32_t)messages.size();
-  BlsKeyPair *bpk = new BlsKeyPair(publicKey);
-  BbsKey key = bpk->getBbsKey(length, err);
-  handleExternError(err);
 
   uint64_t handle = ::bbs_blind_commitment_context_init(err);
   handleExternError(err);
@@ -157,7 +142,7 @@ std::tuple<ByteArray, ByteArray, ByteArray> Bbs::commitmentForBlindSignRequest(
   ::bbs_blind_commitment_context_set_nonce_bytes(handle, nonce, err);
   handleExternError(err);
 
-  ::bbs_blind_commitment_context_set_public_key(handle, key.publicKey, err);
+  ::bbs_blind_commitment_context_set_public_key(handle, publicKey, err);
   handleExternError(err);
 
   ByteBuffer *commitment = new ByteBuffer();

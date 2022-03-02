@@ -1,67 +1,85 @@
 import * as React from 'react'
 import { StyleSheet, Text, View, Button } from 'react-native'
 import {
-  ProofMessageType,
-  createProof,
   generateBls12381G2KeyPair,
   sign,
+  blsSign,
   verify,
-  verifyProof,
-  commitmentForBlindSignRequest,
-  verifyBlindSignContext,
-  generateBls12381G1KeyPair,
-  generateBlindedBls12381G1KeyPair,
-  generateBlindedBls12381G2KeyPair,
+  blsVerify,
   bls12381toBbs,
+  createProof,
+  ProofMessageType,
+  verifyProof,
+  blsCreateProof,
+  blsVerifyProof,
 } from 'react-native-bbs-signatures'
 
 const mockMessages = [new Uint8Array([1, 2, 3, 4])]
 const mockNonce = new Uint8Array([1, 2, 3])
-const revealed = [ProofMessageType.Revealed]
-const hidden = [0]
+const mockRevealed = [ProofMessageType.Revealed]
+//const mockHidden = [0]
 
 export default function App() {
-  const signFunc = () => {
-    const { publicKey, secretKey } = generateBls12381G2KeyPair()
-    const signature = sign({
-      keyPair: { publicKey, secretKey, messageCount: mockMessages.length },
-      messages: mockMessages,
-    })
-    const verifiedSignature = verify({ publicKey: publicKey, signature, messages: mockMessages })
-    const proof = createProof({ signature, messages: mockMessages, publicKey, revealed, nonce: mockNonce })
-    const verifiedProof = verifyProof({ nonce: mockNonce, proof, messages: mockMessages, publicKey })
-    commitmentForBlindSignRequest({ nonce: mockNonce, hidden, messages: mockMessages, publicKey })
-    console.log('verified Sig: ', JSON.stringify(verifiedSignature))
-    console.log('proof: ', JSON.stringify(proof))
-    console.log('verified proof: ', JSON.stringify(verifiedProof))
-  }
+  const [isBlsSignatureVerified, setIsBlsSignatureVerified] = React.useState(false)
+  const [isBlsProofVerified, setIsBlsProofVerified] = React.useState(false)
+  const [isSignatureVerified, setIsSignatureVerified] = React.useState(false)
+  const [isProofVerified, setIsProofVerified] = React.useState(false)
+  const flow = () => {
+    const blsKeyPair = generateBls12381G2KeyPair()
 
-  const createKeys = () => {
-    const g1KeyPair = generateBls12381G1KeyPair()
-    const g2KeyPair = generateBls12381G2KeyPair()
-    const blindedG1KeyPair = generateBlindedBls12381G1KeyPair()
-    const blindedG2KeyPair = generateBlindedBls12381G2KeyPair()
-    console.log(`        g1: pk: ${g1KeyPair.publicKey.length} sk: ${g1KeyPair.secretKey.length}`)
-    console.log(`        g2: pk: ${g2KeyPair.publicKey.length} sk: ${g2KeyPair.secretKey.length}`)
-    console.log(
-      `blinded g1: pk ${blindedG1KeyPair.publicKey.length} sk: ${blindedG1KeyPair.secretKey.length} bf: ${blindedG1KeyPair.blindingFactor.length}`
+    const blsSignature = blsSign({ keyPair: blsKeyPair, messages: mockMessages })
+
+    setIsBlsSignatureVerified(
+      blsVerify({
+        publicKey: blsKeyPair.publicKey,
+        messages: mockMessages,
+        signature: blsSignature,
+      }).verified
     )
-    console.log(
-      `blinded g2: pk ${blindedG2KeyPair.publicKey.length} sk: ${blindedG2KeyPair.secretKey.length} bf: ${blindedG2KeyPair.blindingFactor.length}`
-    )
-    const blsKeyPair = bls12381toBbs({
-      keyPair: { publicKey: g2KeyPair.publicKey, secretKey: g2KeyPair.secretKey },
-      messageCount: 1,
+
+    const blsProof = blsCreateProof({
+      signature: blsSignature,
+      publicKey: blsKeyPair.publicKey,
+      messages: mockMessages,
+      revealed: mockRevealed,
+      nonce: mockNonce,
     })
-    console.log(
-      `        bls: pk: ${blsKeyPair.publicKey.length} sk: ${blsKeyPair.secretKey?.length} mc: ${blsKeyPair.messageCount}`
+
+    setIsBlsProofVerified(
+      blsVerifyProof({
+        nonce: mockNonce,
+        proof: blsProof,
+        messages: mockMessages,
+        publicKey: blsKeyPair.publicKey,
+      }).verified
+    )
+
+    const bbsKeyPair = bls12381toBbs({ keyPair: blsKeyPair, messageCount: mockMessages.length })
+
+    const signature = sign({ keyPair: bbsKeyPair, messages: mockMessages })
+
+    setIsSignatureVerified(verify({ signature, messages: mockMessages, publicKey: bbsKeyPair.publicKey }).verified)
+
+    const proof = createProof({
+      publicKey: bbsKeyPair.publicKey,
+      messages: mockMessages,
+      signature,
+      nonce: mockNonce,
+      revealed: mockRevealed,
+    })
+
+    setIsProofVerified(
+      verifyProof({ nonce: mockNonce, messages: mockMessages, publicKey: bbsKeyPair.publicKey, proof }).verified
     )
   }
 
   return (
     <View style={styles.container}>
-      <Button onPress={signFunc} title="sign and verify" />
-      <Button onPress={createKeys} title="create keys" />
+      <Button onPress={flow} title="flow" />
+      <Text style={isBlsSignatureVerified ? styles.green : styles.red}>bls Signature</Text>
+      <Text style={isBlsProofVerified ? styles.green : styles.red}>bls Proof</Text>
+      <Text style={isSignatureVerified ? styles.green : styles.red}>Signature</Text>
+      <Text style={isProofVerified ? styles.green : styles.red}>Proof</Text>
     </View>
   )
 }
@@ -71,5 +89,11 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
+  },
+  green: {
+    color: '#00ff00',
+  },
+  red: {
+    color: '#ff0000',
   },
 })

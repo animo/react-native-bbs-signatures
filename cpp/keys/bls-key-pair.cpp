@@ -64,7 +64,8 @@ BbsKey BlsKeyPair::getBbsKey(uint32_t messageCount, ExternError *err) {
     ::bls_public_key_to_bbs_key(publicKey, messageCount, pk, err);
     handleExternError(err);
   } else {
-    throw "Cannot generate BbsKey from G1 public key";
+    throw "Key has incorrect length. A bbs key can only be generated from a "
+          "secret key or a G2 public key.";
   }
   return BbsKey{byteBufferToByteArray(*pk), messageCount};
 }

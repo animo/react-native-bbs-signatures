@@ -1,3 +1,4 @@
+import { bls12381toBbs } from './bls12381toBbs'
 import { bbsNativeBindings } from './register'
 import type {
   BbsBlindSignContext,
@@ -13,8 +14,6 @@ import type {
   BlsBbsVerifyRequest,
 } from './types'
 
-// export const BBS_SIGNATURE_LENGTH = 112
-
 // TODO: promisfy
 export const sign = ({ messages, keyPair }: BbsSignRequest): Uint8Array => {
   const messageBuffers = messages.map((m) => m.buffer)
@@ -25,6 +24,11 @@ export const sign = ({ messages, keyPair }: BbsSignRequest): Uint8Array => {
   })
 
   return signature as Uint8Array
+}
+
+export const blsSign = ({ messages, keyPair }: BlsBbsSignRequest): Uint8Array => {
+  const bbsKeyPair = bls12381toBbs({ keyPair, messageCount: messages.length })
+  return sign({ keyPair: bbsKeyPair, messages })
 }
 
 export const verify = ({ publicKey, signature, messages }: BbsVerifyRequest): BbsVerifyResult => {
@@ -41,6 +45,11 @@ export const verify = ({ publicKey, signature, messages }: BbsVerifyRequest): Bb
   }
 }
 
+export const blsVerify = ({ messages, publicKey, signature }: BlsBbsVerifyRequest): BbsVerifyResult => {
+  const bbsKeyPair = bls12381toBbs({ keyPair: { publicKey }, messageCount: messages.length })
+  return verify({ messages, signature, publicKey: bbsKeyPair.publicKey })
+}
+
 export const createProof = ({ publicKey, messages, signature, nonce, revealed }: BbsCreateProofRequest): Uint8Array => {
   const messageBuffers = messages.map((m) => m.buffer)
   const { proof } = bbsNativeBindings.createProof({
@@ -52,6 +61,17 @@ export const createProof = ({ publicKey, messages, signature, nonce, revealed }:
   })
 
   return proof
+}
+
+export const blsCreateProof = ({
+  signature,
+  publicKey,
+  messages,
+  nonce,
+  revealed,
+}: BbsCreateProofRequest): Uint8Array => {
+  const bbsKeyPair = bls12381toBbs({ keyPair: { publicKey }, messageCount: messages.length })
+  return createProof({ publicKey: bbsKeyPair.publicKey, signature, messages, nonce, revealed })
 }
 
 export const verifyProof = ({ nonce, proof, messages, publicKey }: BbsVerifyProofRequest): BbsVerifyResult => {
@@ -68,45 +88,19 @@ export const verifyProof = ({ nonce, proof, messages, publicKey }: BbsVerifyProo
   }
 }
 
-export const blsSign = ({ messages, keyPair }: BlsBbsSignRequest): Uint8Array => {
-  throw new Error('NOT YET IMPLEMENTED')
-}
-
-export const blsVerify = ({ messages, publicKey, signature }: BlsBbsVerifyRequest): BbsVerifyResult => {
-  throw new Error('NOT YET IMPLEMENTED')
-}
-
-// This should call createProof now.
-export const blsCreateProof = ({
-  signature,
-  publicKey,
-  messages,
-  nonce,
-  revealed,
-}: BbsCreateProofRequest): Uint8Array => {
-  throw new Error('NOT YET IMPLEMENTED')
-}
-
-// does NOT need to call verifyProof
 export const blsVerifyProof = ({ nonce, proof, messages, publicKey }: BbsVerifyProofRequest): BbsVerifyResult => {
-  throw new Error('NOT YET IMPLEMENTED')
+  const bbsKeyPair = bls12381toBbs({ keyPair: { publicKey }, messageCount: messages.length })
+  return verifyProof({ publicKey: bbsKeyPair.publicKey, nonce, messages, proof })
 }
 
 export const commitmentForBlindSignRequest = ({}: BbsBlindSignContextRequest): BbsBlindSignContext => {
   throw new Error('NOT YET IMPLEMENTED')
-  // const messageBuffers = messages.map((m) => m.buffer)
-  // const = bbsNativeBindings.commitmentForBlindSignRequest({
-  //   nonce: nonce.buffer,
-  //   hidden,
-  //   messages: messageBuffers,
-  //   publicKey: publicKey.buffer,
-  // })
 }
 
 export const verifyBlindSignContext = ({}: BbsVerifyBlindSignContextRequest): boolean => {
   throw new Error('NOT YET IMPLEMENTED')
 }
 
-export const blindSign = (request: BbsBlindSignRequest): Uint8Array => {
+export const blindSign = ({}: BbsBlindSignRequest): Uint8Array => {
   throw new Error('NOT YET IMPLEMENTED')
 }
