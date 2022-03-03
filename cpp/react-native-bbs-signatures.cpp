@@ -21,9 +21,8 @@ jsi::Object NativeBbsSignatures::sign(jsi::Runtime &rt,
     ByteBuffer signature = Bbs::sign(publicKey, secretKey, messages, err);
 
     jsi::Object object = jsi::Object(rt);
-    object.setProperty(
-        rt, "signature",
-        TurboModuleUtils::byteBufferToArrayBuffer(rt, signature));
+    object.setProperty(rt, "signature",
+                       TurboModuleUtils::byteBufferToArrayBuffer(rt, signature));
     return object;
   } catch (const char *e) {
     throw jsi::JSError(rt, e);
@@ -223,11 +222,19 @@ NativeBbsSignatures::generateBls12381G2KeyPair(jsi::Runtime &rt,
     ExternError *err = new ExternError();
 
     BlsKeyPair bpk = Bbs::generateBls12381G2KeyPair(seed, err);
+      
+      void *buffer = (void *)bpk.publicKey.data;
+      size_t length = bpk.publicKey.length;
+      jsi::Function arrayBufferCtor = rt.global().getPropertyAsFunction(rt, "ArrayBuffer");
+      jsi::Object o = arrayBufferCtor.callAsConstructor(rt, (int)length).getObject(rt);
+      jsi::ArrayBuffer arrayBuffer = o.getArrayBuffer(rt);
+      memcpy(arrayBuffer.data(rt), buffer, length);
+      
 
     jsi::Object object = jsi::Object(rt);
     object.setProperty(
         rt, "publicKey",
-        TurboModuleUtils::byteArrayToArrayBuffer(rt, bpk.publicKey));
+        arrayBuffer);
     object.setProperty(
         rt, "secretKey",
         TurboModuleUtils::byteArrayToArrayBuffer(rt, bpk.secretKey));
@@ -292,10 +299,10 @@ jsi::Object NativeBbsSignatures::generateBlindedBls12381G2KeyPair(
 jsi::Object NativeBbsSignatures::bls12381toBbs(jsi::Runtime &rt,
                                                const jsi::Object &options) {
   try {
-    ByteArray publicKey = TurboModuleUtils::jsiToValue<ByteArray>(
-        rt, options.getProperty(rt, "publicKey"));
     uint32_t messageCount = TurboModuleUtils::jsiToValue<int32_t>(
         rt, options.getProperty(rt, "messageCount"));
+    ByteArray publicKey = TurboModuleUtils::jsiToValue<ByteArray>(
+        rt, options.getProperty(rt, "publicKey"));
 
     ExternError *err = new ExternError();
     BlsKeyPair blsKeyPair = BlsKeyPair{publicKey};

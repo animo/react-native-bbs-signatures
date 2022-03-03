@@ -1,6 +1,5 @@
 #include "TurboModuleUtils.h"
 
-
 using namespace facebook;
 using namespace react;
 
@@ -103,10 +102,10 @@ ByteArray TurboModuleUtils::jsiToValue<ByteArray>(jsi::Runtime &rt,
                                                   jsi::Value value,
                                                   bool optional) {
   if (value.isObject() && value.asObject(rt).isArrayBuffer(rt)) {
-    jsi::ArrayBuffer array_buffer = value.getObject(rt).getArrayBuffer(rt);
-    return ByteArray{array_buffer.size(rt), array_buffer.data(rt)};
+    jsi::ArrayBuffer arrayBuffer = value.getObject(rt).getArrayBuffer(rt);
+    return ByteArray{arrayBuffer.size(rt), arrayBuffer.data(rt)};
   }
-    
+
   if (optional)
     return ByteArray{0, 0};
 
@@ -133,7 +132,7 @@ std::vector<ByteArray> TurboModuleUtils::jsiToValue<std::vector<ByteArray>>(
   }
   if (optional)
     return {};
-    
+
   throw jsi::JSError(rt, "Value is not of type ByteArray[]");
 }
 
@@ -174,20 +173,63 @@ uint8_t TurboModuleUtils::jsiToValue<uint8_t>(jsi::Runtime &rt,
   throw jsi::JSError(rt, "Value is not of type number");
 }
 
-jsi::ArrayBuffer TurboModuleUtils::byteBufferToArrayBuffer(jsi::Runtime &rt,
-                                                           ByteBuffer bb) {
-  const uint8_t *buffer = bb.data;
-  auto size = bb.len;
-  auto end = buffer + (size * sizeof(uint8_t));
-  std::vector<uint8_t> vector(buffer, end);
-  return TypedArray<TypedArrayKind::Uint8Array>(rt, vector).getArrayBuffer(rt);
-}
+//jsi::Array TurboModuleUtils::byteBufferToArray(jsi::Runtime &rt,
+//                                               ByteBuffer bb) {
+//  const uint8_t *buffer = bb.data;
+//  size_t length = bb.len;
+//  jsi::Function arrayBufferCtor =
+//      rt.global().getPropertyAsFunction(rt, "Array");
+//  jsi::Array arr =
+//      arrayBufferCtor.callAsConstructor(rt, static_cast<int>(length))
+//          .getObject(rt)
+//          .getArray(rt);
+//  for (int i = 0; i < length; i++) {
+//    arr.setValueAtIndex(rt, i, std::move((int)buffer[i]));
+//  }
+//  return arr;
+//}
+//
+//jsi::Array TurboModuleUtils::byteArrayToArray(jsi::Runtime &rt, ByteArray ba) {
+//  const uint8_t *buffer = ba.data;
+//  size_t length = ba.length;
+//  jsi::Function arrayBufferCtor =
+//      rt.global().getPropertyAsFunction(rt, "Array");
+//  jsi::Array arr =
+//      arrayBufferCtor.callAsConstructor(rt, static_cast<int>(length))
+//          .getObject(rt)
+//          .getArray(rt);
+//  for (int i = 0; i < length; i++) {
+//    arr.setValueAtIndex(rt, i, std::move((int)buffer[i]));
+//  }
+//  return arr;
+//}
 
 jsi::ArrayBuffer TurboModuleUtils::byteArrayToArrayBuffer(jsi::Runtime &rt,
                                                           ByteArray ba) {
   const uint8_t *buffer = ba.data;
-  auto size = ba.length;
-  auto end = buffer + (size * sizeof(uint8_t));
-  std::vector<uint8_t> vector(buffer, end);
-  return TypedArray<TypedArrayKind::Uint8Array>(rt, vector).getArrayBuffer(rt);
+  size_t length = ba.length;
+  jsi::Function arrayBufferCtor =
+      rt.global().getPropertyAsFunction(rt, "ArrayBuffer");
+  jsi::ArrayBuffer arrayBuffer =
+      arrayBufferCtor.callAsConstructor(rt, (int)length)
+          .getObject(rt)
+          .getArrayBuffer(rt);
+  memcpy(arrayBuffer.data(rt), buffer, length);
+    auto o = arrayBuffer.length(rt);
+  return arrayBuffer;
 }
+
+jsi::ArrayBuffer TurboModuleUtils::byteBufferToArrayBuffer(jsi::Runtime &rt,
+                                                           ByteBuffer bb) {
+  const uint8_t *buffer = bb.data;
+  size_t length = bb.len;
+  jsi::Function arrayBufferCtor =
+      rt.global().getPropertyAsFunction(rt, "ArrayBuffer");
+  jsi::ArrayBuffer arrayBuffer =
+      arrayBufferCtor.callAsConstructor(rt, (int)length)
+          .getObject(rt)
+          .getArrayBuffer(rt);
+  memcpy(arrayBuffer.data(rt), buffer, length);
+  return arrayBuffer;
+}
+

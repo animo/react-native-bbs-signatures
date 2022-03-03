@@ -3,7 +3,7 @@ import type { BlindedBlsKeyPair, BlsKeyPair } from './types'
 type SignOptions = {
   publicKey: ArrayBuffer
   secretKey: ArrayBuffer
-  messages: ArrayBuffer[]
+  messages: readonly ArrayBuffer[]
 }
 
 type BlsSignOptions = {
@@ -33,7 +33,7 @@ type CreateProofOptions = {
 }
 
 type BlsCreateProofOptions = {
-  nonce: Uint8Array
+  nonce: ArrayBuffer
   revealed: number[]
   publicKey: ArrayBuffer
   signature: ArrayBuffer
@@ -48,7 +48,7 @@ type VerifyProofOptions = {
 }
 
 type BlsVerifyProofOptions = {
-  nonce: Uint8Array
+  nonce: ArrayBuffer
   publicKey: ArrayBuffer
   proof: ArrayBuffer
   messages: ArrayBuffer[]
@@ -78,25 +78,28 @@ type BlindSignOptions = {
 
 // ---
 type GenerateBls12381G1KeyPairOptions = {
-  seed?: Uint8Array
+  seed?: ArrayBuffer
 }
 
 type GenerateBlindedBls12381G1KeyPairOptions = {}
 
 type GenerateBls12381G2KeyPairOptions = {
-  seed?: Uint8Array
+  seed?: ArrayBuffer
 }
 
 type GenerateBlindedBls12381G2KeyPairOptions = {}
 // ---
-type Bl12381toBbsOptions = {}
+type Bl12381toBbsOptions = {
+  publicKey: ArrayBuffer
+  messageCount: number
+}
 
 export interface Bbs {
-  sign(options: SignOptions): { signature: Uint8Array }
+  sign(options: SignOptions): { signature: ArrayBuffer }
   blsSign(options: BlsSignOptions): {}
   verify(options: VerifyOptions): { verified: boolean; error?: string }
   blsVerify(options: BlsVerifyOptions): {}
-  createProof(options: CreateProofOptions): { proof: Uint8Array }
+  createProof(options: CreateProofOptions): { proof: ArrayBuffer }
   blsCreateProof(options: BlsCreateProofOptions): {}
   verifyProof(options: VerifyProofOptions): { verified: boolean; error?: string }
   blsVerifyProof(options: BlsVerifyProofOptions): {}
@@ -106,8 +109,11 @@ export interface Bbs {
   // ---
   generateBls12381G1KeyPair(options: GenerateBls12381G1KeyPairOptions): Required<BlsKeyPair>
   generateBlindedBls12381G1KeyPair(options: GenerateBlindedBls12381G1KeyPairOptions): Required<BlindedBlsKeyPair>
-  generateBls12381G2KeyPair(options: GenerateBls12381G2KeyPairOptions): Required<BlsKeyPair>
+  generateBls12381G2KeyPair(options: GenerateBls12381G2KeyPairOptions): {
+    publicKey: ArrayBuffer
+    secretKey: ArrayBuffer
+  }
   generateBlindedBls12381G2KeyPair(options: GenerateBlindedBls12381G2KeyPairOptions): Required<BlindedBlsKeyPair>
   // ---
-  bls12381toBbs(options: Bl12381toBbsOptions): { publicKey: Uint8Array }
+  bls12381toBbs(options: Bl12381toBbsOptions): { publicKey: ArrayBuffer }
 }

@@ -2,9 +2,9 @@
   "name": "react-native-bbs-signatures",
   "version": "0.1.0",
   "description": "ffi-bbs-signatures wrapper for react native",
-  "react-native": "dist/index.js",
-  "source": "dist/index.js",
-  "main": "dist/index.js",
+  "react-native": "src/index.ts",
+  "source": "src/index.ts",
+  "main": "src/index.ts",
   "files": [
     "dist",
     "lib",

@@ -2,9 +2,10 @@ import { bbsNativeBindings } from './register'
 import type { BbsKeyPair, Bls12381ToBbsRequest } from './types'
 
 export const bls12381toBbs = (request: Bls12381ToBbsRequest): BbsKeyPair => {
+  console.log(request.keyPair)
   const { publicKey } = bbsNativeBindings.bls12381toBbs({
-    publicKey: request.keyPair.publicKey.buffer,
     messageCount: request.messageCount,
+    publicKey: request.keyPair.publicKey,
   })
 
   return {

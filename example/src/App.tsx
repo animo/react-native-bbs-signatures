@@ -1,17 +1,17 @@
 import * as React from 'react'
 import { StyleSheet, Text, View, Button } from 'react-native'
 import {
-  generateBls12381G2KeyPair,
-  sign,
-  blsSign,
-  verify,
-  blsVerify,
   bls12381toBbs,
-  createProof,
-  ProofMessageType,
-  verifyProof,
   blsCreateProof,
+  blsSign,
+  blsVerify,
   blsVerifyProof,
+  createProof,
+  generateBls12381G2KeyPair,
+  ProofMessageType,
+  sign,
+  verify,
+  verifyProof,
 } from 'react-native-bbs-signatures'
 
 const mockMessages = [new Uint8Array([1, 2, 3, 4])]

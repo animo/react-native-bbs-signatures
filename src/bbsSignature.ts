@@ -23,7 +23,7 @@ export const sign = ({ messages, keyPair }: BbsSignRequest): Uint8Array => {
     messages: messageBuffers,
   })
 
-  return signature as Uint8Array
+  return new Uint8Array(signature)
 }
 
 export const blsSign = ({ messages, keyPair }: BlsBbsSignRequest): Uint8Array => {
@@ -60,7 +60,7 @@ export const createProof = ({ publicKey, messages, signature, nonce, revealed }:
     revealed,
   })
 
-  return proof
+  return new Uint8Array(proof)
 }
 
 export const blsCreateProof = ({

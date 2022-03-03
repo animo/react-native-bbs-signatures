@@ -29,9 +29,13 @@ public:
   static void callbackWithResponse(uintptr_t result, uint32_t code,
                                    const char *response);
 
+//  static jsi::Array byteBufferToArray(jsi::Runtime &rt, ByteBuffer bb);
+//
+//  static jsi::Array byteArrayToArray(jsi::Runtime &rt, ByteArray ba);
+
   static jsi::ArrayBuffer byteBufferToArrayBuffer(jsi::Runtime &rt,
                                                   ByteBuffer bb);
-
+    
   static jsi::ArrayBuffer byteArrayToArrayBuffer(jsi::Runtime &rt,
                                                  ByteArray ba);
 
