@@ -6,10 +6,7 @@
 #include "../lib/cpp-generated/NativeModules.h"
 #include "TurboModuleUtils.h"
 #include "bbs-signatures.h"
-#include "bbs.h"
 #include <ReactCommon/TurboModule.h>
-#include <jsi/jsi.h>
-#include <jsi/jsilib.h>
 
 namespace facebook {
 namespace react {

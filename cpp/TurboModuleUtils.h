@@ -3,8 +3,6 @@
 #include "TypedArray.h"
 #include "bbs.h"
 #include "react-native-bbs-signatures.h"
-#include <ReactCommon/TurboModule.h>
-#include <jsi/jsi.h>
 
 using namespace facebook;
 using namespace react;

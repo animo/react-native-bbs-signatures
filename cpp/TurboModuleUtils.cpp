@@ -1,5 +1,5 @@
 #include "TurboModuleUtils.h"
-#include <jsi/jsilib.h>
+
 
 using namespace facebook;
 using namespace react;
@@ -102,14 +102,13 @@ template <>
 ByteArray TurboModuleUtils::jsiToValue<ByteArray>(jsi::Runtime &rt,
                                                   jsi::Value value,
                                                   bool optional) {
-  if (optional)
-    return ByteArray{0, 0};
-
   if (value.isObject() && value.asObject(rt).isArrayBuffer(rt)) {
     jsi::ArrayBuffer array_buffer = value.getObject(rt).getArrayBuffer(rt);
-
     return ByteArray{array_buffer.size(rt), array_buffer.data(rt)};
   }
+    
+  if (optional)
+    return ByteArray{0, 0};
 
   throw jsi::JSError(rt, "Value is not of type ByteArray");
 }
@@ -117,9 +116,6 @@ ByteArray TurboModuleUtils::jsiToValue<ByteArray>(jsi::Runtime &rt,
 template <>
 std::vector<ByteArray> TurboModuleUtils::jsiToValue<std::vector<ByteArray>>(
     jsi::Runtime &rt, jsi::Value value, bool optional) {
-  if (optional)
-    return {};
-
   if (value.isObject() && value.asObject(rt).isArray(rt)) {
     std::vector<ByteArray> vec = {};
     jsi::Array arr = value.asObject(rt).asArray(rt);
@@ -135,15 +131,15 @@ std::vector<ByteArray> TurboModuleUtils::jsiToValue<std::vector<ByteArray>>(
     }
     return vec;
   }
+  if (optional)
+    return {};
+    
   throw jsi::JSError(rt, "Value is not of type ByteArray[]");
 }
 
 template <>
 std::vector<int32_t> TurboModuleUtils::jsiToValue<std::vector<int32_t>>(
     jsi::Runtime &rt, jsi::Value value, bool optional) {
-  if (optional)
-    return {};
-
   if (value.isObject() && value.asObject(rt).isArray(rt)) {
     std::vector<int32_t> vec = {};
     jsi::Array arr = value.asObject(rt).asArray(rt);
@@ -158,6 +154,9 @@ std::vector<int32_t> TurboModuleUtils::jsiToValue<std::vector<int32_t>>(
     }
     return vec;
   }
+  if (optional)
+    return {};
+
   throw jsi::JSError(rt, "Value is not of type int64_t[]");
 }
 
@@ -181,8 +180,7 @@ jsi::ArrayBuffer TurboModuleUtils::byteBufferToArrayBuffer(jsi::Runtime &rt,
   auto size = bb.len;
   auto end = buffer + (size * sizeof(uint8_t));
   std::vector<uint8_t> vector(buffer, end);
-  auto array = TypedArray<TypedArrayKind::Uint8Array>(rt, vector);
-  return array.getArrayBuffer(rt);
+  return TypedArray<TypedArrayKind::Uint8Array>(rt, vector).getArrayBuffer(rt);
 }
 
 jsi::ArrayBuffer TurboModuleUtils::byteArrayToArrayBuffer(jsi::Runtime &rt,
@@ -191,6 +189,5 @@ jsi::ArrayBuffer TurboModuleUtils::byteArrayToArrayBuffer(jsi::Runtime &rt,
   auto size = ba.length;
   auto end = buffer + (size * sizeof(uint8_t));
   std::vector<uint8_t> vector(buffer, end);
-  auto array = TypedArray<TypedArrayKind::Uint8Array>(rt, vector);
-  return array.getArrayBuffer(rt);
+  return TypedArray<TypedArrayKind::Uint8Array>(rt, vector).getArrayBuffer(rt);
 }
