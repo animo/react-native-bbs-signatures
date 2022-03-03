@@ -30,16 +30,6 @@ jsi::Object NativeBbsSignatures::sign(jsi::Runtime &rt,
   }
 }
 
-jsi::Object NativeBbsSignatures::blsSign(jsi::Runtime &rt,
-                                         const jsi::Object &options) {
-  try {
-    jsi::Object object = jsi::Object(rt);
-    return object;
-  } catch (const char *e) {
-    throw jsi::JSError(rt, e);
-  }
-}
-
 jsi::Object NativeBbsSignatures::verify(jsi::Runtime &rt,
                                         const jsi::Object &options) {
   try {
@@ -56,16 +46,6 @@ jsi::Object NativeBbsSignatures::verify(jsi::Runtime &rt,
 
     jsi::Object object = jsi::Object(rt);
     object.setProperty(rt, "verified", verified);
-    return object;
-  } catch (const char *e) {
-    throw jsi::JSError(rt, e);
-  }
-}
-
-jsi::Object NativeBbsSignatures::blsVerify(jsi::Runtime &rt,
-                                           const jsi::Object &options) {
-  try {
-    jsi::Object object = jsi::Object(rt);
     return object;
   } catch (const char *e) {
     throw jsi::JSError(rt, e);
@@ -105,16 +85,6 @@ jsi::Object NativeBbsSignatures::createProof(jsi::Runtime &rt,
   }
 }
 
-jsi::Object NativeBbsSignatures::blsCreateProof(jsi::Runtime &rt,
-                                                const jsi::Object &options) {
-  try {
-    jsi::Object object = jsi::Object(rt);
-    return object;
-  } catch (const char *e) {
-    throw jsi::JSError(rt, e);
-  }
-}
-
 jsi::Object NativeBbsSignatures::verifyProof(jsi::Runtime &rt,
                                              const jsi::Object &options) {
   try {
@@ -133,16 +103,6 @@ jsi::Object NativeBbsSignatures::verifyProof(jsi::Runtime &rt,
 
     jsi::Object object = jsi::Object(rt);
     object.setProperty(rt, "verified", verified);
-    return object;
-  } catch (const char *e) {
-    throw jsi::JSError(rt, e);
-  }
-}
-
-jsi::Object NativeBbsSignatures::blsVerifyProof(jsi::Runtime &rt,
-                                                const jsi::Object &options) {
-  try {
-    jsi::Object object = jsi::Object(rt);
     return object;
   } catch (const char *e) {
     throw jsi::JSError(rt, e);

@@ -18,13 +18,9 @@ class NativeBbsSignatures : public BbsSignaturesCxxSpecJSI {
 public:
   NativeBbsSignatures(std::shared_ptr<CallInvoker> jsInvoker);
   jsi::Object sign(jsi::Runtime &rt, const jsi::Object &options);
-  jsi::Object blsSign(jsi::Runtime &rt, const jsi::Object &options);
   jsi::Object verify(jsi::Runtime &rt, const jsi::Object &options);
-  jsi::Object blsVerify(jsi::Runtime &rt, const jsi::Object &options);
   jsi::Object createProof(jsi::Runtime &rt, const jsi::Object &options);
-  jsi::Object blsCreateProof(jsi::Runtime &rt, const jsi::Object &options);
   jsi::Object verifyProof(jsi::Runtime &rt, const jsi::Object &options);
-  jsi::Object blsVerifyProof(jsi::Runtime &rt, const jsi::Object &options);
   jsi::Object commitmentForBlindSignRequest(jsi::Runtime &rt,
                                             const jsi::Object &options);
   jsi::Object verifyBlindSignRequest(jsi::Runtime &rt,

@@ -4,13 +4,9 @@ import { TurboModuleRegistry } from 'react-native-tscodegen-types'
 // General interface for the package. Our generated cpp wrapper will be based on this
 export interface BbsNativeBindings extends TurboModule {
   sign(options: {}): {}
-  blsSign(options: {}): {}
   verify(options: {}): {}
-  blsVerify(options: {}): {}
   createProof(options: {}): {}
-  blsCreateProof(options: {}): {}
   verifyProof(options: {}): {}
-  blsVerifyProof(options: {}): {}
   commitmentForBlindSignRequest(options: {}): {}
   verifyBlindSignRequest(options: {}): {}
   blindSign(options: {}): {}

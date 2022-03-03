@@ -17,18 +17,11 @@ class JSI_EXPORT BbsSignaturesCxxSpecJSI : public TurboModule {
 public:
   BbsSignaturesCxxSpecJSI(std::shared_ptr<CallInvoker> jsInvoker);
   virtual jsi::Object sign(jsi::Runtime &rt, const jsi::Object &options) = 0;
-  virtual jsi::Object blsSign(jsi::Runtime &rt, const jsi::Object &options) = 0;
   virtual jsi::Object verify(jsi::Runtime &rt, const jsi::Object &options) = 0;
-  virtual jsi::Object blsVerify(jsi::Runtime &rt,
-                                const jsi::Object &options) = 0;
   virtual jsi::Object createProof(jsi::Runtime &rt,
                                   const jsi::Object &options) = 0;
-  virtual jsi::Object blsCreateProof(jsi::Runtime &rt,
-                                     const jsi::Object &options) = 0;
   virtual jsi::Object verifyProof(jsi::Runtime &rt,
                                   const jsi::Object &options) = 0;
-  virtual jsi::Object blsVerifyProof(jsi::Runtime &rt,
-                                     const jsi::Object &options) = 0;
   virtual jsi::Object
   commitmentForBlindSignRequest(jsi::Runtime &rt,
                                 const jsi::Object &options) = 0;

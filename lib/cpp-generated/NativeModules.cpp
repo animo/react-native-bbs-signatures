@@ -18,23 +18,11 @@ static jsi::Value __hostFunction_BbsSignaturesCxxSpecJSI_sign(
   return static_cast<BbsSignaturesCxxSpecJSI *>(&turboModule)
       ->sign(rt, args[0].getObject(rt));
 }
-static jsi::Value __hostFunction_BbsSignaturesCxxSpecJSI_blsSign(
-    jsi::Runtime &rt, TurboModule &turboModule, const jsi::Value *args,
-    size_t count) {
-  return static_cast<BbsSignaturesCxxSpecJSI *>(&turboModule)
-      ->blsSign(rt, args[0].getObject(rt));
-}
 static jsi::Value __hostFunction_BbsSignaturesCxxSpecJSI_verify(
     jsi::Runtime &rt, TurboModule &turboModule, const jsi::Value *args,
     size_t count) {
   return static_cast<BbsSignaturesCxxSpecJSI *>(&turboModule)
       ->verify(rt, args[0].getObject(rt));
-}
-static jsi::Value __hostFunction_BbsSignaturesCxxSpecJSI_blsVerify(
-    jsi::Runtime &rt, TurboModule &turboModule, const jsi::Value *args,
-    size_t count) {
-  return static_cast<BbsSignaturesCxxSpecJSI *>(&turboModule)
-      ->blsVerify(rt, args[0].getObject(rt));
 }
 static jsi::Value __hostFunction_BbsSignaturesCxxSpecJSI_createProof(
     jsi::Runtime &rt, TurboModule &turboModule, const jsi::Value *args,
@@ -42,23 +30,11 @@ static jsi::Value __hostFunction_BbsSignaturesCxxSpecJSI_createProof(
   return static_cast<BbsSignaturesCxxSpecJSI *>(&turboModule)
       ->createProof(rt, args[0].getObject(rt));
 }
-static jsi::Value __hostFunction_BbsSignaturesCxxSpecJSI_blsCreateProof(
-    jsi::Runtime &rt, TurboModule &turboModule, const jsi::Value *args,
-    size_t count) {
-  return static_cast<BbsSignaturesCxxSpecJSI *>(&turboModule)
-      ->blsCreateProof(rt, args[0].getObject(rt));
-}
 static jsi::Value __hostFunction_BbsSignaturesCxxSpecJSI_verifyProof(
     jsi::Runtime &rt, TurboModule &turboModule, const jsi::Value *args,
     size_t count) {
   return static_cast<BbsSignaturesCxxSpecJSI *>(&turboModule)
       ->verifyProof(rt, args[0].getObject(rt));
-}
-static jsi::Value __hostFunction_BbsSignaturesCxxSpecJSI_blsVerifyProof(
-    jsi::Runtime &rt, TurboModule &turboModule, const jsi::Value *args,
-    size_t count) {
-  return static_cast<BbsSignaturesCxxSpecJSI *>(&turboModule)
-      ->blsVerifyProof(rt, args[0].getObject(rt));
 }
 static jsi::Value
 __hostFunction_BbsSignaturesCxxSpecJSI_commitmentForBlindSignRequest(
@@ -119,20 +95,12 @@ BbsSignaturesCxxSpecJSI::BbsSignaturesCxxSpecJSI(
     : TurboModule("BbsSignatures", jsInvoker) {
   methodMap_["sign"] =
       MethodMetadata{1, __hostFunction_BbsSignaturesCxxSpecJSI_sign};
-  methodMap_["blsSign"] =
-      MethodMetadata{1, __hostFunction_BbsSignaturesCxxSpecJSI_blsSign};
   methodMap_["verify"] =
       MethodMetadata{1, __hostFunction_BbsSignaturesCxxSpecJSI_verify};
-  methodMap_["blsVerify"] =
-      MethodMetadata{1, __hostFunction_BbsSignaturesCxxSpecJSI_blsVerify};
   methodMap_["createProof"] =
       MethodMetadata{1, __hostFunction_BbsSignaturesCxxSpecJSI_createProof};
-  methodMap_["blsCreateProof"] =
-      MethodMetadata{1, __hostFunction_BbsSignaturesCxxSpecJSI_blsCreateProof};
   methodMap_["verifyProof"] =
       MethodMetadata{1, __hostFunction_BbsSignaturesCxxSpecJSI_verifyProof};
-  methodMap_["blsVerifyProof"] =
-      MethodMetadata{1, __hostFunction_BbsSignaturesCxxSpecJSI_blsVerifyProof};
   methodMap_["commitmentForBlindSignRequest"] = MethodMetadata{
       1, __hostFunction_BbsSignaturesCxxSpecJSI_commitmentForBlindSignRequest};
   methodMap_["verifyBlindSignRequest"] = MethodMetadata{
