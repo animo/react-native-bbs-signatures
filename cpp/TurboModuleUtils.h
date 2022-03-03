@@ -9,8 +9,6 @@
 using namespace facebook;
 using namespace react;
 
-const char *name = "_bbsSignatures";
-
 class TurboModuleUtils {
 public:
   // Install the Turbomodule
@@ -35,9 +33,9 @@ public:
 
   static jsi::ArrayBuffer byteBufferToArrayBuffer(jsi::Runtime &rt,
                                                   ByteBuffer bb);
-    
+
   static jsi::ArrayBuffer byteArrayToArrayBuffer(jsi::Runtime &rt,
-                                                    ByteArray ba);
+                                                 ByteArray ba);
 
   static jsi::Object structureBlsKeyPair(jsi::Runtime &rt,
                                          jsi::ArrayBuffer public_key,

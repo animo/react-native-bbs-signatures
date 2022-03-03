@@ -11,7 +11,7 @@ void TurboModuleUtils::installTurboModule(
       std::make_shared<NativeBbsSignatures>(jsCallInvoker);
 
   // Register IndyVdrCxx instance as global.`NAME`
-  rt.global().setProperty(rt, name,
+  rt.global().setProperty(rt, "_bbsSignatures",
                           jsi::Object::createFromHostObject(rt, turboModule));
 }
 
@@ -186,7 +186,7 @@ jsi::ArrayBuffer TurboModuleUtils::byteBufferToArrayBuffer(jsi::Runtime &rt,
 }
 
 jsi::ArrayBuffer TurboModuleUtils::byteArrayToArrayBuffer(jsi::Runtime &rt,
-                                                           ByteArray ba) {
+                                                          ByteArray ba) {
   const uint8_t *buffer = ba.data;
   auto size = ba.length;
   auto end = buffer + (size * sizeof(uint8_t));
