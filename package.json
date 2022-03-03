@@ -2,22 +2,26 @@
   "name": "react-native-bbs-signatures",
   "version": "0.1.0",
   "description": "ffi-bbs-signatures wrapper for react native",
-  "react-native": "src/index",
-  "source": "src/index",
+  "react-native": "dist/index.js",
+  "source": "dist/index.js",
+  "main": "dist/index.js",
   "files": [
-    "src",
+    "dist",
     "lib",
     "android",
     "ios",
     "cpp",
     "react-native-bbs-signatures.podspec",
     "!android/build",
-    "!ios/build"
+    "!ios/build",
+    "!example",
+    "!example/**/*"
   ],
   "scripts": {
     "typescript": "tsc --noEmit",
     "example": "yarn --cwd example",
-    "tscodegen": "react-native-tscodegen ./react-native-tscodegen.json"
+    "tscodegen": "react-native-tscodegen ./react-native-tscodegen.json",
+    "build": "tsc -p tsconfig.build.json --outDir ./dist"
   },
   "keywords": [
     "react-native",

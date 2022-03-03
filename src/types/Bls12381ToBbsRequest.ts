@@ -11,7 +11,7 @@
  * limitations under the License.
  */
 
-import { BlsKeyPair } from "./BlsKeyPair";
+import type { BlsKeyPair } from '.'
 
 /**
  * Converts a BLS12-381 key to a BBS+ public key
@@ -20,9 +20,9 @@ export interface Bls12381ToBbsRequest {
   /**
    * The BLS 12-381 key pair to convert
    */
-  readonly keyPair: BlsKeyPair;
+  readonly keyPair: BlsKeyPair
   /**
    * The number of messages for the BBS+ key
    */
-  readonly messageCount: number;
+  readonly messageCount: number
 }

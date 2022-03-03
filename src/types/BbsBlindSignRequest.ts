@@ -18,13 +18,13 @@ export interface BbsBlindSignRequest {
   /**
    * The resulting commitment of the blinded messages to sign
    */
-  readonly commitment: Uint8Array;
+  readonly commitment: Uint8Array
   /**
    * The secret key of the signer
    */
-  readonly secretKey: Uint8Array;
+  readonly secretKey: Uint8Array
   /**
    * The known messages to sign
    */
-  readonly messages: readonly Uint8Array[];
+  readonly messages: readonly Uint8Array[]
 }

@@ -18,9 +18,9 @@ export interface BbsVerifyResult {
   /**
    * Indicates whether the verification was successful
    */
-  readonly verified: boolean;
+  readonly verified: boolean
   /**
    * Messages to sign
    */
-  readonly error?: string;
+  readonly error?: string
 }

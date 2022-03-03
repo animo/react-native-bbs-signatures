@@ -19,17 +19,17 @@ export interface BbsBlindSignContextRequest {
   /**
    * The resulting commitment of the blinded messages to sign
    */
-  readonly publicKey: Uint8Array;
+  readonly publicKey: Uint8Array
   /**
    * The zero based indices of which messages to hide
    */
-  readonly hidden: readonly number[];
+  readonly hidden: readonly number[]
   /**
    * A nonce for the resulting proof
    */
-  readonly nonce: Uint8Array;
+  readonly nonce: Uint8Array
   /**
    * The known messages to sign
    */
-  readonly messages: readonly Uint8Array[];
+  readonly messages: readonly Uint8Array[]
 }

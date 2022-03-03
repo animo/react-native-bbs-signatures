@@ -11,7 +11,7 @@
  * limitations under the License.
  */
 
-import { BlsKeyPair } from "./BlsKeyPair";
+import type { BlsKeyPair } from '.'
 
 /**
  * A request to create a BBS signature for a set of messages from a BLS12-381 key pair
@@ -20,9 +20,9 @@ export interface BlsBbsSignRequest {
   /**
    * BLS12-381 key pair
    */
-  readonly keyPair: BlsKeyPair;
+  readonly keyPair: BlsKeyPair
   /**
    * Messages to sign
    */
-  readonly messages: readonly Uint8Array[];
+  readonly messages: readonly Uint8Array[]
 }
