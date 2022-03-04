@@ -16,7 +16,31 @@ namespace react {
 class JSI_EXPORT BbsSignaturesCxxSpecJSI : public TurboModule {
 public:
   BbsSignaturesCxxSpecJSI(std::shared_ptr<CallInvoker> jsInvoker);
-  virtual double multiply(jsi::Runtime &rt, double a, double b) = 0;
+  virtual jsi::Object sign(jsi::Runtime &rt, const jsi::Object &options) = 0;
+  virtual jsi::Object verify(jsi::Runtime &rt, const jsi::Object &options) = 0;
+  virtual jsi::Object createProof(jsi::Runtime &rt,
+                                  const jsi::Object &options) = 0;
+  virtual jsi::Object verifyProof(jsi::Runtime &rt,
+                                  const jsi::Object &options) = 0;
+  virtual jsi::Object
+  commitmentForBlindSignRequest(jsi::Runtime &rt,
+                                const jsi::Object &options) = 0;
+  virtual jsi::Object verifyBlindSignRequest(jsi::Runtime &rt,
+                                             const jsi::Object &options) = 0;
+  virtual jsi::Object blindSign(jsi::Runtime &rt,
+                                const jsi::Object &options) = 0;
+  virtual jsi::Object generateBls12381G1KeyPair(jsi::Runtime &rt,
+                                                const jsi::Object &options) = 0;
+  virtual jsi::Object
+  generateBlindedBls12381G1KeyPair(jsi::Runtime &rt,
+                                   const jsi::Object &options) = 0;
+  virtual jsi::Object generateBls12381G2KeyPair(jsi::Runtime &rt,
+                                                const jsi::Object &options) = 0;
+  virtual jsi::Object
+  generateBlindedBls12381G2KeyPair(jsi::Runtime &rt,
+                                   const jsi::Object &options) = 0;
+  virtual jsi::Object bls12381toBbs(jsi::Runtime &rt,
+                                    const jsi::Object &options) = 0;
 };
 
 } // namespace react

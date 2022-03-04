@@ -1,4 +1,4 @@
-#include "TurboUtilsModule.h"
+#include "TurboModuleUtils.h"
 #include "Logging.h"
 
 #import "BbsSignatures.h"
@@ -50,7 +50,7 @@ RCT_EXPORT_MODULE()
     auto callInvoker = _bridge.jsCallInvoker;
     
     // installs the turbomodule
-    utils::installTurboModule(*jsiRuntime, callInvoker);
+    TurboModuleUtils::installTurboModule(*jsiRuntime, callInvoker);
 }
 
 @end
