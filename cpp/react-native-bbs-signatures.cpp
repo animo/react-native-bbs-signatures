@@ -21,8 +21,9 @@ jsi::Object NativeBbsSignatures::sign(jsi::Runtime &rt,
     ByteBuffer signature = Bbs::sign(publicKey, secretKey, messages, err);
 
     jsi::Object object = jsi::Object(rt);
-    object.setProperty(rt, "signature",
-                       TurboModuleUtils::byteBufferToArrayBuffer(rt, signature));
+    object.setProperty(
+        rt, "signature",
+        TurboModuleUtils::byteBufferToArrayBuffer(rt, signature));
     return object;
   } catch (const char *e) {
     throw jsi::JSError(rt, e);
@@ -222,19 +223,11 @@ NativeBbsSignatures::generateBls12381G2KeyPair(jsi::Runtime &rt,
     ExternError *err = new ExternError();
 
     BlsKeyPair bpk = Bbs::generateBls12381G2KeyPair(seed, err);
-      
-      void *buffer = (void *)bpk.publicKey.data;
-      size_t length = bpk.publicKey.length;
-      jsi::Function arrayBufferCtor = rt.global().getPropertyAsFunction(rt, "ArrayBuffer");
-      jsi::Object o = arrayBufferCtor.callAsConstructor(rt, (int)length).getObject(rt);
-      jsi::ArrayBuffer arrayBuffer = o.getArrayBuffer(rt);
-      memcpy(arrayBuffer.data(rt), buffer, length);
-      
 
     jsi::Object object = jsi::Object(rt);
     object.setProperty(
         rt, "publicKey",
-        arrayBuffer);
+        TurboModuleUtils::byteArrayToArrayBuffer(rt, bpk.publicKey));
     object.setProperty(
         rt, "secretKey",
         TurboModuleUtils::byteArrayToArrayBuffer(rt, bpk.secretKey));

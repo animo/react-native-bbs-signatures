@@ -42,11 +42,6 @@ std::string TurboModuleUtils::jsiToValue<std::string>(jsi::Runtime &rt,
 template <>
 int64_t TurboModuleUtils::jsiToValue<int64_t>(jsi::Runtime &rt,
                                               jsi::Value value, bool optional) {
-  // We return -1 here as rust interprets this as the optional value was not
-  // given.
-  if ((value.isNull() || value.isUndefined()) && optional)
-    return -1;
-
   if (value.isNumber())
     return value.asNumber();
 
@@ -57,11 +52,6 @@ template <>
 uint64_t TurboModuleUtils::jsiToValue<uint64_t>(jsi::Runtime &rt,
                                                 jsi::Value value,
                                                 bool optional) {
-  // We return -1 here as rust interprets this as the optional value was not
-  // given.
-  if ((value.isNull() || value.isUndefined()) && optional)
-    return -1;
-
   if (value.isNumber())
     return value.asNumber();
 
@@ -71,11 +61,6 @@ uint64_t TurboModuleUtils::jsiToValue<uint64_t>(jsi::Runtime &rt,
 template <>
 int32_t TurboModuleUtils::jsiToValue<int32_t>(jsi::Runtime &rt,
                                               jsi::Value value, bool optional) {
-  // We return -1 here as rust interprets this as the optional value was not
-  // given.
-  if ((value.isNull() || value.isUndefined()) && optional)
-    return -1;
-
   if (value.isNumber())
     return value.asNumber();
 
@@ -86,11 +71,6 @@ template <>
 uint32_t TurboModuleUtils::jsiToValue<uint32_t>(jsi::Runtime &rt,
                                                 jsi::Value value,
                                                 bool optional) {
-  // We return -1 here as rust interprets this as the optional value was not
-  // given.
-  if ((value.isNull() || value.isUndefined()) && optional)
-    return -1;
-
   if (value.isNumber())
     return value.asNumber();
 
@@ -118,7 +98,7 @@ std::vector<ByteArray> TurboModuleUtils::jsiToValue<std::vector<ByteArray>>(
   if (value.isObject() && value.asObject(rt).isArray(rt)) {
     std::vector<ByteArray> vec = {};
     jsi::Array arr = value.asObject(rt).asArray(rt);
-    auto length = arr.length(rt);
+    size_t length = arr.length(rt);
     for (int i = 0; i < length; i++) {
       jsi::Value element = arr.getValueAtIndex(rt, i);
       if (element.isObject() && element.asObject(rt).isArrayBuffer(rt)) {
@@ -133,7 +113,7 @@ std::vector<ByteArray> TurboModuleUtils::jsiToValue<std::vector<ByteArray>>(
   if (optional)
     return {};
 
-  throw jsi::JSError(rt, "Value is not of type ByteArray[]");
+  throw jsi::JSError(rt, "Value is not of type []");
 }
 
 template <>
@@ -142,7 +122,7 @@ std::vector<int32_t> TurboModuleUtils::jsiToValue<std::vector<int32_t>>(
   if (value.isObject() && value.asObject(rt).isArray(rt)) {
     std::vector<int32_t> vec = {};
     jsi::Array arr = value.asObject(rt).asArray(rt);
-    auto length = arr.length(rt);
+    size_t length = arr.length(rt);
     for (int i = 0; i < length; i++) {
       jsi::Value element = arr.getValueAtIndex(rt, i);
       if (element.isNumber()) {
@@ -156,53 +136,17 @@ std::vector<int32_t> TurboModuleUtils::jsiToValue<std::vector<int32_t>>(
   if (optional)
     return {};
 
-  throw jsi::JSError(rt, "Value is not of type int64_t[]");
+  throw jsi::JSError(rt, "Value is not of type []");
 }
 
 template <>
 uint8_t TurboModuleUtils::jsiToValue<uint8_t>(jsi::Runtime &rt,
                                               jsi::Value value, bool optional) {
-  // We return -1 here as rust interprets this as the optional value was not
-  // given.
-  if ((value.isNull() || value.isUndefined()) && optional)
-    return -1;
-
   if (value.isNumber())
     return value.asNumber();
 
   throw jsi::JSError(rt, "Value is not of type number");
 }
-
-//jsi::Array TurboModuleUtils::byteBufferToArray(jsi::Runtime &rt,
-//                                               ByteBuffer bb) {
-//  const uint8_t *buffer = bb.data;
-//  size_t length = bb.len;
-//  jsi::Function arrayBufferCtor =
-//      rt.global().getPropertyAsFunction(rt, "Array");
-//  jsi::Array arr =
-//      arrayBufferCtor.callAsConstructor(rt, static_cast<int>(length))
-//          .getObject(rt)
-//          .getArray(rt);
-//  for (int i = 0; i < length; i++) {
-//    arr.setValueAtIndex(rt, i, std::move((int)buffer[i]));
-//  }
-//  return arr;
-//}
-//
-//jsi::Array TurboModuleUtils::byteArrayToArray(jsi::Runtime &rt, ByteArray ba) {
-//  const uint8_t *buffer = ba.data;
-//  size_t length = ba.length;
-//  jsi::Function arrayBufferCtor =
-//      rt.global().getPropertyAsFunction(rt, "Array");
-//  jsi::Array arr =
-//      arrayBufferCtor.callAsConstructor(rt, static_cast<int>(length))
-//          .getObject(rt)
-//          .getArray(rt);
-//  for (int i = 0; i < length; i++) {
-//    arr.setValueAtIndex(rt, i, std::move((int)buffer[i]));
-//  }
-//  return arr;
-//}
 
 jsi::ArrayBuffer TurboModuleUtils::byteArrayToArrayBuffer(jsi::Runtime &rt,
                                                           ByteArray ba) {
@@ -215,7 +159,6 @@ jsi::ArrayBuffer TurboModuleUtils::byteArrayToArrayBuffer(jsi::Runtime &rt,
           .getObject(rt)
           .getArrayBuffer(rt);
   memcpy(arrayBuffer.data(rt), buffer, length);
-    auto o = arrayBuffer.length(rt);
   return arrayBuffer;
 }
 
@@ -232,4 +175,3 @@ jsi::ArrayBuffer TurboModuleUtils::byteBufferToArrayBuffer(jsi::Runtime &rt,
   memcpy(arrayBuffer.data(rt), buffer, length);
   return arrayBuffer;
 }
-

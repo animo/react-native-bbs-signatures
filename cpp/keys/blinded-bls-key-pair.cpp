@@ -6,7 +6,8 @@ BlindedBlsKeyPair::BlindedBlsKeyPair(ByteArray pk, ByteArray sk, ByteArray bf) {
   blindingFactor = bf;
 }
 
-BlindedBlsKeyPair BlindedBlsKeyPair::generateBlindedG1(ByteArray seed, ExternError *err) {
+BlindedBlsKeyPair BlindedBlsKeyPair::generateBlindedG1(ByteArray seed,
+                                                       ExternError *err) {
   ByteBuffer *pk = new ByteBuffer();
   ByteBuffer *sk = new ByteBuffer();
   ByteBuffer *bf = new ByteBuffer();
@@ -20,7 +21,8 @@ BlindedBlsKeyPair BlindedBlsKeyPair::generateBlindedG1(ByteArray seed, ExternErr
   return BlindedBlsKeyPair{bapk, bask, babf};
 }
 
-BlindedBlsKeyPair BlindedBlsKeyPair::generateBlindedG2(ByteArray seed, ExternError *err) {
+BlindedBlsKeyPair BlindedBlsKeyPair::generateBlindedG2(ByteArray seed,
+                                                       ExternError *err) {
   ByteBuffer *pk = new ByteBuffer();
   ByteBuffer *sk = new ByteBuffer();
   ByteBuffer *bf = new ByteBuffer();

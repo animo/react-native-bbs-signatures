@@ -1,8 +1,8 @@
 #pragma once
 
 #include "bbs-key.h"
-#include "bls-key-pair.h"
 #include "bbs.h"
+#include "bls-key-pair.h"
 #include "util.h"
 
 class BlindedBlsKeyPair {
