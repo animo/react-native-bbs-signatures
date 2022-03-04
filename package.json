@@ -11,11 +11,7 @@
     "android",
     "ios",
     "cpp",
-    "react-native-bbs-signatures.podspec",
-    "!android/build",
-    "!ios/build",
-    "!example",
-    "!example/**/*"
+    "react-native-bbs-signatures.podspec"
   ],
   "scripts": {
     "typescript": "tsc --noEmit",

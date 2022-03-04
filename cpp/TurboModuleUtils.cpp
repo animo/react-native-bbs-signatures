@@ -9,7 +9,7 @@ void TurboModuleUtils::installTurboModule(
   std::shared_ptr<NativeBbsSignatures> turboModule =
       std::make_shared<NativeBbsSignatures>(jsCallInvoker);
 
-  // Register IndyVdrCxx instance as global.`NAME`
+  // Register bbsSignatures instance as global.`NAME`
   rt.global().setProperty(rt, "_bbsSignatures",
                           jsi::Object::createFromHostObject(rt, turboModule));
 }
