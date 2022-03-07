@@ -1,7 +1,7 @@
 #pragma once
 
 #include "bbs-key.h"
-#include "bbs.h"
+#include "../include/bbs.h"
 #include "bls-key-pair.h"
 #include "util.h"
 
@@ -13,5 +13,4 @@ public:
   ByteArray blindingFactor;
   static BlindedBlsKeyPair generateBlindedG1(ByteArray seed, ExternError *err);
   static BlindedBlsKeyPair generateBlindedG2(ByteArray seed, ExternError *err);
-  // TODO: what other methods do we have here?
 };

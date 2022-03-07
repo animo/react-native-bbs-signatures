@@ -18,12 +18,12 @@ jsi::Object NativeBbsSignatures::sign(jsi::Runtime &rt,
             rt, options.getProperty(rt, "messages"));
 
     ExternError *err = new ExternError();
-    ByteBuffer signature = Bbs::sign(publicKey, secretKey, messages, err);
+    ByteArray signature = Bbs::sign(publicKey, secretKey, messages, err);
 
     jsi::Object object = jsi::Object(rt);
     object.setProperty(
         rt, "signature",
-        TurboModuleUtils::byteBufferToArrayBuffer(rt, signature));
+        TurboModuleUtils::byteArrayToArrayBuffer(rt, signature));
     return object;
   } catch (const char *e) {
     throw jsi::JSError(rt, e);

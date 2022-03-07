@@ -1,6 +1,6 @@
 #include "bbs-signatures.h"
 
-ByteBuffer Bbs::sign(ByteArray publicKey, ByteArray secretKey,
+ByteArray Bbs::sign(ByteArray publicKey, ByteArray secretKey,
                      std::vector<ByteArray> messages, ExternError *err) {
   uint32_t length = (uint32_t)messages.size();
 
@@ -23,10 +23,8 @@ ByteBuffer Bbs::sign(ByteArray publicKey, ByteArray secretKey,
   ::bbs_sign_context_finish(handle, signature, err);
   handleExternError(err);
 
-  return *signature;
+  return byteBufferToByteArray(*signature);
 }
-
-void Bbs::blsSign() {}
 
 bool Bbs::verify(ByteArray publicKey, ByteArray signature,
                  std::vector<ByteArray> messages, ExternError *err) {
@@ -53,8 +51,6 @@ bool Bbs::verify(ByteArray publicKey, ByteArray signature,
 
   return res == 0;
 }
-
-void Bbs::blsVerify() {}
 
 ByteArray Bbs::createProof(ByteArray nonce, ByteArray publicKey,
                            ByteArray signature, std::vector<ByteArray> messages,
@@ -91,8 +87,6 @@ ByteArray Bbs::createProof(ByteArray nonce, ByteArray publicKey,
   return byteBufferToByteArray(*proof);
 }
 
-void Bbs::blsCreateProof() {}
-
 bool Bbs::verifyProof(ByteArray nonce, ByteArray publicKey, ByteArray proof,
                       std::vector<ByteArray> messages, ExternError *err) {
   uint32_t length = (uint32_t)messages.size();
@@ -120,8 +114,6 @@ bool Bbs::verifyProof(ByteArray nonce, ByteArray publicKey, ByteArray proof,
 
   return res == 0;
 }
-
-void Bbs::blsVerifyProof() {}
 
 std::tuple<ByteArray, ByteArray, ByteArray> Bbs::commitmentForBlindSignRequest(
     ByteArray nonce, ByteArray publicKey, std::vector<ByteArray> messages,
@@ -188,8 +180,6 @@ bool Bbs::verifyBlindSignRequest(ByteArray nonce, ByteArray publicKey,
 
   return res == 0;
 }
-
-void Bbs::blindSign() {}
 
 BlsKeyPair Bbs::generateBls12381G1KeyPair(ByteArray seed, ExternError *err) {
   return BlsKeyPair::generateG1(seed, err);

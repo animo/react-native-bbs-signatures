@@ -63,3 +63,5 @@ android/keystores/debug.keystore
 dist/*
 
 *.tgz
+
+cpp/tests/libs/*.dylib

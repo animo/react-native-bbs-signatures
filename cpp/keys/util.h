@@ -1,6 +1,6 @@
 #pragma once
 
-#include "bbs.h"
+#include "../include/bbs.h"
 
 void handleExternError(ExternError *err);
 

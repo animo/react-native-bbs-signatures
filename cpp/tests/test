@@ -1,0 +1,18 @@
+#!/usr/bin/env sh
+
+cd build 
+cmake ..
+make
+./bbs_test 
+if [[ $? == 0 ]]
+then
+  echo "---------------------"
+  echo "| All tests passed. |"
+  echo "---------------------"
+else
+  echo "-----------------"
+  echo "| Tests failed! |"
+  echo "-----------------"
+fi
+cd -
+
