@@ -64,4 +64,4 @@ dist/*
 
 *.tgz
 
-tests/**/*.dylib
+cpp/tests/libs/*.dylib
