@@ -1,119 +1,127 @@
-import type { BlindedBlsKeyPair, BlsKeyPair } from './types'
+import type { BlindedBlsKeyPair, BlsKeyPair } from "./types";
 
 type SignOptions = {
-  publicKey: ArrayBuffer
-  secretKey: ArrayBuffer
-  messages: readonly ArrayBuffer[]
-}
+  publicKey: ArrayBuffer;
+  secretKey: ArrayBuffer;
+  messages: readonly ArrayBuffer[];
+};
 
 type BlsSignOptions = {
-  publickey: ArrayBuffer
-  secretkey: ArrayBuffer
-  messages: ArrayBuffer[]
-}
+  publickey: ArrayBuffer;
+  secretkey: ArrayBuffer;
+  messages: ArrayBuffer[];
+};
 
 type VerifyOptions = {
-  publicKey: ArrayBuffer
-  signature: ArrayBuffer
-  messages: ArrayBuffer[]
-}
+  publicKey: ArrayBuffer;
+  signature: ArrayBuffer;
+  messages: ArrayBuffer[];
+};
 
 type BlsVerifyOptions = {
-  publickey: ArrayBuffer
-  signature: ArrayBuffer
-  messages: ArrayBuffer[]
-}
+  publickey: ArrayBuffer;
+  signature: ArrayBuffer;
+  messages: ArrayBuffer[];
+};
 
 type CreateProofOptions = {
-  nonce: ArrayBuffer
-  revealed: readonly number[]
-  publicKey: ArrayBuffer
-  signature: ArrayBuffer
-  messages: ArrayBuffer[]
-}
+  nonce: ArrayBuffer;
+  revealed: readonly number[];
+  publicKey: ArrayBuffer;
+  signature: ArrayBuffer;
+  messages: ArrayBuffer[];
+};
 
 type BlsCreateProofOptions = {
-  nonce: ArrayBuffer
-  revealed: number[]
-  publicKey: ArrayBuffer
-  signature: ArrayBuffer
-  messages: ArrayBuffer[]
-}
+  nonce: ArrayBuffer;
+  revealed: number[];
+  publicKey: ArrayBuffer;
+  signature: ArrayBuffer;
+  messages: ArrayBuffer[];
+};
 
 type VerifyProofOptions = {
-  nonce: ArrayBuffer
-  publicKey: ArrayBuffer
-  proof: ArrayBuffer
-  messages: ArrayBuffer[]
-}
+  nonce: ArrayBuffer;
+  publicKey: ArrayBuffer;
+  proof: ArrayBuffer;
+  messages: ArrayBuffer[];
+};
 
 type BlsVerifyProofOptions = {
-  nonce: ArrayBuffer
-  publicKey: ArrayBuffer
-  proof: ArrayBuffer
-  messages: ArrayBuffer[]
-}
+  nonce: ArrayBuffer;
+  publicKey: ArrayBuffer;
+  proof: ArrayBuffer;
+  messages: ArrayBuffer[];
+};
 
 type CommitmentForBlindSignRequestOptions = {
-  nonce: ArrayBuffer
-  publicKey: ArrayBuffer
-  messages: ArrayBuffer[]
-  hidden: readonly number[]
-}
+  nonce: ArrayBuffer;
+  publicKey: ArrayBuffer;
+  messages: ArrayBuffer[];
+  hidden: readonly number[];
+};
 
 type VerifyBlindSignRequestOptions = {
-  nonce: ArrayBuffer
-  commitment: ArrayBuffer
-  proofOfHiddenMessages: ArrayBuffer
-  challengeHash: ArrayBuffer
-  publicKey: ArrayBuffer
-  blinded: readonly number[]
-}
+  nonce: ArrayBuffer;
+  commitment: ArrayBuffer;
+  proofOfHiddenMessages: ArrayBuffer;
+  challengeHash: ArrayBuffer;
+  publicKey: ArrayBuffer;
+  blinded: readonly number[];
+};
 
 type BlindSignOptions = {
-  commitment: ArrayBuffer
-  secretKey: ArrayBuffer
-  messages: ArrayBuffer[]
-}
+  commitment: ArrayBuffer;
+  secretKey: ArrayBuffer;
+  messages: ArrayBuffer[];
+};
 
-// ---
 type GenerateBls12381G1KeyPairOptions = {
-  seed?: ArrayBuffer
-}
+  seed?: ArrayBuffer;
+};
 
-type GenerateBlindedBls12381G1KeyPairOptions = {}
+type GenerateBlindedBls12381G1KeyPairOptions = {};
 
 type GenerateBls12381G2KeyPairOptions = {
-  seed?: ArrayBuffer
-}
+  seed?: ArrayBuffer;
+};
 
-type GenerateBlindedBls12381G2KeyPairOptions = {}
-// ---
+type GenerateBlindedBls12381G2KeyPairOptions = {};
+
 type Bl12381toBbsOptions = {
-  publicKey: ArrayBuffer
-  messageCount: number
-}
+  publicKey: ArrayBuffer;
+  messageCount: number;
+};
 
 export interface Bbs {
-  sign(options: SignOptions): { signature: ArrayBuffer }
-  blsSign(options: BlsSignOptions): {}
-  verify(options: VerifyOptions): { verified: boolean; error?: string }
-  blsVerify(options: BlsVerifyOptions): {}
-  createProof(options: CreateProofOptions): { proof: ArrayBuffer }
-  blsCreateProof(options: BlsCreateProofOptions): {}
-  verifyProof(options: VerifyProofOptions): { verified: boolean; error?: string }
-  blsVerifyProof(options: BlsVerifyProofOptions): {}
-  commitmentForBlindSignRequest(options: CommitmentForBlindSignRequestOptions): {}
-  verifyBlindSignRequest(options: VerifyBlindSignRequestOptions): {}
-  blindSign(options: BlindSignOptions): {}
-  // ---
-  generateBls12381G1KeyPair(options: GenerateBls12381G1KeyPairOptions): Required<BlsKeyPair>
-  generateBlindedBls12381G1KeyPair(options: GenerateBlindedBls12381G1KeyPairOptions): Required<BlindedBlsKeyPair>
+  sign(options: SignOptions): { signature: ArrayBuffer };
+  blsSign(options: BlsSignOptions): {};
+  verify(options: VerifyOptions): { verified: boolean; error?: string };
+  blsVerify(options: BlsVerifyOptions): {};
+  createProof(options: CreateProofOptions): { proof: ArrayBuffer };
+  blsCreateProof(options: BlsCreateProofOptions): {};
+  verifyProof(options: VerifyProofOptions): {
+    verified: boolean;
+    error?: string;
+  };
+  blsVerifyProof(options: BlsVerifyProofOptions): {};
+  commitmentForBlindSignRequest(
+    options: CommitmentForBlindSignRequestOptions
+  ): {};
+  verifyBlindSignRequest(options: VerifyBlindSignRequestOptions): {};
+  blindSign(options: BlindSignOptions): {};
+  generateBls12381G1KeyPair(
+    options: GenerateBls12381G1KeyPairOptions
+  ): Required<BlsKeyPair>;
+  generateBlindedBls12381G1KeyPair(
+    options: GenerateBlindedBls12381G1KeyPairOptions
+  ): Required<BlindedBlsKeyPair>;
   generateBls12381G2KeyPair(options: GenerateBls12381G2KeyPairOptions): {
-    publicKey: ArrayBuffer
-    secretKey: ArrayBuffer
-  }
-  generateBlindedBls12381G2KeyPair(options: GenerateBlindedBls12381G2KeyPairOptions): Required<BlindedBlsKeyPair>
-  // ---
-  bls12381toBbs(options: Bl12381toBbsOptions): { publicKey: ArrayBuffer }
+    publicKey: ArrayBuffer;
+    secretKey: ArrayBuffer;
+  };
+  generateBlindedBls12381G2KeyPair(
+    options: GenerateBlindedBls12381G2KeyPairOptions
+  ): Required<BlindedBlsKeyPair>;
+  bls12381toBbs(options: Bl12381toBbsOptions): { publicKey: ArrayBuffer };
 }

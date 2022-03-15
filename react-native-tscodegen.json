@@ -1,6 +1,6 @@
 {
   "libraryName": "BbsSignatures",
-  "outputDirectory": "./lib/cpp-generated",
+  "outputDirectory": "./cpp/generated",
   "moduleSpecName": "BbsSignatures",
   "generators": ["modulesCxx"],
   "inputFile": "./src/turboModule.ts"

@@ -9,9 +9,10 @@ set(build_DIR ${CMAKE_SOURCE_DIR}/build)
 set(PACKAGE_NAME "bbs_signatures")
 
 include_directories(
-        ../lib/cpp-generated
         ../cpp
         ../cpp/keys
+        ../cpp/include
+        ../cpp/generated
         ../node_modules/react-native/React
         ../node_modules/react-native/React/Base
         ../node_modules/react-native/ReactCommon
@@ -42,12 +43,11 @@ add_library(
         ../node_modules/react-native/ReactCommon/react/nativemodule/core/ReactCommon/TurboModule.cpp
         ../cpp/TurboModuleUtils.cpp
         ../cpp/react-native-bbs-signatures.cpp
-        ../cpp/TypedArray.cpp
         ../cpp/bbs-signatures.cpp
         ../cpp/keys/util.cpp
         ../cpp/keys/bls-key-pair.cpp
         ../cpp/keys/blinded-bls-key-pair.cpp
-        ../lib/cpp-generated/NativeModules.cpp
+        ../cpp/generated/NativeModules.cpp
         cpp-adapter.cpp
 )
 

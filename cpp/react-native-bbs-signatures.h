@@ -3,7 +3,7 @@
 // class "interface" of the generated code. This has to be copied over from
 // `../lib/cpp-generated/NativeModules.h`
 
-#include "../lib/cpp-generated/NativeModules.h"
+#include "generated/NativeModules.h"
 #include "TurboModuleUtils.h"
 #include "bbs-signatures.h"
 #include <ReactCommon/TurboModule.h>

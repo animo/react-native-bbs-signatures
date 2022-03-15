@@ -36,7 +36,8 @@ Pod::Spec.new do |s|
       "HEADER_SEARCH_PATHS" => "\"$(PODS_TARGET_SRCROOT)/ReactCommon\" \"$(PODS_TARGET_SRCROOT)\" \"$(PODS_ROOT)/#{folly_prefix}Folly\" \"$(PODS_ROOT)/Headers/Private/React-Core\" ",
   }
 
-  s.source_files = "ios/**/*.{h,m,mm}", "cpp/**/*.{h,cpp}", "lib/cpp-generated/*.{h,cpp}"
+  s.source_files  = "ios/**/*.{h,m,mm}", "cpp/**/*.{h,cpp}"
+  s.exclude_files = "cpp/tests/**/*"
 
   s.requires_arc = true
 

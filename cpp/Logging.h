@@ -1,6 +1,6 @@
 #pragma once
 
-#define TAG "MyTurboUtils-CPP"
+#define TAG "BBS-CPP"
 
 #ifdef __ANDROID__
 #include <android/log.h>
