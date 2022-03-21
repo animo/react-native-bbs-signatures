@@ -1,23 +1,27 @@
 {
   "name": "react-native-bbs-signatures",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "ffi-bbs-signatures wrapper for react native",
-  "react-native": "src/index.ts",
+  "react-native": "build/index.js",
   "source": "src/index.ts",
-  "main": "src/index.ts",
+  "main": "build/index.js",
   "files": [
-    "dist",
-    "lib",
+    "build",
     "android",
     "ios",
     "cpp",
-    "react-native-bbs-signatures.podspec"
+    "react-native-bbs-signatures.podspec",
+    "README.md"
   ],
   "scripts": {
-    "typescript": "tsc --noEmit",
+    "check-types": "tsc --noEmit -p tsconfig.build.json",
     "example": "yarn --cwd example",
-    "tscodegen": "react-native-tscodegen ./react-native-tscodegen.json",
-    "build": "tsc -p tsconfig.build.json --outDir ./dist"
+    "prettier": "prettier --ignore-path .gitignore '**/*.+(js|json|ts|md|yml|yaml)'",
+    "format": "yarn prettier --write",
+    "build": "yarn run clean && yarn run compile",
+    "clean": "rimraf -rf ./build",
+    "compile": "tsc -p tsconfig.build.json",
+    "tscodegen": "react-native-tscodegen ./react-native-tscodegen.json"
   },
   "keywords": [
     "react-native",
@@ -34,6 +38,10 @@
   "publishConfig": {
     "registry": "https://registry.npmjs.org/"
   },
+  "dependencies": {
+    "react-native-tscodegen": "0.68.4",
+    "react-native-tscodegen-types": "0.67.3"
+  },
   "devDependencies": {
     "@types/react": "^16.9.19",
     "@types/react-native": "^0.66.0",
@@ -45,9 +53,5 @@
   "peerDependencies": {
     "react": "*",
     "react-native": "*"
-  },
-  "dependencies": {
-    "react-native-tscodegen": "0.68.4",
-    "react-native-tscodegen-types": "0.67.3"
   }
 }
