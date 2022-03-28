@@ -209,7 +209,7 @@ dependencies {
 
     implementation (project(':reactnativebbssignatures')) {
        exclude group:'com.facebook.fbjni'
-     }
+    }
 }
 
 // Run this once to be able to run the application with BUCK

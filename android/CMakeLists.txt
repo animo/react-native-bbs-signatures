@@ -13,16 +13,16 @@ include_directories(
         ../cpp/keys
         ../cpp/include
         ../cpp/generated
-        ../node_modules/react-native/React
-        ../node_modules/react-native/React/Base
-        ../node_modules/react-native/ReactCommon
-        ../node_modules/react-native/ReactCommon/jsi
-        ../node_modules/react-native/ReactCommon/callinvoker
-        ../node_modules/react-native/ReactCommon/jsiexecutor/jsireact
-        ../node_modules/react-native/ReactCommon/react/nativemodule
-        ../node_modules/react-native/ReactCommon/react/nativemodule/core
-        ../node_modules/react-native/ReactCommon/react/nativemodule/core/ReactCommon
-        ../node_modules/react-native/ReactAndroid/src/main/java/com/facebook/react/turbomodule/core/jni/ReactCommon
+        "${NODE_MODULES_DIR}/react-native/React"
+        "${NODE_MODULES_DIR}/react-native/React/Base"
+        "${NODE_MODULES_DIR}/react-native/ReactCommon"
+        "${NODE_MODULES_DIR}/react-native/ReactCommon/jsi"
+        "${NODE_MODULES_DIR}/react-native/ReactCommon/callinvoker"
+        "${NODE_MODULES_DIR}/react-native/ReactCommon/jsiexecutor/jsireact"
+        "${NODE_MODULES_DIR}/react-native/ReactCommon/react/nativemodule"
+        "${NODE_MODULES_DIR}/react-native/ReactCommon/react/nativemodule/core"
+        "${NODE_MODULES_DIR}/react-native/ReactCommon/react/nativemodule/core/ReactCommon"
+        "${NODE_MODULES_DIR}/react-native/ReactAndroid/src/main/java/com/facebook/react/turbomodule/core/jni/ReactCommon"
 )
 
 # Add the correct multiply static library
@@ -38,9 +38,9 @@ find_package(fbjni REQUIRED CONFIG)
 add_library(
         ${PACKAGE_NAME}
         SHARED
-        ../node_modules/react-native/ReactCommon/jsi/jsi/jsi.cpp
-        ../node_modules/react-native/ReactAndroid/src/main/java/com/facebook/react/turbomodule/core/jni/ReactCommon/CallInvokerHolder.cpp
-        ../node_modules/react-native/ReactCommon/react/nativemodule/core/ReactCommon/TurboModule.cpp
+        "${NODE_MODULES_DIR}/react-native/ReactCommon/jsi/jsi/jsi.cpp"
+        "${NODE_MODULES_DIR}/react-native/ReactAndroid/src/main/java/com/facebook/react/turbomodule/core/jni/ReactCommon/CallInvokerHolder.cpp"
+        "${NODE_MODULES_DIR}/react-native/ReactCommon/react/nativemodule/core/ReactCommon/TurboModule.cpp"
         ../cpp/TurboModuleUtils.cpp
         ../cpp/react-native-bbs-signatures.cpp
         ../cpp/bbs-signatures.cpp

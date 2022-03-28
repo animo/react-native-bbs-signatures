@@ -1,15 +1,16 @@
 {
   "name": "react-native-bbs-signatures",
-  "version": "0.2.0",
+  "version": "0.11.0",
   "description": "ffi-bbs-signatures wrapper for react native",
-  "react-native": "build/index.js",
+  "react-native": "lib/index.js",
   "source": "src/index.ts",
-  "main": "build/index.js",
+  "main": "lib/index.js",
   "files": [
-    "build",
+    "lib",
     "android",
     "ios",
     "cpp",
+    "react-native.config.js",
     "react-native-bbs-signatures.podspec",
     "README.md"
   ],
@@ -18,8 +19,8 @@
     "example": "yarn --cwd example",
     "prettier": "prettier --ignore-path .gitignore '**/*.+(js|json|ts|md|yml|yaml)'",
     "format": "yarn prettier --write",
-    "build": "yarn run clean && yarn run compile",
-    "clean": "rimraf -rf ./build",
+    "build": "yarn clean && yarn compile",
+    "clean": "rimraf -rf ./lib",
     "compile": "tsc -p tsconfig.build.json",
     "tscodegen": "react-native-tscodegen ./react-native-tscodegen.json"
   },

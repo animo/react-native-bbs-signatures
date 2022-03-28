@@ -2,7 +2,7 @@ require "json"
 
 package = JSON.parse(File.read(File.join(__dir__, "package.json")))
 
-rnVersion = JSON.parse(File.read(File.join(__dir__, "node_modules" ,"react-native", "package.json")))["version"].split('.')[1]
+rnVersion = JSON.parse(File.read(File.join(File.dirname(`node --print "require.resolve('@react-native-community/cli-platform-ios/package.json')"`), "package.json")))["version"].split('.')[1]
 
 folly_prefix = ""
 if rnVersion.to_i >= 64
