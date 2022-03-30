@@ -18,17 +18,17 @@ export interface BbsVerifyProofRequest {
   /**
    * The BBS proof to verify
    */
-  readonly proof: Uint8Array
+  readonly proof: Uint8Array;
   /**
    * Public key of the signer of the proof to verify
    */
-  readonly publicKey: Uint8Array
+  readonly publicKey: Uint8Array;
   /**
    * Revealed messages to verify (TODO maybe rename this field??)
    */
-  readonly messages: readonly Uint8Array[]
+  readonly messages: readonly Uint8Array[];
   /**
    * Nonce included in the proof for the un-revealed attributes (OPTIONAL)
    */
-  readonly nonce: Uint8Array
+  readonly nonce: Uint8Array;
 }
