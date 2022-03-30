@@ -18,17 +18,17 @@ export interface BbsBlindSignContext {
   /**
    * The resulting commitment of the blinded messages to sign
    */
-  readonly commitment: Uint8Array
+  readonly commitment: Uint8Array;
   /**
    * The proof of hidden messages to be verified by the signer
    */
-  readonly proofOfHiddenMessages: Uint8Array
+  readonly proofOfHiddenMessages: Uint8Array;
   /**
    * Fiat-Shamir challenge
    */
-  readonly challengeHash: Uint8Array
+  readonly challengeHash: Uint8Array;
   /**
    * The signature blinding factor
    */
-  readonly blindingFactor: Uint8Array
+  readonly blindingFactor: Uint8Array;
 }
