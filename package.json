@@ -27,7 +27,8 @@
     "build": "yarn clean && yarn compile",
     "clean": "rimraf -rf ./lib",
     "compile": "tsc -p tsconfig.build.json",
-    "tscodegen": "react-native-tscodegen ./react-native-tscodegen.json"
+    "tscodegen": "react-native-tscodegen ./react-native-tscodegen.json",
+    "release": "release-it"
   },
   "keywords": [
     "react-native",
