@@ -1,5 +1,5 @@
 {
-  "name": "react-native-bbs-signatures",
+  "name": "@animo-id/react-native-bbs-signatures",
   "version": "0.0.0",
   "description": "ffi-bbs-signatures wrapper for react native",
   "react-native": "lib/index.js",
