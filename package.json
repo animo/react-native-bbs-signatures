@@ -1,6 +1,6 @@
 {
   "name": "react-native-bbs-signatures",
-  "version": "0.11.0",
+  "version": "0.1.0",
   "description": "ffi-bbs-signatures wrapper for react native",
   "react-native": "lib/index.js",
   "source": "src/index.ts",
@@ -8,11 +8,12 @@
   "files": [
     "lib",
     "android",
+    "!android/libs",
     "ios",
+    "!ios/Frameworks",
     "cpp",
-    "react-native.config.js",
-    "react-native-bbs-signatures.podspec",
-    "README.md"
+    "!cpp/tests",
+    "react-native-bbs-signatures.podspec"
   ],
   "scripts": {
     "check-types": "tsc --noEmit -p tsconfig.build.json",

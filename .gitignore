@@ -57,3 +57,6 @@ build
 *.tgz
 lib
 cpp/tests/libs/*.dylib
+
+ios/Frameworks
+android/libs
