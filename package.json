@@ -1,6 +1,6 @@
 {
   "name": "react-native-bbs-signatures",
-  "version": "0.11.0",
+  "version": "0.12.0",
   "description": "ffi-bbs-signatures wrapper for react native",
   "react-native": "lib/index.js",
   "source": "src/index.ts",
@@ -14,6 +14,13 @@
     "react-native-bbs-signatures.podspec",
     "README.md"
   ],
+  "binary": {
+    "module_name": "libs",
+    "host": "https://github.com/animo/ffi-bbs-signatures/releases/download/",
+    "remote_path": "{version}",
+    "package_name": "android.zip",
+    "module_path": "."
+  },
   "scripts": {
     "check-types": "tsc --noEmit -p tsconfig.build.json",
     "example": "yarn --cwd example",
@@ -44,6 +51,7 @@
     "react-native-tscodegen-types": "0.67.3"
   },
   "devDependencies": {
+    "@mathquis/node-pre-gyp-github": "^1.0.2",
     "@types/react": "^16.9.19",
     "@types/react-native": "^0.66.0",
     "prettier": "^2.0.5",
