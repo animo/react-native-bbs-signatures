@@ -22,7 +22,7 @@ Pod::Spec.new do |s|
   s.authors      = package["author"]
 
   s.platforms    = { :ios => "12.0" }
-  s.source       = { :git => "https://github.com/animo/react-native-bbs-signatures.git.git", :tag => "#{s.version}" }
+  s.source       = { :git => "https://github.com/animo/react-native-bbs-signatures.git", :tag => "#{s.version}" }
 
   s.xcconfig = {
     "CLANG_CXX_LANGUAGE_STANDARD" => "c++14",

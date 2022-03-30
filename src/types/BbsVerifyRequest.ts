@@ -18,13 +18,13 @@ export interface BbsVerifyRequest {
   /**
    * Public key of the signer of the signature
    */
-  readonly publicKey: Uint8Array
+  readonly publicKey: Uint8Array;
   /**
    * Raw signature value
    */
-  readonly signature: Uint8Array
+  readonly signature: Uint8Array;
   /**
    * Messages that were signed to produce the signature
    */
-  readonly messages: readonly Uint8Array[]
+  readonly messages: readonly Uint8Array[];
 }
