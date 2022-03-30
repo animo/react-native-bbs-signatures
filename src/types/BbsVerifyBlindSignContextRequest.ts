@@ -18,25 +18,25 @@ export interface BbsVerifyBlindSignContextRequest {
   /**
    * The resulting commitment of the blinded messages to sign
    */
-  readonly commitment: Uint8Array
+  readonly commitment: Uint8Array;
   /**
    * The proof of hidden messages to be verified by the signer
    */
-  readonly proofOfHiddenMessages: Uint8Array
+  readonly proofOfHiddenMessages: Uint8Array;
   /**
    * Fiat-Shamir challenge
    */
-  readonly challengeHash: Uint8Array
+  readonly challengeHash: Uint8Array;
   /**
    * Public key of the original signer of the signature
    */
-  readonly publicKey: Uint8Array
+  readonly publicKey: Uint8Array;
   /**
    * The zero based indices of which messages are blinded
    */
-  readonly blinded: readonly number[]
+  readonly blinded: readonly number[];
   /**
    * A nonce for the resulting proof
    */
-  readonly nonce: Uint8Array
+  readonly nonce: Uint8Array;
 }
