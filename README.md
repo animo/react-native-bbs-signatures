@@ -1,4 +1,17 @@
-# react-native-bbs-signatures
+# React Native BBS Signatures
+
+Wrapper for React Native around [ffi-bbs-signatures](https://github.com/mattrglobal/ffi-bbs-signatures).
+This library uses the new TurboModule for increased performance, however this may causes issues when something other than `React Native 0.66.4` is used.
+Most versions above `0.64.x` should work, however the library has been tested extensively with `0.66.4` and it is garanteed to work.
+
+## Functionality
+
+- Create key pair (bls12381g1, bls12381g2)
+- Convert bls to bbs key (bls12381g1, bls12381g2)
+- Sign with keypair (bls12381g2)
+- Verify signature
+
+This library matches the public API of [bbs-signatures](https://github.com/mattrglobal/bbs-signatures) but still misses some minor functionality.
 
 ## Installation
 
@@ -90,3 +103,11 @@ protected List<ReactPackage> getPackages() {
 }
 
 ```
+
+After these changes to your application everything is ready for usage.
+
+## Credits
+
+- [mattrglobal](https://github.com/mattrglobal)
+  - For providing [ffi-bbs-signatures](https://github.com/mattrglobal/ffi-bbs-signatures)
+  - And [bbs-signatures](https://github.com/mattrglobal/bbs-signatures)
