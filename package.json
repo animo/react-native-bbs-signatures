@@ -1,22 +1,20 @@
 {
-  "name": "react-native-bbs-signatures",
+  "name": "@animo-id/react-native-bbs-signatures",
   "version": "0.0.0",
   "description": "ffi-bbs-signatures wrapper for react native",
   "react-native": "lib/index.js",
   "source": "src/index.ts",
   "main": "lib/index.js",
   "files": [
-    "android/src",
-    "android/libs",
-    "android/build.gradle",
-    "android/CMakeLists.txt",
-    "android/cpp-adapter.cpp",
+    "android",
     "lib",
     "ios",
+    "cpp",
     "react-native-bbs-signatures.podspec",
     "README.md",
     "LICENSE",
-    "react-native.config.js"
+    "react-native.config.js",
+    "package.json"
   ],
   "scripts": {
     "check-types": "tsc --noEmit -p tsconfig.build.json",
@@ -27,7 +25,8 @@
     "build": "yarn clean && yarn compile",
     "clean": "rimraf -rf ./lib",
     "compile": "tsc -p tsconfig.build.json",
-    "tscodegen": "react-native-tscodegen ./react-native-tscodegen.json"
+    "tscodegen": "react-native-tscodegen ./react-native-tscodegen.json",
+    "release": "release-it"
   },
   "keywords": [
     "react-native",
