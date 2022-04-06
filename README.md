@@ -24,7 +24,7 @@ yarn add @animo-id/react-native-bbs-signatures
 
 Since autolinking is disabled for both iOS and Android the following steps also have to be done:
 
-## iOS
+### iOS
 
 We need to install the pod manually so apply the following diff:
 
