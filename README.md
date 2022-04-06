@@ -9,6 +9,7 @@ Most versions above `0.64.x` should work, however the library has been tested ex
 - Create key pair (bls12381g1, bls12381g2)
 - Convert bls to bbs key (bls12381g1, bls12381g2)
 - Sign with keypair (bls12381g2)
+- Derive zero knowledge proofs with selective disclosure of attributes
 - Verify signature
 
 This library matches the public API of [bbs-signatures](https://github.com/mattrglobal/bbs-signatures) but still misses some minor functionality.
