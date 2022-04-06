@@ -109,6 +109,6 @@ After these changes to your application everything is ready for usage.
 
 ## Credits
 
-- [mattrglobal](https://github.com/mattrglobal)
+- [MATTR](https://github.com/mattrglobal) for providing [ffi-bbs-signatures](https://github.com/mattrglobal/ffi-bbs-signatures) and [bbs-signatures](https://github.com/mattrglobal/bbs-signatures)
   - For providing [ffi-bbs-signatures](https://github.com/mattrglobal/ffi-bbs-signatures)
   - And [bbs-signatures](https://github.com/mattrglobal/bbs-signatures)
