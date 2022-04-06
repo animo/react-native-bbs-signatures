@@ -56,7 +56,7 @@ end
 After this run `pod install --project-directory=ios` from the root of your project and the installation
 is complete.
 
-## Android
+### Android
 
 For Android we have to edit some more files in order for everything to work.
 
