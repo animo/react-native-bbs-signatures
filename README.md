@@ -1,6 +1,6 @@
 # React Native BBS Signatures
 
-Wrapper for React Native around [ffi-bbs-signatures](https://github.com/mattrglobal/ffi-bbs-signatures).
+Wrapper for React Native around [ffi-bbs-signatures](https://github.com/mattrglobal/ffi-bbs-signatures). It matches the interface from the [BBS Signatures](https://github.com/mattrglobal/bbs-signatures) library so it can be used with the [JSON-LD Signatures BBS](https://github.com/mattrglobal/jsonld-signatures-bbs) library.
 This library uses the new TurboModule for increased performance, however this may causes issues when something other than `React Native 0.66.4` is used.
 Most versions above `0.64.x` should work, however the library has been tested extensively with `0.66.4` and it is garanteed to work.
 
