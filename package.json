@@ -6,17 +6,15 @@
   "source": "src/index.ts",
   "main": "lib/index.js",
   "files": [
-    "android/src",
-    "android/libs",
-    "android/build.gradle",
-    "android/CMakeLists.txt",
-    "android/cpp-adapter.cpp",
+    "android",
     "lib",
     "ios",
+    "cpp",
     "react-native-bbs-signatures.podspec",
     "README.md",
     "LICENSE",
-    "react-native.config.js"
+    "react-native.config.js",
+    "package.json"
   ],
   "scripts": {
     "check-types": "tsc --noEmit -p tsconfig.build.json",
