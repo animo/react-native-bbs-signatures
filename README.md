@@ -28,9 +28,10 @@ Since autolinking is disabled for both iOS and Android the following steps also 
 
 We need to install the pod manually so apply the following diff:
 
-`<PROJECT>/ios/Podfile`
 
 ```diff
+# <PROJECT>/ios/Podfile
+
 require_relative '../node_modules/react-native/scripts/react_native_pods'
 require_relative '../node_modules/@react-native-community/cli-platform-ios/native_modules'
 
@@ -60,16 +61,19 @@ is complete.
 
 For Android we have to edit some more files in order for everything to work.
 
-`<PROJECT>/android/settings.gradle`
 
 ```diff
+# <PROJECT>/android/settings.gradle
+
 + include ':reactnativebbssignatures'
 + project(':reactnativebbssignatures').projectDir = new File(rootProject.projectDir, '../node_modules/@animo-id/react-native-bbs-signatures/android')
 ```
 
-`<PROJECT>/android/app/build.gradle`
 
 ```diff
+# <PROJECT>/android/app/build.gradle
+
+
 android {
   ...
 
@@ -90,9 +94,10 @@ dependencies {
 
 ```
 
-`<PROJECT>/android/src/main/java/.../MainApplication.java`
 
 ```diff
+# <PROJECT>/android/src/main/java/.../MainApplication.java
+
 + import com.reactnativebbssignatures.BbsSignaturesPackage;
 
 @Override
