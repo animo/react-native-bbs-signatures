@@ -28,7 +28,6 @@ Since autolinking is disabled for both iOS and Android the following steps also 
 
 We need to install the pod manually so apply the following diff:
 
-
 ```diff
 # <PROJECT>/ios/Podfile
 
@@ -61,14 +60,12 @@ is complete.
 
 For Android we have to edit some more files in order for everything to work.
 
-
 ```diff
 # <PROJECT>/android/settings.gradle
 
 + include ':reactnativebbssignatures'
 + project(':reactnativebbssignatures').projectDir = new File(rootProject.projectDir, '../node_modules/@animo-id/react-native-bbs-signatures/android')
 ```
-
 
 ```diff
 # <PROJECT>/android/app/build.gradle
@@ -94,7 +91,6 @@ dependencies {
 
 ```
 
-
 ```diff
 # <PROJECT>/android/src/main/java/.../MainApplication.java
 
@@ -118,6 +114,6 @@ After these changes to your application everything is ready for usage.
   - For providing [ffi-bbs-signatures](https://github.com/mattrglobal/ffi-bbs-signatures)
   - And [bbs-signatures](https://github.com/mattrglobal/bbs-signatures)
 
-<hr> 
+<hr>
 
 This work was created as a joint effort between [Northern Block](https://northernblock.io/), [Animo Solutions](https://animo.id/) and the Ontario government, on behalf of the Ontario government.
