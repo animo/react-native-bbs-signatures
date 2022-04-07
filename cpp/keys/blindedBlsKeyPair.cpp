@@ -1,4 +1,4 @@
-#include "blinded-bls-key-pair.h"
+#include "blindedBlsKeyPair.h"
 
 BlindedBlsKeyPair::BlindedBlsKeyPair(ByteArray pk, ByteArray sk, ByteArray bf) {
   publicKey = pk;

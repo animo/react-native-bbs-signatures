@@ -1,6 +1,6 @@
 #pragma once
 
-#include "bbs-key.h"
+#include "bbsKey.h"
 #include "../include/bbs.h"
 #include "util.h"
 
