@@ -18,6 +18,7 @@ FunctionMap TurboModuleHostObject::functionMapping(jsi::Runtime &rt) {
                               &nativeBbsSignatures::generateBls12381G2KeyPair));
   fMap.insert(
       std::make_tuple("bls12381toBbs", &nativeBbsSignatures::bls12381toBbs));
+
   return fMap;
 }
 
@@ -54,6 +55,11 @@ jsi::Value TurboModuleHostObject::get(jsi::Runtime &rt,
       return TurboModuleHostObject::call(rt, it->first, cb);
     }
   }
-  // TODO: throw error
-  return jsi::Value::undefined();
+
+  // TODO: DOCUMENT
+  if (propName == "$$typeof") {
+    return jsi::Value::undefined();
+  }
+
+  throw jsi::JSError(rt, "Function: " + propName + " is not defined");
 }
