@@ -13,7 +13,6 @@ Pod::Spec.new do |s|
   s.platforms    = { :ios => "12.0" }
   s.source       = { :git => "https://github.com/animo/react-native-bbs-signatures", :tag => "#{s.version}" }
 
-
   s.header_mappings_dir = "cpp"
 
   s.pod_target_xcconfig = {

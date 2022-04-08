@@ -17,8 +17,6 @@ export {
   blsVerifyProof,
 } from "./bbsSignature";
 
-export { bbsNativeBindings } from "./register";
-
 const module = NativeModules.BbsSignatures;
 const res = module.install();
 if (!res) {
