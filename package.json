@@ -10,7 +10,7 @@
     "android/libs",
     "android/build.gradle",
     "android/CMakeLists.txt",
-    "android/cpp-adapter",
+    "android/cpp-adapter.cpp",
     "ios/**/*.h",
     "ios/**/*.m",
     "ios/**/*.mm",
