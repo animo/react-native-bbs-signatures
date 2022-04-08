@@ -11,11 +11,8 @@ void registerTurboModule(jsi::Runtime &rt) {
   rt.global().setProperty(rt, "_bbs_signatures", std::move(jsInstance));
 }
 
-void assertValueIsObject(jsi::Runtime &rt, jsi::Value &val) {
-  // TODO
-  if (!true) {
-    throw jsi::JSError(rt, "Argument is not of type object");
-  }
+void assertValueIsObject(jsi::Runtime &rt, const jsi::Value *val) {
+    val->asObject(rt);
 }
 
 void handleError(jsi::Runtime &rt, ExternError *error) {

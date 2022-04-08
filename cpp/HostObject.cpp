@@ -9,8 +9,9 @@ jsi::Function TurboModuleHostObject::call(
       rt, jsi::PropNameID::forAscii(rt, name), 1,
       [this, ptr](jsi::Runtime &rt, const jsi::Value &thisValue,
                   const jsi::Value *arguments, size_t count) -> jsi::Value {
-        // TODO: safe assert that there is an object as the first param
-        return (*ptr)(rt, arguments[0].getObject(rt));
+        const jsi::Value* val = &arguments[0];
+        turboModuleUtility::assertValueIsObject(rt, val);
+        return (*ptr)(rt, val->getObject(rt));
       });
 };
 

@@ -76,7 +76,6 @@ ByteArray testSign(ByteArray publicKey, ByteArray secretKey,
                    std::vector<ByteArray> messages, ExternError *err) {
   ByteArray signature = bbs::sign(publicKey, secretKey, messages, err);
 
-  // TODO: get the signature size dynamically
   assert(signature.length == 112);
 
   return signature;
@@ -105,20 +104,20 @@ void testVerifyProof(ByteArray nonce, ByteArray publicKey, ByteArray proof,
 
 int main() {
   // --- standalone ---
-  // testPublicG1KeySize();
-  // testPublicG2KeySize();
-  // testSecretKeySize();
+  testPublicG1KeySize();
+  testPublicG2KeySize();
+  testSecretKeySize();
 
-  // testGenerateBls12381G1KeyPair();
-  // testGenerateBls12381G2KeyPair();
+  testGenerateBls12381G1KeyPair();
+  testGenerateBls12381G2KeyPair();
 
-  // testGenerateBlindedG1();
-  // testGenerateBlindedG2();
+  testGenerateBlindedG1();
+  testGenerateBlindedG2();
 
-  // testBls12381toBbs();
+  testBls12381toBbs();
 
-  // testByteArrayToByteBuffer();
-  // testByteBufferToByteArray();
+  testByteArrayToByteBuffer();
+  testByteBufferToByteArray();
 
   // --- Whole flow ---
   try {
