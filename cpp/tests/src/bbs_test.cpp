@@ -4,20 +4,14 @@
 #include <cassert>
 #include <vector>
 
-void testPublicG1KeySize() {
-  assert(BlsKeyPair::publicG1KeySize() == 48);
-}
+void testPublicG1KeySize() { assert(BlsKeyPair::publicG1KeySize() == 48); }
 
-void testPublicG2KeySize() {
-  assert(BlsKeyPair::publicG2KeySize() == 96);
-}
+void testPublicG2KeySize() { assert(BlsKeyPair::publicG2KeySize() == 96); }
 
-void testSecretKeySize() {
-  assert(BlsKeyPair::secretKeySize() == 32);
-}
+void testSecretKeySize() { assert(BlsKeyPair::secretKeySize() == 32); }
 
 void testGenerateBls12381G2KeyPair() {
-  ByteArray seed = ByteArray{0,0};
+  ByteArray seed = ByteArray{0, 0};
   ExternError *err = new ExternError();
   BlsKeyPair blsKeyPair = bbs::generateBls12381G2KeyPair(seed, err);
   assert(blsKeyPair.isG2() == 1);
@@ -25,7 +19,7 @@ void testGenerateBls12381G2KeyPair() {
 }
 
 void testGenerateBls12381G1KeyPair() {
-  ByteArray seed = ByteArray{0,0};
+  ByteArray seed = ByteArray{0, 0};
   ExternError *err = new ExternError();
   BlsKeyPair blsKeyPair = bbs::generateBls12381G1KeyPair(seed, err);
   assert(blsKeyPair.isG1() == 1);
@@ -33,21 +27,22 @@ void testGenerateBls12381G1KeyPair() {
 }
 
 void testGenerateBlindedG1() {
-  ByteArray seed = ByteArray{0,0};
+  ByteArray seed = ByteArray{0, 0};
   ExternError *err = new ExternError();
-  BlindedBlsKeyPair blindedBlsKeyPair  = BlindedBlsKeyPair::generateBlindedG1(seed, err);
+  BlindedBlsKeyPair blindedBlsKeyPair =
+      BlindedBlsKeyPair::generateBlindedG1(seed, err);
   assert(blindedBlsKeyPair.publicKey.length == BlsKeyPair::publicG1KeySize());
   assert(blindedBlsKeyPair.secretKey.length == BlsKeyPair::secretKeySize());
 }
 
 void testGenerateBlindedG2() {
-  ByteArray seed = ByteArray{0,0};
+  ByteArray seed = ByteArray{0, 0};
   ExternError *err = new ExternError();
-  BlindedBlsKeyPair blindedBlsKeyPair  = BlindedBlsKeyPair::generateBlindedG2(seed, err);
+  BlindedBlsKeyPair blindedBlsKeyPair =
+      BlindedBlsKeyPair::generateBlindedG2(seed, err);
   assert(blindedBlsKeyPair.publicKey.length == BlsKeyPair::publicG2KeySize());
   assert(blindedBlsKeyPair.secretKey.length == BlsKeyPair::secretKeySize());
 }
-
 
 void testByteArrayToByteBuffer() {
   uint8_t data = 'a';
@@ -67,7 +62,7 @@ void testByteBufferToByteArray() {
 
 void testBls12381toBbs() {
   uint32_t messageCount = 1;
-  ByteArray seed = ByteArray{0,0};
+  ByteArray seed = ByteArray{0, 0};
   ExternError *err = new ExternError();
   BlsKeyPair blsKeyPair = bbs::generateBls12381G2KeyPair(seed, err);
 
@@ -77,7 +72,8 @@ void testBls12381toBbs() {
   assert(bbsKey.messageCount == 1);
 }
 
-ByteArray testSign(ByteArray publicKey, ByteArray secretKey, std::vector<ByteArray> messages, ExternError *err) {
+ByteArray testSign(ByteArray publicKey, ByteArray secretKey,
+                   std::vector<ByteArray> messages, ExternError *err) {
   ByteArray signature = bbs::sign(publicKey, secretKey, messages, err);
 
   // TODO: get the signature size dynamically
@@ -86,58 +82,63 @@ ByteArray testSign(ByteArray publicKey, ByteArray secretKey, std::vector<ByteArr
   return signature;
 }
 
-void testVerify(ByteArray publicKey, ByteArray signature, std::vector<ByteArray> messages, ExternError *err) {
+void testVerify(ByteArray publicKey, ByteArray signature,
+                std::vector<ByteArray> messages, ExternError *err) {
   bool isVerified = bbs::verify(publicKey, signature, messages, err);
 
   assert(isVerified == true);
 }
 
-ByteArray testCreateProof(ByteArray nonce, ByteArray publicKey, ByteArray signature, std::vector<ByteArray> messages, std::vector<int32_t> revealed, ExternError *err) {
-  ByteArray proof = bbs::createProof(nonce, publicKey, signature, messages, revealed, err);
+ByteArray testCreateProof(ByteArray nonce, ByteArray publicKey,
+                          ByteArray signature, std::vector<ByteArray> messages,
+                          std::vector<int32_t> revealed, ExternError *err) {
+  ByteArray proof =
+      bbs::createProof(nonce, publicKey, signature, messages, revealed, err);
   return proof;
 }
 
-void testVerifyProof(ByteArray nonce, ByteArray publicKey, ByteArray proof, std::vector<ByteArray> messages, ExternError *err) {
+void testVerifyProof(ByteArray nonce, ByteArray publicKey, ByteArray proof,
+                     std::vector<ByteArray> messages, ExternError *err) {
   bool isVerified = bbs::verifyProof(nonce, publicKey, proof, messages, err);
   assert(isVerified == 1);
 }
 
-
 int main() {
-  // --- standalone --- 
-  testPublicG1KeySize();
-  testPublicG2KeySize();
-  testSecretKeySize();
+  // --- standalone ---
+  // testPublicG1KeySize();
+  // testPublicG2KeySize();
+  // testSecretKeySize();
 
-  testGenerateBls12381G1KeyPair();
-  testGenerateBls12381G2KeyPair();
+  // testGenerateBls12381G1KeyPair();
+  // testGenerateBls12381G2KeyPair();
 
-  testGenerateBlindedG1();
-  testGenerateBlindedG2();
+  // testGenerateBlindedG1();
+  // testGenerateBlindedG2();
 
-  testBls12381toBbs();
+  // testBls12381toBbs();
 
-  testByteArrayToByteBuffer();
-  testByteBufferToByteArray();
+  // testByteArrayToByteBuffer();
+  // testByteBufferToByteArray();
 
-  // --- Whole flow --- 
+  // --- Whole flow ---
   try {
     // Mock data
     uint8_t data = 'q';
     ByteArray message = ByteArray{1, &data};
-    std::vector<ByteArray> messages = { message, message, message };
+    std::vector<ByteArray> messages = {message, message, message};
     uint32_t messageCount = (uint32_t)messages.size();
-    ByteArray seed = ByteArray{0,0};
+    ByteArray seed = ByteArray{0, 0};
     ExternError *err = new ExternError();
-    ByteArray nonce = ByteArray{10, &data};
-    std::vector<int32_t> revealed = {1,1,1};
+    ByteArray nonce = ByteArray{1, &data};
+    std::vector<int32_t> revealed = {0};
 
     // Generate a G2 bls keypair
     BlsKeyPair blsKeyPair = bbs::generateBls12381G2KeyPair(seed, err);
     BbsKey bbsKey = blsKeyPair.getBbsKey(messageCount, err);
 
     // Create a signature for the messages
-    ByteArray signature = testSign(bbsKey.publicKey, blsKeyPair.secretKey, messages, err);
+    ByteArray signature =
+        testSign(bbsKey.publicKey, blsKeyPair.secretKey, messages, err);
     assert(err->code == 0);
 
     // Verify the signature
@@ -145,14 +146,15 @@ int main() {
     assert(err->code == 0);
 
     // Create a proof with the signature
-    ByteArray proof = testCreateProof(nonce, bbsKey.publicKey, signature, messages, revealed, err);
+    ByteArray proof = testCreateProof(nonce, bbsKey.publicKey, signature,
+                                      messages, revealed, err);
     assert(err->code == 0);
 
     // Verify the proof with the messages
-    testVerifyProof(nonce, bbsKey.publicKey, proof, messages, err);
+    testVerifyProof(nonce, bbsKey.publicKey, proof, {message}, err);
     assert(err->code == 0);
-  } catch(const char* e) {
-    printf("ERROR:\n%s\n", e);
+  } catch (const char *e) {
+    printf("ERROR: %s\n", e);
     return 1;
   }
 

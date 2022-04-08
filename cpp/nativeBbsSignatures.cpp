@@ -4,15 +4,21 @@ namespace nativeBbsSignatures {
 
 jsi::Value sign(jsi::Runtime &rt, jsi::Object options) {
   try {
-    ByteArray publicKey = turboModuleUtility::jsiToValue<ByteArray>(rt, options.getProperty(rt, "publicKey"));
-    ByteArray secretKey = turboModuleUtility::jsiToValue<ByteArray>(rt, options.getProperty(rt, "secretKey"));
-    std::vector<ByteArray> messages = turboModuleUtility::jsiToValue<std::vector<ByteArray>>(rt, options.getProperty(rt, "messages"));
+    ByteArray publicKey = turboModuleUtility::jsiToValue<ByteArray>(
+        rt, options.getProperty(rt, "publicKey"));
+    ByteArray secretKey = turboModuleUtility::jsiToValue<ByteArray>(
+        rt, options.getProperty(rt, "secretKey"));
+    std::vector<ByteArray> messages =
+        turboModuleUtility::jsiToValue<std::vector<ByteArray>>(
+            rt, options.getProperty(rt, "messages"));
 
     ExternError *err = new ExternError();
     ByteArray signature = bbs::sign(publicKey, secretKey, messages, err);
 
     jsi::Object object = jsi::Object(rt);
-    object.setProperty(rt, "signature", turboModuleUtility::byteArrayToArrayBuffer(rt, signature));
+    object.setProperty(
+        rt, "signature",
+        turboModuleUtility::byteArrayToArrayBuffer(rt, signature));
     return object;
   } catch (const char *e) {
     throw jsi::JSError(rt, e);
@@ -118,7 +124,7 @@ jsi::Value generateBls12381G1KeyPair(jsi::Runtime &rt, jsi::Object options) {
 }
 
 jsi::Value generateBls12381G2KeyPair(jsi::Runtime &rt, jsi::Object options) {
-    try {
+  try {
     ByteArray seed = turboModuleUtility::jsiToValue<ByteArray>(
         rt, options.getProperty(rt, "seed"), true);
 
@@ -138,7 +144,7 @@ jsi::Value generateBls12381G2KeyPair(jsi::Runtime &rt, jsi::Object options) {
     throw jsi::JSError(rt, e);
   }
 }
- 
+
 jsi::Value bls12381toBbs(jsi::Runtime &rt, jsi::Object options) {
   try {
     uint32_t messageCount = turboModuleUtility::jsiToValue<int32_t>(
@@ -160,4 +166,4 @@ jsi::Value bls12381toBbs(jsi::Runtime &rt, jsi::Object options) {
   }
 }
 
-}
+} // namespace nativeBbsSignatures

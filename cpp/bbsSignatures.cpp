@@ -1,9 +1,11 @@
 #include "bbsSignatures.h"
 
+#include <algorithm>
+
 namespace bbs {
 
 ByteArray sign(ByteArray publicKey, ByteArray secretKey,
-                     std::vector<ByteArray> messages, ExternError *err) {
+               std::vector<ByteArray> messages, ExternError *err) {
   uint32_t length = (uint32_t)messages.size();
 
   uint64_t handle = ::bbs_sign_context_init(err);
@@ -29,7 +31,7 @@ ByteArray sign(ByteArray publicKey, ByteArray secretKey,
 }
 
 bool verify(ByteArray publicKey, ByteArray signature,
-                 std::vector<ByteArray> messages, ExternError *err) {
+            std::vector<ByteArray> messages, ExternError *err) {
 
   uint32_t length = (uint32_t)messages.size();
 
@@ -54,19 +56,28 @@ bool verify(ByteArray publicKey, ByteArray signature,
   return res == 0;
 }
 
-ByteArray createProof(ByteArray nonce, ByteArray publicKey,
-                           ByteArray signature, std::vector<ByteArray> messages,
-                           std::vector<int32_t> revealed, ExternError *err) {
-  uint32_t length = (uint32_t)messages.size();
+ByteArray createProof(ByteArray nonce, ByteArray publicKey, ByteArray signature,
+                      std::vector<ByteArray> messages,
+                      std::vector<int32_t> revealed, ExternError *err) {
+  uint32_t messagesLength = (uint32_t)messages.size();
+  uint32_t revealedLength = (uint32_t)revealed.size();
+
+  if (revealedLength > messagesLength) {
+    throw "Array of revealed messages is longer than the array of messages";
+  }
 
   uint64_t handle = ::bbs_create_proof_context_init(err);
   handleExternError(err);
 
-  for (int i = 0; i < length; i++) {
-    // TODO: message length MUST equal revealed length?
+  std::vector<std::tuple<ByteArray, int32_t>> messagesWithType;
+  for (int i = 0; i < messagesLength; i++) {
+    bool shouldBeRevealed =
+        std::find(revealed.begin(), revealed.end(), i) != revealed.end();
+    int32_t type = shouldBeRevealed ? 1 : 2;
+
+    ProofMessageType xtype = static_cast<ProofMessageType>(type);
     ByteArray message = messages[i];
-    ProofMessageType xtype = static_cast<ProofMessageType>(revealed[i]);
-    // TODO: how do we get the blinding factor?
+
     ByteArray blindingFactor = ByteArray{0, 0};
     ::bbs_create_proof_context_add_proof_message_bytes(handle, message, xtype,
                                                        blindingFactor, err);
@@ -90,7 +101,7 @@ ByteArray createProof(ByteArray nonce, ByteArray publicKey,
 }
 
 bool verifyProof(ByteArray nonce, ByteArray publicKey, ByteArray proof,
-                      std::vector<ByteArray> messages, ExternError *err) {
+                 std::vector<ByteArray> messages, ExternError *err) {
   uint32_t length = (uint32_t)messages.size();
 
   uint64_t handle = ::bbs_verify_proof_context_init(err);
@@ -117,7 +128,6 @@ bool verifyProof(ByteArray nonce, ByteArray publicKey, ByteArray proof,
   return res == 0;
 }
 
-
 BlsKeyPair generateBls12381G1KeyPair(ByteArray seed, ExternError *err) {
   return BlsKeyPair::generateG1(seed, err);
 }
@@ -130,4 +140,4 @@ BbsKey bls12381toBbs(BlsKeyPair kp, uint32_t messageCount, ExternError *err) {
   return kp.getBbsKey(messageCount, err);
 }
 
-}
+} // namespace bbs

@@ -16,8 +16,7 @@ import {
 
 const mockMessages = [new Uint8Array([1, 2, 3, 4])];
 const mockNonce = new Uint8Array([1, 2, 3]);
-const mockRevealed = [ProofMessageType.Revealed];
-//const mockHidden = [0]
+const mockRevealed = [0];
 
 export default function App() {
   const [isBlsSignatureVerified, setIsBlsSignatureVerified] =

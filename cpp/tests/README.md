@@ -8,6 +8,6 @@
 
 4. build the ffi-bbs-signature [library](https://github.com/mattrglobal/ffi-bbs-signatures) with `cargo build --release`
 
-5. move the file in `target/release/*.dylib` to `cpp/tests/lib/*.dylib`
+5. move the file in `target/release/*.dylib` to `cpp/tests/libs/*.dylib`
 
 6. run `./test`

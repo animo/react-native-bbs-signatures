@@ -1,7 +1,7 @@
 #pragma once
 
-#include "bbsKey.h"
 #include "../include/bbs.h"
+#include "bbsKey.h"
 #include "util.h"
 
 class BlsKeyPair {

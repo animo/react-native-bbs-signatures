@@ -36,7 +36,8 @@ uint8_t jsiToValue<uint8_t>(jsi::Runtime &rt, jsi::Value value, bool optional) {
 }
 
 template <>
-std::string jsiToValue<std::string>(jsi::Runtime &rt, jsi::Value value, bool optional) {
+std::string jsiToValue<std::string>(jsi::Runtime &rt, jsi::Value value,
+                                    bool optional) {
   if ((value.isNull() || value.isUndefined()) && optional)
     return std::string();
 
@@ -55,7 +56,8 @@ int64_t jsiToValue<int64_t>(jsi::Runtime &rt, jsi::Value value, bool optional) {
 }
 
 template <>
-uint64_t jsiToValue<uint64_t>(jsi::Runtime &rt, jsi::Value value, bool optional) {
+uint64_t jsiToValue<uint64_t>(jsi::Runtime &rt, jsi::Value value,
+                              bool optional) {
   if (value.isNumber())
     return value.asNumber();
 
@@ -71,7 +73,8 @@ int32_t jsiToValue<int32_t>(jsi::Runtime &rt, jsi::Value value, bool optional) {
 }
 
 template <>
-uint32_t jsiToValue<uint32_t>(jsi::Runtime &rt, jsi::Value value, bool optional) {
+uint32_t jsiToValue<uint32_t>(jsi::Runtime &rt, jsi::Value value,
+                              bool optional) {
   if (value.isNumber())
     return value.asNumber();
 
@@ -79,7 +82,8 @@ uint32_t jsiToValue<uint32_t>(jsi::Runtime &rt, jsi::Value value, bool optional)
 }
 
 template <>
-ByteArray jsiToValue<ByteArray>(jsi::Runtime &rt, jsi::Value value, bool optional) {
+ByteArray jsiToValue<ByteArray>(jsi::Runtime &rt, jsi::Value value,
+                                bool optional) {
   if (value.isObject() && value.asObject(rt).isArrayBuffer(rt)) {
     jsi::ArrayBuffer arrayBuffer = value.getObject(rt).getArrayBuffer(rt);
     return ByteArray{arrayBuffer.size(rt), arrayBuffer.data(rt)};
@@ -92,7 +96,9 @@ ByteArray jsiToValue<ByteArray>(jsi::Runtime &rt, jsi::Value value, bool optiona
 }
 
 template <>
-std::vector<ByteArray> jsiToValue<std::vector<ByteArray>>(jsi::Runtime &rt, jsi::Value value, bool optional) {
+std::vector<ByteArray> jsiToValue<std::vector<ByteArray>>(jsi::Runtime &rt,
+                                                          jsi::Value value,
+                                                          bool optional) {
   if (value.isObject() && value.asObject(rt).isArray(rt)) {
     std::vector<ByteArray> vec = {};
     jsi::Array arr = value.asObject(rt).asArray(rt);
@@ -115,7 +121,9 @@ std::vector<ByteArray> jsiToValue<std::vector<ByteArray>>(jsi::Runtime &rt, jsi:
 }
 
 template <>
-std::vector<int32_t> jsiToValue<std::vector<int32_t>>(jsi::Runtime &rt, jsi::Value value, bool optional) {
+std::vector<int32_t> jsiToValue<std::vector<int32_t>>(jsi::Runtime &rt,
+                                                      jsi::Value value,
+                                                      bool optional) {
   if (value.isObject() && value.asObject(rt).isArray(rt)) {
     std::vector<int32_t> vec = {};
     jsi::Array arr = value.asObject(rt).asArray(rt);
@@ -135,7 +143,6 @@ std::vector<int32_t> jsiToValue<std::vector<int32_t>>(jsi::Runtime &rt, jsi::Val
 
   throw jsi::JSError(rt, "Value is not of type []");
 }
-
 
 jsi::ArrayBuffer byteArrayToArrayBuffer(jsi::Runtime &rt, ByteArray ba) {
   const uint8_t *buffer = ba.data;
@@ -163,4 +170,4 @@ jsi::ArrayBuffer byteBufferToArrayBuffer(jsi::Runtime &rt, ByteBuffer bb) {
   return arrayBuffer;
 }
 
-}
+} // namespace turboModuleUtility

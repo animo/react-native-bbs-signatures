@@ -21,4 +21,4 @@ void handleError(jsi::Runtime &rt, ExternError *error);
 jsi::ArrayBuffer byteBufferToArrayBuffer(jsi::Runtime &rt, ByteBuffer bb);
 jsi::ArrayBuffer byteArrayToArrayBuffer(jsi::Runtime &rt, ByteArray ba);
 
-}
+} // namespace turboModuleUtility

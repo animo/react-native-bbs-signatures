@@ -2,8 +2,8 @@
 
 #include <jsi/jsi.h>
 
-#include "turboModuleUtility.h"
 #include "bbsSignatures.h"
+#include "turboModuleUtility.h"
 
 using namespace facebook;
 
@@ -17,4 +17,4 @@ jsi::Value generateBls12381G1KeyPair(jsi::Runtime &rt, jsi::Object options);
 jsi::Value generateBls12381G2KeyPair(jsi::Runtime &rt, jsi::Object options);
 jsi::Value bls12381toBbs(jsi::Runtime &rt, jsi::Object options);
 
-};
+}; // namespace nativeBbsSignatures
