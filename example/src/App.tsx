@@ -28,35 +28,37 @@ export default function App() {
   const flow = async () => {
     const blsKeyPair = await generateBls12381G2KeyPair();
 
-    // const blsSignature = blsSign({
-    //   keyPair: blsKeyPair,
-    //   messages: mockMessages,
-    // });
+    const blsSignature = await blsSign({
+      keyPair: blsKeyPair,
+      messages: mockMessages,
+    });
 
-    // setIsBlsSignatureVerified(
-    //   blsVerify({
-    //     publicKey: blsKeyPair.publicKey,
-    //     messages: mockMessages,
-    //     signature: blsSignature,
-    //   }).verified
-    // );
+    const blsVerified = await blsVerify({
+      publicKey: blsKeyPair.publicKey,
+      messages: mockMessages,
+      signature: blsSignature,
+    });
 
-    // const blsProof = blsCreateProof({
-    //   signature: blsSignature,
-    //   publicKey: blsKeyPair.publicKey,
-    //   messages: mockMessages,
-    //   revealed: mockRevealed,
-    //   nonce: mockNonce,
-    // });
+    setIsBlsSignatureVerified(blsVerified);
 
-    // setIsBlsProofVerified(
-    //   blsVerifyProof({
-    //     nonce: mockNonce,
-    //     proof: blsProof,
-    //     messages: mockMessages,
-    //     publicKey: blsKeyPair.publicKey,
-    //   }).verified
-    // );
+    const blsProof = await blsCreateProof({
+      signature: blsSignature,
+      publicKey: blsKeyPair.publicKey,
+      messages: mockMessages,
+      revealed: mockRevealed,
+      nonce: mockNonce,
+    });
+
+    const blsVerifiedProof = (
+      await blsVerifyProof({
+        nonce: mockNonce,
+        proof: blsProof,
+        publicKey: blsKeyPair.publicKey,
+        messages: mockMessages,
+      })
+    ).verified;
+
+    setIsBlsProofVerified(blsVerifiedProof);
 
     const bbsKeyPair = await bls12381toBbs({
       keyPair: blsKeyPair,
@@ -67,32 +69,35 @@ export default function App() {
       keyPair: bbsKeyPair,
       messages: mockMessages,
     });
-    console.log(signature);
 
-    // setIsSignatureVerified(
-    //   verify({
-    //     signature,
-    //     messages: mockMessages,
-    //     publicKey: bbsKeyPair.publicKey,
-    //   }).verified
-    // );
+    const verified = (
+      await verify({
+        signature,
+        messages: mockMessages,
+        publicKey: bbsKeyPair.publicKey,
+      })
+    ).verified;
 
-    // const proof = createProof({
-    //   publicKey: bbsKeyPair.publicKey,
-    //   messages: mockMessages,
-    //   signature,
-    //   nonce: mockNonce,
-    //   revealed: mockRevealed,
-    // });
+    setIsSignatureVerified(verified);
 
-    // setIsProofVerified(
-    //   verifyProof({
-    //     nonce: mockNonce,
-    //     messages: mockMessages,
-    //     publicKey: bbsKeyPair.publicKey,
-    //     proof,
-    //   }).verified
-    // );
+    const proof = await createProof({
+      publicKey: bbsKeyPair.publicKey,
+      messages: mockMessages,
+      signature,
+      nonce: mockNonce,
+      revealed: mockRevealed,
+    });
+
+    const verifiedProof = (
+      await verifyProof({
+        nonce: mockNonce,
+        messages: mockMessages,
+        publicKey: bbsKeyPair.publicKey,
+        proof,
+      })
+    ).verified;
+
+    setIsProofVerified(verifiedProof);
   };
 
   return (

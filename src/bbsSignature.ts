@@ -128,7 +128,8 @@ export const createProof = async ({
     });
 
     return new Uint8Array(proof);
-  } catch {
+  } catch (e) {
+    console.error(e);
     throw new Error("Failed to create proof");
   }
 };
@@ -212,7 +213,7 @@ export const blsVerifyProof = async ({
     publicKey: bbsKeyPair.publicKey,
     nonce,
     messages,
-    proof,
+    proof: proof,
   });
 };
 
