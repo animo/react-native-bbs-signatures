@@ -12,7 +12,7 @@ void registerTurboModule(jsi::Runtime &rt) {
 }
 
 void assertValueIsObject(jsi::Runtime &rt, const jsi::Value *val) {
-    val->asObject(rt);
+  val->asObject(rt);
 }
 
 void handleError(jsi::Runtime &rt, ExternError *error) {

@@ -1,69 +1,59 @@
 #include <HostObject.h>
+#include <algorithm>
+#include <vector>
 
 TurboModuleHostObject::TurboModuleHostObject(jsi::Runtime &rt) { return; }
 
-jsi::Function TurboModuleHostObject::call(
-    jsi::Runtime &rt, const char *name,
-    jsi::Value (*ptr)(jsi::Runtime &rt, jsi::Object options)) {
+FunctionMap TurboModuleHostObject::functionMapping(jsi::Runtime &rt) {
+  FunctionMap fMap;
+  fMap.insert(std::make_tuple("sign", &nativeBbsSignatures::sign));
+  fMap.insert(std::make_tuple("verify", &nativeBbsSignatures::verify));
+  fMap.insert(
+      std::make_tuple("createProof", &nativeBbsSignatures::createProof));
+  fMap.insert(
+      std::make_tuple("verifyProof", &nativeBbsSignatures::verifyProof));
+  fMap.insert(std::make_tuple("generateBls12381G1KeyPair",
+                              &nativeBbsSignatures::generateBls12381G1KeyPair));
+  fMap.insert(std::make_tuple("generateBls12381G2KeyPair",
+                              &nativeBbsSignatures::generateBls12381G2KeyPair));
+  fMap.insert(
+      std::make_tuple("bls12381toBbs", &nativeBbsSignatures::bls12381toBbs));
+  return fMap;
+}
+
+jsi::Function TurboModuleHostObject::call(jsi::Runtime &rt, const char *name,
+                                          Cb cb) {
   return jsi::Function::createFromHostFunction(
       rt, jsi::PropNameID::forAscii(rt, name), 1,
-      [this, ptr](jsi::Runtime &rt, const jsi::Value &thisValue,
-                  const jsi::Value *arguments, size_t count) -> jsi::Value {
-        const jsi::Value* val = &arguments[0];
+      [this, cb](jsi::Runtime &rt, const jsi::Value &thisValue,
+                 const jsi::Value *arguments, size_t count) -> jsi::Value {
+        const jsi::Value *val = &arguments[0];
         turboModuleUtility::assertValueIsObject(rt, val);
-        return (*ptr)(rt, val->getObject(rt));
+        return (*cb)(rt, val->getObject(rt));
       });
 };
 
 std::vector<jsi::PropNameID>
 TurboModuleHostObject::getPropertyNames(jsi::Runtime &rt) {
+  auto fMap = TurboModuleHostObject::functionMapping(rt);
   std::vector<jsi::PropNameID> result;
-  result.push_back(jsi::PropNameID::forUtf8(rt, std::string("sign")));
-  result.push_back(jsi::PropNameID::forUtf8(rt, std::string("verify")));
-  result.push_back(jsi::PropNameID::forUtf8(rt, std::string("createProof")));
-  result.push_back(jsi::PropNameID::forUtf8(rt, std::string("verifyProof")));
-  result.push_back(
-      jsi::PropNameID::forUtf8(rt, std::string("generateBls12381G1KeyPair")));
-  result.push_back(
-      jsi::PropNameID::forUtf8(rt, std::string("generateBls12381G2KeyPair")));
-  result.push_back(jsi::PropNameID::forUtf8(rt, std::string("bls12381toBbs")));
+  for (FunctionMap::iterator it = fMap.begin(); it != fMap.end(); ++it) {
+    result.push_back(jsi::PropNameID::forUtf8(rt, it->first));
+  }
+
   return result;
 }
 
 jsi::Value TurboModuleHostObject::get(jsi::Runtime &rt,
                                       const jsi::PropNameID &propNameId) {
   auto propName = propNameId.utf8(rt);
-  const char *propNameCString = propName.c_str();
-
-  // TODO: tuple
-  if (propName == "sign") {
-    auto cb = &nativeBbsSignatures::sign;
-    return TurboModuleHostObject::call(rt, propNameCString, cb);
+  auto fMap = TurboModuleHostObject::functionMapping(rt);
+  for (FunctionMap::iterator it = fMap.begin(); it != fMap.end(); ++it) {
+    if (it->first == propName) {
+      Cb cb = it->second;
+      return TurboModuleHostObject::call(rt, it->first, cb);
+    }
   }
-  if (propName == "verify") {
-    auto cb = &nativeBbsSignatures::verify;
-    return TurboModuleHostObject::call(rt, propNameCString, cb);
-  }
-  if (propName == "createProof") {
-    auto cb = &nativeBbsSignatures::createProof;
-    return TurboModuleHostObject::call(rt, propNameCString, cb);
-  }
-  if (propName == "verifyProof") {
-    auto cb = &nativeBbsSignatures::verifyProof;
-    return TurboModuleHostObject::call(rt, propNameCString, cb);
-  }
-  if (propName == "generateBls12381G1KeyPair") {
-    auto cb = &nativeBbsSignatures::generateBls12381G1KeyPair;
-    return TurboModuleHostObject::call(rt, propNameCString, cb);
-  }
-  if (propName == "generateBls12381G2KeyPair") {
-    auto cb = &nativeBbsSignatures::generateBls12381G2KeyPair;
-    return TurboModuleHostObject::call(rt, propNameCString, cb);
-  }
-  if (propName == "bls12381toBbs") {
-    auto cb = &nativeBbsSignatures::bls12381toBbs;
-    return TurboModuleHostObject::call(rt, propNameCString, cb);
-  }
-
+  // TODO: throw error
   return jsi::Value::undefined();
 }
