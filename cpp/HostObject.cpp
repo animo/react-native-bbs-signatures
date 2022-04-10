@@ -51,12 +51,23 @@ jsi::Value TurboModuleHostObject::get(jsi::Runtime &rt,
   auto fMap = TurboModuleHostObject::functionMapping(rt);
   for (FunctionMap::iterator it = fMap.begin(); it != fMap.end(); ++it) {
     if (it->first == propName) {
-      Cb cb = it->second;
-      return TurboModuleHostObject::call(rt, it->first, cb);
+      return TurboModuleHostObject::call(rt, it->first, it->second);
     }
   }
 
-  // TODO: DOCUMENT
+  /*
+   * https://overreacted.io/why-do-react-elements-have-typeof-property/
+   *
+   * This is a special React key on the object that `React.createElement()`
+   * returns.
+   *
+   * This function is called under-the-hood to see if this React element is
+   * renderable.
+   *
+   * When we return undefined, instead of `Symbol.for('react.element'), we tell
+   * React that this element is not renderable.
+   *
+   */
   if (propName == "$$typeof") {
     return jsi::Value::undefined();
   }
