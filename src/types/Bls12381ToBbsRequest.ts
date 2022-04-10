@@ -11,7 +11,7 @@
  * limitations under the License.
  */
 
-import type { BlsKeyPair } from ".";
+import type { BlsKeyPair } from "./BlsKeyPair";
 
 /**
  * Converts a BLS12-381 key to a BBS+ public key

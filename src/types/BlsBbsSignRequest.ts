@@ -11,7 +11,7 @@
  * limitations under the License.
  */
 
-import type { BlsKeyPair } from ".";
+import type { BlsKeyPair } from "./BlsKeyPair";
 
 /**
  * A request to create a BBS signature for a set of messages from a BLS12-381 key pair
