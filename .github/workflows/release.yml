@@ -53,13 +53,16 @@ jobs:
   native-tests:
     runs-on: ubuntu-20.04
     steps: 
-      - name: Checkout react-native-bbs-signatures
+      - name: Checkout ffi-bbs-signatures
         uses: actions/checkout@v2
         with: 
           repository: mattrglobal/ffi-bbs-signatures
-
       - name: Checkout react-native-bbs-signatures
         uses: actions/checkout@v2
+      - name: ls -R running 
+        run: ls -R
+      - name: ls -R in ..
+        run: ls -R ..
 
       - uses: actions-rs/cargo@v1
         with:
