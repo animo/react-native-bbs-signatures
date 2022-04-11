@@ -55,18 +55,13 @@ jobs:
     steps: 
       - name: Checkout react-native-bbs-signatures
         uses: actions/checkout@v2
-      - name: Go to test directory
-        run: cd cpp/tests
-      - name: Make build directory
-        run: mkdir build
-      - name: Go to build directory
-        run: cd build
-      - name: run cmake
-        run: cmake ..
-      - name: run make
-        run: make
-      - name: run tests
-        run: ./bbs_test
+      - name: CPP Tests
+        run: | 
+         mkdir build
+         cd build
+         cmake ..
+         make
+         ./bbs_test
   release:
     runs-on: ubuntu-20.04
     name: Release
