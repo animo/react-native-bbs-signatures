@@ -52,7 +52,7 @@ jobs:
         run: yarn check-types
   native-tests:
     runs-on: ubuntu-20.04
-    name: Native Tests
+    steps: 
       - name: Checkout react-native-bbs-signatures
         uses: actions/checkout@v2
       - name: Go to test directory
