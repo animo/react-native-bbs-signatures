@@ -79,7 +79,6 @@ def prebuiltDir = sourceBuild
 
 def reactProperties = new Properties()
 file("$nodeModules/react-native/ReactAndroid/gradle.properties").withInputStream { reactProperties.load(it) }
-def REACT_NATIVE_VERSION = reactProperties.getProperty("VERSION_NAME").split("\\.")[1].toInteger()
 
 android {
   compileSdkVersion 30
@@ -94,7 +93,6 @@ android {
       cmake {
         cppFlags "-fexceptions", "-frtti", "-std=c++1y", "-DONANDROID"
         arguments '-DANDROID_STL=c++_shared',
-                  "-DREACT_NATIVE_VERSION=${REACT_NATIVE_VERSION}",
                   "-DNODE_MODULES_DIR=${nodeModules}",
                   "-DPREBUILT_DIR=${prebuiltDir}"
       }
