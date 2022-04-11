@@ -49,11 +49,11 @@ yarn-error.log
 # BUCK
 buck-out/
 \.buckd/
-android/app/libs
+android/gradle*
 android/keystores/debug.keystore
 
 build
 .expo/*
 *.tgz
 lib
-cpp/tests/libs/*.dylib
+cpp/tests/libs/

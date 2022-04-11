@@ -15,7 +15,6 @@ ByteBuffer byteArrayToByteBuffer(ByteArray ba) {
   return ByteBuffer{(long long)length, (uint8_t *)data};
 }
 
-// TODO: How safe is this conversion?
 ByteArray byteBufferToByteArray(ByteBuffer bb) {
   auto length = bb.len;
   auto data = bb.data;

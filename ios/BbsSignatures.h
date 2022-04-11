@@ -2,6 +2,4 @@
 
 @interface BbsSignatures: NSObject <RCTBridgeModule>
 
-@property(nonatomic, assign) BOOL setBridgeOnMainQueue;
-
 @end

@@ -1,4 +1,4 @@
-#include "bls-key-pair.h"
+#include "blsKeyPair.h"
 
 BlsKeyPair::BlsKeyPair(ByteArray pk, ByteArray sk) {
   publicKey = pk;

@@ -1,4 +1,4 @@
-import type { BlindedBlsKeyPair, BlsKeyPair } from "./types";
+import type { BlsKeyPair } from "./types";
 
 type SignOptions = {
   publicKey: ArrayBuffer;
@@ -54,39 +54,13 @@ type BlsVerifyProofOptions = {
   messages: ArrayBuffer[];
 };
 
-type CommitmentForBlindSignRequestOptions = {
-  nonce: ArrayBuffer;
-  publicKey: ArrayBuffer;
-  messages: ArrayBuffer[];
-  hidden: readonly number[];
-};
-
-type VerifyBlindSignRequestOptions = {
-  nonce: ArrayBuffer;
-  commitment: ArrayBuffer;
-  proofOfHiddenMessages: ArrayBuffer;
-  challengeHash: ArrayBuffer;
-  publicKey: ArrayBuffer;
-  blinded: readonly number[];
-};
-
-type BlindSignOptions = {
-  commitment: ArrayBuffer;
-  secretKey: ArrayBuffer;
-  messages: ArrayBuffer[];
-};
-
 type GenerateBls12381G1KeyPairOptions = {
   seed?: ArrayBuffer;
 };
 
-type GenerateBlindedBls12381G1KeyPairOptions = {};
-
 type GenerateBls12381G2KeyPairOptions = {
   seed?: ArrayBuffer;
 };
-
-type GenerateBlindedBls12381G2KeyPairOptions = {};
 
 type Bl12381toBbsOptions = {
   publicKey: ArrayBuffer;
@@ -105,23 +79,12 @@ export interface Bbs {
     error?: string;
   };
   blsVerifyProof(options: BlsVerifyProofOptions): {};
-  commitmentForBlindSignRequest(
-    options: CommitmentForBlindSignRequestOptions
-  ): {};
-  verifyBlindSignRequest(options: VerifyBlindSignRequestOptions): {};
-  blindSign(options: BlindSignOptions): {};
   generateBls12381G1KeyPair(
     options: GenerateBls12381G1KeyPairOptions
   ): Required<BlsKeyPair>;
-  generateBlindedBls12381G1KeyPair(
-    options: GenerateBlindedBls12381G1KeyPairOptions
-  ): Required<BlindedBlsKeyPair>;
   generateBls12381G2KeyPair(options: GenerateBls12381G2KeyPairOptions): {
     publicKey: ArrayBuffer;
     secretKey: ArrayBuffer;
   };
-  generateBlindedBls12381G2KeyPair(
-    options: GenerateBlindedBls12381G2KeyPairOptions
-  ): Required<BlindedBlsKeyPair>;
   bls12381toBbs(options: Bl12381toBbsOptions): { publicKey: ArrayBuffer };
 }

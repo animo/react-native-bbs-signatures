@@ -1,5 +1,9 @@
 #!/usr/bin/env sh
 
+mkdir build
+
+set -e
+
 cd build 
 cmake ..
 make

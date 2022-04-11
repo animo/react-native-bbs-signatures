@@ -1,10 +1,9 @@
-export * from "./types";
+import { NativeModules } from "react-native";
 
+export * from "./types";
 export {
   generateBls12381G1KeyPair,
-  generateBlindedBls12381G2KeyPair,
   generateBls12381G2KeyPair,
-  generateBlindedBls12381G1KeyPair,
 } from "./bls12381";
 export { bls12381toBbs } from "./bls12381toBbs";
 export {
@@ -16,9 +15,10 @@ export {
   blsCreateProof,
   verifyProof,
   blsVerifyProof,
-  commitmentForBlindSignRequest,
-  blindSign,
-  verifyBlindSignContext,
 } from "./bbsSignature";
 
-export { bbsNativeBindings } from "./register";
+const module = NativeModules.BbsSignatures;
+const res = module.install();
+if (!res) {
+  throw Error("Unable to install the turboModule: bbsSignatures.");
+}

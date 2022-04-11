@@ -209,13 +209,8 @@ PODS:
   - React-jsinspector (0.66.3)
   - React-logger (0.66.3):
     - glog
-  - react-native-bbs-signatures (0.1.0):
-    - RCT-Folly
-    - React
-    - React-callinvoker
+  - react-native-bbs-signatures (0.0.0):
     - React-Core
-    - React-jsi
-    - ReactCommon/turbomodule/core
   - React-perflogger (0.66.3)
   - React-RCTActionSheet (0.66.3):
     - React-Core/RCTActionSheetHeaders (= 0.66.3)
@@ -405,7 +400,7 @@ SPEC CHECKSUMS:
   React-jsiexecutor: 433a691aee158533a6a6ee9c86cb4a1684fa2853
   React-jsinspector: d9c8eb0b53f0da206fed56612b289fec84991157
   React-logger: e522e76fa3e9ec3e7d7115b49485cc065cf4ae06
-  react-native-bbs-signatures: b8136b93e93a0e3d0d01c762272fe535941e435c
+  react-native-bbs-signatures: 3a8b27255dd23fc39269ef546ee475c11a4ac29a
   React-perflogger: 73732888d37d4f5065198727b167846743232882
   React-RCTActionSheet: 96c6d774fa89b1f7c59fc460adc3245ba2d7fd79
   React-RCTAnimation: 8940cfd3a8640bd6f6372150dbdb83a79bcbae6c
@@ -422,4 +417,4 @@ SPEC CHECKSUMS:
 
 PODFILE CHECKSUM: 91b3bdaeeac39b5dceea0d806cbc0b5439882506
 
-COCOAPODS: 1.10.1
+COCOAPODS: 1.11.3

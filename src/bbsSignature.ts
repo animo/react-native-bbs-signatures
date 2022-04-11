@@ -1,12 +1,8 @@
 import { bls12381toBbs } from "./bls12381toBbs";
 import { bbsNativeBindings } from "./register";
 import type {
-  BbsBlindSignContext,
-  BbsBlindSignContextRequest,
-  BbsBlindSignRequest,
   BbsCreateProofRequest,
   BbsSignRequest,
-  BbsVerifyBlindSignContextRequest,
   BbsVerifyProofRequest,
   BbsVerifyRequest,
   BbsVerifyResult,
@@ -128,7 +124,7 @@ export const createProof = async ({
     });
 
     return new Uint8Array(proof);
-  } catch {
+  } catch (e) {
     throw new Error("Failed to create proof");
   }
 };
@@ -212,21 +208,6 @@ export const blsVerifyProof = async ({
     publicKey: bbsKeyPair.publicKey,
     nonce,
     messages,
-    proof,
+    proof: proof,
   });
 };
-
-export const commitmentForBlindSignRequest =
-  async ({}: BbsBlindSignContextRequest): Promise<BbsBlindSignContext> => {
-    throw new Error("NOT YET IMPLEMENTED");
-  };
-
-export const verifyBlindSignContext =
-  async ({}: BbsVerifyBlindSignContextRequest): Promise<boolean> => {
-    throw new Error("NOT YET IMPLEMENTED");
-  };
-
-export const blindSign =
-  async ({}: BbsBlindSignRequest): Promise<Uint8Array> => {
-    throw new Error("NOT YET IMPLEMENTED");
-  };
