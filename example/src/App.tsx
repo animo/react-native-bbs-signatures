@@ -1,5 +1,5 @@
 import * as React from "react";
-import {StyleSheet, Text, View, Button} from "react-native";
+import { StyleSheet, Text, View, Button } from "react-native";
 import {
   bls12381toBbs,
   blsCreateProof,
@@ -7,20 +7,22 @@ import {
   blsVerify,
   blsVerifyProof,
   createProof,
+  generateBls12381G1KeyPair,
   generateBls12381G2KeyPair,
   sign,
   verify,
   verifyProof,
 } from "@animo-id/react-native-bbs-signatures";
-import {generateBls12381G1KeyPair} from "react-native-bbs-signatures";
 
 const mockMessages = [new Uint8Array([1, 2, 3, 4])];
 const mockNonce = new Uint8Array([1, 2, 3]);
 const mockRevealed = [0];
 
 export default function App() {
-  const [isGeneratedBls12381G1KeyPair, setIsGeneratedBls12381G1KeyPair] = React.useState(false);
-  const [isGeneratedBls12381G2KeyPair, setIsGeneratedBls12381G2KeyPair] = React.useState(false);
+  const [isGeneratedBls12381G1KeyPair, setIsGeneratedBls12381G1KeyPair] =
+    React.useState(false);
+  const [isGeneratedBls12381G2KeyPair, setIsGeneratedBls12381G2KeyPair] =
+    React.useState(false);
   const [isBlsSignatureVerified, setIsBlsSignatureVerified] =
     React.useState(false);
   const [isBlsProofVerified, setIsBlsProofVerified] = React.useState(false);
@@ -28,10 +30,14 @@ export default function App() {
   const [isProofVerified, setIsProofVerified] = React.useState(false);
   const flow = async () => {
     const blsg1KeyPair = await generateBls12381G1KeyPair();
-    setIsGeneratedBls12381G1KeyPair(blsg1KeyPair && blsg1KeyPair.publicKey.length > 0)
+    setIsGeneratedBls12381G1KeyPair(
+      blsg1KeyPair && blsg1KeyPair.publicKey.length > 0
+    );
 
     const blsg2KeyPair = await generateBls12381G2KeyPair();
-    setIsGeneratedBls12381G2KeyPair(blsg2KeyPair && blsg2KeyPair.publicKey.length > 0)
+    setIsGeneratedBls12381G2KeyPair(
+      blsg2KeyPair && blsg2KeyPair.publicKey.length > 0
+    );
 
     const blsSignature = await blsSign({
       keyPair: blsg2KeyPair,
@@ -108,7 +114,7 @@ export default function App() {
   return (
     <View style={styles.container}>
       <Button onPress={flow} title="flow" />
-      <Text style={isGeneratedBls12381G2KeyPair ? styles.green : styles.red}>
+      <Text style={isGeneratedBls12381G1KeyPair ? styles.green : styles.red}>
         generate bls12381g1 keypair
       </Text>
       <Text style={isGeneratedBls12381G2KeyPair ? styles.green : styles.red}>
