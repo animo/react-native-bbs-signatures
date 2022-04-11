@@ -68,7 +68,7 @@ jobs:
         uses: actions-rs/cargo@v1
         with:
           command: build
-          args: --release --manifest-path ../ffi-bbs-signatures/Cargo.toml
+          args: --release --manifest-path ffi-bbs-signatures/Cargo.toml
       - run: ls
       - run: ls -R ..
 
