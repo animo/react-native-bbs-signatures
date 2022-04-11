@@ -6,7 +6,7 @@ project(bbs_test)
 
 include_directories(.. ../keys)
 
-file(GLOB LIBRARIES ./libs/*.so)
+file(GLOB LIBRARIES libs/*.so)
 
 file(GLOB SOURCES ../keys/* ../bbsSignatures.* ../../Logging.h ./src/bbsTest.cpp)
 
