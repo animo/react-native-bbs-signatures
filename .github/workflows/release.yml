@@ -70,7 +70,7 @@ jobs:
           args: --release --manifest-path ffi-bbs-signatures/Cargo.toml
       - name: Setup tests
         run: |
-          mkdir cpp/tests/libs
+          mkdir react-native-bbs-signatures/cpp/tests/libs
           mv ffi-bbs-signatures/target/release/libbbs.so react-native-bbs-signatures/cpp/tests/libs/libbbs.so
       - name: Run native tests
         run: |
