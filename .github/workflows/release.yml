@@ -63,14 +63,23 @@ jobs:
         uses: actions/checkout@v3
         with:
           path: react-native-bbs-signatures
-      - run: ls
       - name: Build ffi-bbs-signatures
         uses: actions-rs/cargo@v1
         with:
           command: build
           args: --release --manifest-path ffi-bbs-signatures/Cargo.toml
-      - run: ls
-      - run: ls -R ..
+      - name: Setup tests
+        run: |
+          mkdir cpp/tests/libs
+          mv ffi-bbs-signatures/target/release/libbbs.so react-native-bbs-signatures/cpp/tests/libs/libbbs.so
+      - name: Run native tests
+        run: |
+          cd react-native-bbs-signatures/cpp/tests
+          mkdir build
+          cd build
+          cmake ..
+          make
+          ./bbs_test
 
   release:
     runs-on: ubuntu-20.04
