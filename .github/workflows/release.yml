@@ -50,20 +50,27 @@ jobs:
 
       - name: Check typescript
         run: yarn check-types
-
-      - name: Native tests
-        run: |
-          cd cpp/tests
-          mkdir build
-          cd build
-          cmake ..
-          make
-          ./bbs_test
-
+  native-tests:
+    runs-on: ubuntu-20.04
+    name: Native Tests
+      - name: Checkout react-native-bbs-signatures
+        uses: actions/checkout@v2
+      - name: Go to test directory
+        run: cd cpp/tests
+      - name: Make build directory
+        run: mkdir build
+      - name: Go to build directory
+        run: cd build
+      - name: run cmake
+        run: cmake ..
+      - name: run make
+        run: make
+      - name: run tests
+        run: ./bbs_test
   release:
     runs-on: ubuntu-20.04
     name: Release
-    needs: [validate]
+    needs: [validate, native-tests]
     # Only run on workflow dispatch to main branch
     if: github.ref == 'refs/heads/main' && github.repository == 'animo/react-native-bbs-signatures' && github.event_name == 'workflow_dispatch'
     steps:
