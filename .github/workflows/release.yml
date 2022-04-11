@@ -54,30 +54,19 @@ jobs:
     runs-on: ubuntu-20.04
     steps: 
       - name: Checkout ffi-bbs-signatures
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
         with: 
           repository: mattrglobal/ffi-bbs-signatures
-      - name: Checkout react-native-bbs-signatures
-        uses: actions/checkout@v2
-      - name: ls -R running 
-        run: ls -R
-      - name: ls -R in ..
-        run: ls -R ..
+          path: ffi-bbs-signatures
 
-      - uses: actions-rs/cargo@v1
+      - name: Checkout react-native-bbs-signatures
+        uses: actions/checkout@v3
         with:
-          command: build
-          args: --release
-      - name: ls -R running 
-        run: ls -R
-      - name: CPP Tests
-        run: | 
-          cd cpp/tests
-          mkdir build
-          cd build
-          cmake ..
-          make
-          ./bbs_test
+          path: react-native-bbs-signatures
+      - run: ls 
+      - run: ls ..
+      - run: ls -R ..
+
   release:
     runs-on: ubuntu-20.04
     name: Release
