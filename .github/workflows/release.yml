@@ -48,6 +48,18 @@ jobs:
       - name: Prettier
         run: yarn check-format
 
+      - name: Check typescript
+        run: yarn check-types
+      
+      - name: Native tests
+        run: |
+          cd cpp/tests
+          mkdir build
+          cd build
+          cmake ..
+          make
+          ./bbs_test
+
   release:
     runs-on: ubuntu-20.04
     name: Release
