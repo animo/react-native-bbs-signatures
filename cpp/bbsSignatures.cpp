@@ -1,6 +1,8 @@
 #include "bbsSignatures.h"
 
 #include <algorithm>
+#include <vector>
+#include <tuple>
 
 namespace bbs {
 

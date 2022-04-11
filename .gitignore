@@ -57,3 +57,4 @@ build
 *.tgz
 lib
 cpp/tests/libs/*.dylib
+cpp/tests/libs/*.dll

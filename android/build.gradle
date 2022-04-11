@@ -16,7 +16,7 @@ static def findNodeModules(baseDir) {
 }
 
 def nodeModules = findNodeModules(projectDir)
-logger.warn("react-native-bbs-signatures: node_modules found at: ${nodeModules}")
+logger.debug("react-native-bbs-signatures: node_modules found at: ${nodeModules}")
 
 buildscript {
   repositories {
