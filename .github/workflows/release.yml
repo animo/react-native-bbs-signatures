@@ -56,7 +56,7 @@ jobs:
       - name: Checkout react-native-bbs-signatures
         uses: actions/checkout@v2
         with: 
-          repository: hyperledger/indy-vdr
+          repository: mattrglobal/ffi-bbs-signatures
 
       - name: Checkout react-native-bbs-signatures
         uses: actions/checkout@v2
