@@ -52,10 +52,10 @@ jobs:
         run: yarn check-types
   native-tests:
     runs-on: ubuntu-20.04
-    steps: 
+    steps:
       - name: Checkout ffi-bbs-signatures
         uses: actions/checkout@v3
-        with: 
+        with:
           repository: mattrglobal/ffi-bbs-signatures
           path: ffi-bbs-signatures
 
@@ -80,6 +80,7 @@ jobs:
           cmake ..
           make
           ./bbs_test
+          exit 1
 
   release:
     runs-on: ubuntu-20.04
