@@ -57,11 +57,12 @@ jobs:
         uses: actions/checkout@v2
       - name: CPP Tests
         run: | 
-         mkdir build
-         cd build
-         cmake ..
-         make
-         ./bbs_test
+          cd cpp/tests
+          mkdir build
+          cd build
+          cmake ..
+          make
+          ./bbs_test
   release:
     runs-on: ubuntu-20.04
     name: Release
