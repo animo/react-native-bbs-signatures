@@ -25,7 +25,6 @@ yarn add @animo-id/react-native-bbs-signatures
 
 On iOS you still need to run `pod install --project-directory=ios` in the root of your project to setup the native dependencies.
 
-
 ### Android
 
 Since autolinking can handle everything on the Android side, no additional steps are required.

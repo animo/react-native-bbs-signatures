@@ -50,7 +50,7 @@ jobs:
 
       - name: Check typescript
         run: yarn check-types
-      
+
       - name: Native tests
         run: |
           cd cpp/tests

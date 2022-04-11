@@ -1,5 +1,5 @@
-import {bls12381toBbs} from "./bls12381toBbs";
-import {bbsNativeBindings} from "./register";
+import { bls12381toBbs } from "./bls12381toBbs";
+import { bbsNativeBindings } from "./register";
 import type {
   BbsCreateProofRequest,
   BbsSignRequest,
@@ -22,7 +22,7 @@ export const sign = async ({
 }: BbsSignRequest): Promise<Uint8Array> => {
   try {
     const messageBuffers = messages.map((m) => m.buffer);
-    const {signature} = bbsNativeBindings.sign({
+    const { signature } = bbsNativeBindings.sign({
       publicKey: keyPair.publicKey.buffer,
       secretKey: keyPair.secretKey!.buffer,
       messages: messageBuffers,
@@ -48,7 +48,7 @@ export const blsSign = async ({
     keyPair,
     messageCount: messages.length,
   });
-  return sign({keyPair: bbsKeyPair, messages});
+  return sign({ keyPair: bbsKeyPair, messages });
 };
 
 /**
@@ -64,7 +64,7 @@ export const verify = async ({
 }: BbsVerifyRequest): Promise<BbsVerifyResult> => {
   try {
     const messageBuffers = messages.map((m) => m.buffer);
-    const {verified} = bbsNativeBindings.verify({
+    const { verified } = bbsNativeBindings.verify({
       publicKey: publicKey.buffer,
       signature: signature.buffer,
       messages: messageBuffers,
@@ -75,9 +75,9 @@ export const verify = async ({
     };
   } catch (error) {
     if (typeof error === "string") {
-      return {verified: false, error};
+      return { verified: false, error };
     } else {
-      return {verified: false};
+      return { verified: false };
     }
   }
 };
@@ -94,10 +94,10 @@ export const blsVerify = async ({
   signature,
 }: BlsBbsVerifyRequest): Promise<BbsVerifyResult> => {
   const bbsKeyPair = await bls12381toBbs({
-    keyPair: {publicKey},
+    keyPair: { publicKey },
     messageCount: messages.length,
   });
-  return verify({messages, signature, publicKey: bbsKeyPair.publicKey});
+  return verify({ messages, signature, publicKey: bbsKeyPair.publicKey });
 };
 
 /**
@@ -115,7 +115,7 @@ export const createProof = async ({
 }: BbsCreateProofRequest): Promise<Uint8Array> => {
   try {
     const messageBuffers = messages.map((m) => m.buffer);
-    const {proof} = bbsNativeBindings.createProof({
+    const { proof } = bbsNativeBindings.createProof({
       publicKey: publicKey.buffer,
       messages: messageBuffers,
       signature: signature.buffer,
@@ -143,7 +143,7 @@ export const blsCreateProof = async ({
   revealed,
 }: BbsCreateProofRequest): Promise<Uint8Array> => {
   const bbsKeyPair = await bls12381toBbs({
-    keyPair: {publicKey},
+    keyPair: { publicKey },
     messageCount: messages.length,
   });
   return createProof({
@@ -169,7 +169,7 @@ export const verifyProof = async ({
 }: BbsVerifyProofRequest): Promise<BbsVerifyResult> => {
   try {
     const messageBuffers = messages.map((m) => m.buffer);
-    const {verified} = bbsNativeBindings.verifyProof({
+    const { verified } = bbsNativeBindings.verifyProof({
       publicKey: publicKey.buffer,
       messages: messageBuffers,
       proof: proof.buffer,
@@ -181,9 +181,9 @@ export const verifyProof = async ({
     };
   } catch (error) {
     if (typeof error === "string") {
-      return {verified: false, error};
+      return { verified: false, error };
     } else {
-      return {verified: false};
+      return { verified: false };
     }
   }
 };
@@ -201,7 +201,7 @@ export const blsVerifyProof = async ({
   publicKey,
 }: BbsVerifyProofRequest): Promise<BbsVerifyResult> => {
   const bbsKeyPair = await bls12381toBbs({
-    keyPair: {publicKey},
+    keyPair: { publicKey },
     messageCount: messages.length,
   });
   return verifyProof({

@@ -1,11 +1,11 @@
-import {NativeModules} from "react-native";
+import { NativeModules } from "react-native";
 
 export * from "./types";
 export {
   generateBls12381G1KeyPair,
   generateBls12381G2KeyPair,
 } from "./bls12381";
-export {bls12381toBbs} from "./bls12381toBbs";
+export { bls12381toBbs } from "./bls12381toBbs";
 export {
   sign,
   blsSign,
