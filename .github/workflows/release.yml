@@ -79,8 +79,9 @@ jobs:
           cd build
           cmake ..
           make
+          echo "Running BBS tests"
           ./bbs_test
-          exit 1
+          echo "Tests exited with $?"
 
   release:
     runs-on: ubuntu-20.04
