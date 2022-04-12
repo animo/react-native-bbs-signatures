@@ -12,9 +12,7 @@
     "android/CMakeLists.txt",
     "android/cpp-adapter.cpp",
     "ios/**/*.h",
-    "ios/**/*.m",
     "ios/**/*.mm",
-    "ios/**/*.cpp",
     "ios/Frameworks",
     "ios/BbsSignatures.xcodeproj/project.pbxproj",
     "lib",
@@ -25,8 +23,7 @@
     "react-native-bbs-signatures.podspec",
     "README.md",
     "LICENSE",
-    "react-native.config.js",
-    "package.json"
+    "react-native.config.js"
   ],
   "scripts": {
     "check-types": "tsc --noEmit -p tsconfig.build.json",

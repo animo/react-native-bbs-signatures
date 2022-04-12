@@ -2,7 +2,7 @@
   "compilerOptions": {
     "baseUrl": "./",
     "paths": {
-      "react-native-bbs-signatures": ["./src/index"]
+      "@animo-id/react-native-bbs-signatures": ["./src/index"]
     },
     "allowUnreachableCode": false,
     "allowUnusedLabels": false,
