@@ -127,7 +127,7 @@ jobs:
 
       - name: Set NPM config
         run: |
-          echo "//registry.npmjs.org/:_authToken=${{secrets.NPM_TOKEN}}" >> .npmrc
+          echo "//registry.npmjs.org/:_authToken=${{secrets.NPM_TOKEN_ANIMO_BOT}}" >> .npmrc
           echo "registry=https://registry.npmjs.org/" >> .npmrc
           echo "always-auth=true" >> .npmrc
       - name: Install dependencies
